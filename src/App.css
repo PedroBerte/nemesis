@@ -1,0 +1,24 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+a {
+  font-family: Segoe UI;
+}
+
+:root{
+  --primary-color: #45c4b0;
+  --secundary-color: #9AEBA3;
+  --default-grey: #EDEDED;
+
+  --default-padding: 85px;
+  --responsive-padding: 30px;
+}
+

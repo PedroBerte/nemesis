@@ -1,0 +1,13 @@
+.button-body {
+  width: 150px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.button-body p {
+  font-weight: bold;
+  font-size: 15px;
+}
