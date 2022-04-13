@@ -3,6 +3,7 @@ import Logo from "./../../images/NemesisV1.1.png";
 import Button from "./../Button/Button";
 import menuIcon from "./../../images/menuIcon.png";
 
+import { Link } from "react-router-dom";
 const Navbar = () => {
   var isShowed = false;
 
@@ -30,8 +31,12 @@ const Navbar = () => {
           <img src={Logo} height="65px" alt="" />
         </div>
         <div className="navbar-right-side">
-          <Button text="Cadastre-se" background="#45c4b0" color="white" />
-          <a href="">Fazer Login</a>
+          <Link to="/Register">
+            <Button text="Cadastre-se" background="#45c4b0" color="white" />
+          </Link>
+          <Link to="/Login">
+            <a href="">Fazer Login</a>
+          </Link>
         </div>
 
         <div className="navbar-right-side-responsive">
@@ -40,18 +45,22 @@ const Navbar = () => {
       </div>
 
       <div id="responsive-menu" className="responsive-menu">
-        <Button
-          className="button-menu-responsive"
-          text="Cadastre-se"
-          background="#45c4b0"
-          color="white"
-        />
-        <Button
-          className="button-menu-responsive"
-          text="Fazer Login"
-          background="#9AEBA3"
-          color="white"
-        />
+        <Link to="/Register">
+          <Button
+            className="button-menu-responsive"
+            text="Cadastre-se"
+            background="#45c4b0"
+            color="white"
+          />
+        </Link>
+        <Link to="/Login">
+          <Button
+            className="button-menu-responsive"
+            text="Fazer Login"
+            background="#9AEBA3"
+            color="white"
+          />
+        </Link>
       </div>
     </div>
   );
