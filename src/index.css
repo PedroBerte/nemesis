@@ -9,7 +9,13 @@ h1,
 h2,
 h3,
 h4,
-h5,
-a {
+h5 {
   font-family: Segoe UI;
+}
+a{
+  margin-top: 20px;
+  font-family: Segoe UI;
+  text-decoration: none;
+  font-size: 15px;
+  color: #1F67A9;
 }

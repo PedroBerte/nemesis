@@ -3,14 +3,74 @@
     height: 100vh;
     display:flex;
 }
-.left-side{
+.register-left-side{
     background-color: #ededed;
-    height: 100%;
+    height: 100vh;
     width: 30%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.right-side{
+.register-logo{
+    margin: 4rem 0 4rem 3rem;
+}
+.register-form{
+    margin-left: 4rem;
+    margin-bottom: 1rem;
+}
+
+.register-right-side{
     width: 70%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.register-email-side{
+    width: 60%;
+    height: 100%;
+}
+.input{
+    border-radius: 10px;
+    border: 1px solid #c6c6c6;
+    outline: none;
+    padding: 1rem;
+    box-shadow: 2px 6px 4px rgba(0, 0, 0, 0.25);
+    margin-right: 1rem;
+    font-size: 18px;
+    font-family: Segoe UI;
+    margin-bottom: 1rem;
+}
+.select{
+    border-radius: 10px;
+    outline: none;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #c6c6c6;
+    box-shadow: 2px 6px 4px rgba(0, 0, 0, 0.25);
+    font-size: 18px;
+    color: #868686;
+    font-family: Segoe UI;
+}
+.input::placeholder {
+    color: #868686;
+    font-size: 18px;
+    font-family: Segoe UI;
+}
+.lg{
+    width: 430px;
+    height: 50px;
+}
+.sm{
+    width: 210px;
+    height: 50px;
+    align-items:center;
+    text-align: center;
+}
+.sm::placeholder{
+    text-align: center;
+}
+.input[type=date]{
+    color: #868686;
+    font-size: 18px;
+    font-family: Segoe UI;
 }

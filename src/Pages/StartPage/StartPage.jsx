@@ -33,17 +33,14 @@ const StartPage = () => {
               className="input-apresentation"
               placeholder="Insira seu E-mail"
             />
-            <div className="shadow-div">
-              <Button
-                className="button-apresentation"
-                text="Cadastre-se"
-                background="#45c4b0"
-                color="white"
-                width="100%"
-                height="50px"
-                box_shadow="box-shadow: 2px 6px 4px rgba(0, 0, 0, 0.25);"
-              />
-            </div>
+            <Button
+              text="Cadastre-se"
+              background="#45c4b0"
+              color="white"
+              width="200px"
+              height="50px"
+              shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
+            />
           </form>
         </div>
         <div className="image-right-side">
@@ -57,7 +54,7 @@ const StartPage = () => {
             Com suas medidas, montamos o melhor <br /> programa para alcançar
             seus objetivos.
           </p>
-          <p className="title wrap">
+          <p className="title wrap" style={{ marginTop: "58px" }}>
             Com suas medidas, montamos o melhor programa para alcançar seus
             objetivos.
           </p>

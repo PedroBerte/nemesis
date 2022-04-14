@@ -1,6 +1,6 @@
 import "./Button.css";
 
-const Button = ({ text, background, color, height, width }) => {
+const Button = ({ text, background, color, height, width, shadow }) => {
   return (
     <div
       style={{
@@ -8,6 +8,7 @@ const Button = ({ text, background, color, height, width }) => {
         backgroundColor: background,
         color: color,
         height: height,
+        boxShadow: shadow,
       }}
       className="button-body"
     >
