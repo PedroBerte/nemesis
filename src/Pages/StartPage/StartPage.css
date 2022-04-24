@@ -150,9 +150,6 @@ footer p {
   display: none;
 }
 form{
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 80%;
 }
 
@@ -203,6 +200,13 @@ form{
   .subtitle{
     text-align: center !important;
   }
+  form{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
 }
 
 @media screen and (max-width: 900px) {

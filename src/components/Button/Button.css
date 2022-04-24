@@ -6,6 +6,8 @@
   justify-content: center;
   border-radius: 10px;
   cursor: pointer;
+  outline: none;
+  border: none;
 }
 .button-body p {
   font-weight: bold;

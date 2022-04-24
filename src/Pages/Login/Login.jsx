@@ -27,13 +27,14 @@ const Login = () => {
           style={{ marginBottom: "25px" }}
         />
         <Button
-          text="Login"
           background="#45c4b0"
           color="white"
           width="150px"
           height="40px"
           shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
-        />
+        >
+          Login
+        </Button>
         <Link to="/Register">
           <a>
             <i>Não tem uma conta? Crie Aqui!</i>

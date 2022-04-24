@@ -32,7 +32,9 @@ const Navbar = () => {
         </div>
         <div className="navbar-right-side">
           <Link to="/Register">
-            <Button text="Cadastre-se" background="#45c4b0" color="white" />
+            <Button background="#45c4b0" color="white">
+              Cadastre-se
+            </Button>
           </Link>
           <Link to="/Login">
             <a href="">Fazer Login</a>
@@ -48,18 +50,20 @@ const Navbar = () => {
         <Link to="/Register">
           <Button
             className="button-menu-responsive"
-            text="Cadastre-se"
             background="#45c4b0"
             color="white"
-          />
+          >
+            Cadastre-se
+          </Button>
         </Link>
         <Link to="/Login">
           <Button
             className="button-menu-responsive"
-            text="Fazer Login"
             background="#9AEBA3"
             color="white"
-          />
+          >
+            Login
+          </Button>
         </Link>
       </div>
     </div>

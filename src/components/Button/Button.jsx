@@ -1,19 +1,20 @@
 import "./Button.css";
 
-const Button = ({ text, background, color, height, width, shadow }) => {
+const Button = (props) => {
   return (
-    <div
+    <button
+      {...props}
       style={{
-        width: width,
-        backgroundColor: background,
-        color: color,
-        height: height,
-        boxShadow: shadow,
+        width: props.width,
+        backgroundColor: props.background,
+        color: props.color,
+        height: props.height,
+        boxShadow: props.shadow,
       }}
       className="button-body"
     >
-      <p>{text}</p>
-    </div>
+      <p>{props.children}</p>
+    </button>
   );
 };
 

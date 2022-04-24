@@ -40,7 +40,9 @@ const StartPage = () => {
               width="200px"
               height="50px"
               shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
-            />
+            >
+              Cadastre-se
+            </Button>
           </form>
         </div>
         <div className="image-right-side">
