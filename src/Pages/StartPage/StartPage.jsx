@@ -9,6 +9,7 @@ import Men from "./../../images/men.png";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import AbacateCorrida from "./../../images/AbacateCorrida1.png";
 import SmartphoneNotification from "./../../images/phoneNotification.png";
+import { auth, db } from "./../../firebase-config";
 
 const StartPage = () => {
   return (

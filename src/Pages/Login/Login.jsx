@@ -5,6 +5,7 @@ import AbacateAlongamento from "./../../images/AbacateAlongamento1.png";
 import RightWave from "./../../images/wave-right.png";
 import Button from "./../../components/Button/Button";
 import { Link } from "react-router-dom";
+import Input from "../../components/Input/Input";
 
 const Login = () => {
   return (
@@ -13,28 +14,33 @@ const Login = () => {
         <Link to="/">
           <img className="login-logo" width="230px" src={Logo} alt="" />
         </Link>
-        <input
-          type="email"
-          className="input lg mb"
-          placeholder="Insira o seu E-mail"
-          required
-        />
-        <input
-          type="password"
-          className="input lg mb"
-          placeholder="Sua senha"
-          required
-          style={{ marginBottom: "25px" }}
-        />
-        <Button
-          background="#45c4b0"
-          color="white"
-          width="150px"
-          height="40px"
-          shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
-        >
-          Login
-        </Button>
+        <form action="" className="login-form">
+          <Input
+            type="text"
+            placeholder="Insira seu E-mail"
+            size="lg"
+            onChange={(event) => {
+              console.log(event.target.value);
+            }}
+          />
+          <Input
+            type="password"
+            placeholder="Sua senha"
+            size="lg"
+            onChange={(event) => {
+              console.log(event.target.value);
+            }}
+          />
+          <Button
+            background="#45c4b0"
+            color="white"
+            width="150px"
+            height="40px"
+            shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
+          >
+            Login
+          </Button>
+        </form>
         <Link to="/Register">
           <a>
             <i>Não tem uma conta? Crie Aqui!</i>
@@ -43,7 +49,7 @@ const Login = () => {
       </div>
       <img src={RightWave} width="100vh" alt="" />
       <div className="login-right-side">
-        <img src={AbacateAlongamento} alt="" />
+        <img src={AbacateAlongamento} width="50%" />
       </div>
     </div>
   );

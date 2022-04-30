@@ -15,8 +15,6 @@
     margin: 0 0 4rem 3rem;
 }
 .register-form{
-    margin-left: 4rem;
-    margin-bottom: 1rem;
     display: flex;
 }
 .register-right-side{
@@ -42,17 +40,6 @@
     justify-content: center;
     flex-direction: column;
 }
-.input{
-    border-radius: 10px;
-    border: 1px solid #c6c6c6;
-    outline: none;
-    box-shadow: 2px 6px 4px rgba(0, 0, 0, 0.25);
-    font-size: 18px;
-    font-family: Segoe UI;
-    color: #868686;
-    margin-bottom: 1rem;
-    padding-left: 10px;
-}
 .select{
     border-radius: 10px;
     outline: none;
@@ -66,31 +53,15 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    
-}
-.input::placeholder {
-    color: #adadad;
-    font-size: 18px;
-    font-family: Segoe UI;
-}
-.lg{
-    width: 95%;
-    height: 50px;
-}
-.sm{
     width: 80%;
     height: 50px;
     align-items:center;
     text-align: center;
 }
-.sm::placeholder{
-    text-align: center;
-}
-.input[type=date]{
-    color: #868686;
+.input::placeholder {
+    color: #adadad;
     font-size: 18px;
     font-family: Segoe UI;
-    background-color: #fff;
 }
 @media screen and (max-width: 1100px){
     body {

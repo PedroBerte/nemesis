@@ -6,12 +6,14 @@ import Logo from "./../../images/NemesisV1.1.png";
 import LeftWave from "./../../images/wave-left.png";
 
 import Button from "./../../components/Button/Button";
+import Input from "./../../components/Input/Input";
 
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "./../../firebase-config";
 import { setDoc, doc } from "firebase/firestore";
 import toast, { Toaster } from "react-hot-toast";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Register = () => {
   const [registerName, setRegisterName] = useState("");
@@ -64,11 +66,11 @@ const Register = () => {
             uid: uid,
             name: registerName,
             email: registerEmail,
-            Date: registerBornDate,
-            Sex: registerSex,
-            Height: registerHeight,
-            Weight: registerWeight,
-            Goal: registerGoal,
+            date: registerBornDate,
+            sex: registerSex,
+            height: registerHeight,
+            weight: registerWeight,
+            goal: registerGoal,
           });
           toast.success("Conta criada! Aproveite!"); //Cria conta Web >= 1100
           setTimeout(() => {
@@ -163,6 +165,7 @@ const Register = () => {
       }
     }
   };
+
   return (
     <div className="register-body">
       <div>
@@ -184,41 +187,41 @@ const Register = () => {
         </div>
         <form className="register-form">
           <div className="register-email-side" id="register-email-side">
-            <input
+            <Input
               type="text"
-              className="input lg"
+              size="lg"
               placeholder="Nome Completo"
               onChange={(event) => {
                 setRegisterName(event.target.value);
               }}
             />
-            <input
+            <Input
               type="email"
-              className="input lg"
+              size="lg"
               placeholder="Insira seu E-mail"
               onChange={(event) => {
                 setRegisterEmail(event.target.value);
               }}
             />
-            <input
+            <Input
               type="email"
-              className="input lg"
+              size="lg"
               placeholder="Confirme seu E-mail"
               onChange={(event) => {
                 setRegisterConfirmEmail(event.target.value);
               }}
             />
-            <input
+            <Input
               type="password"
-              className="input lg"
+              size="lg"
               placeholder="Sua Senha"
               onChange={(event) => {
                 setRegisterPassword(event.target.value);
               }}
             />
-            <input
+            <Input
               type="password"
-              className="input lg"
+              size="lg"
               placeholder="Confirme a sua Senha"
               onChange={(event) => {
                 setRegisterConfirmPassword(event.target.value);
@@ -226,16 +229,16 @@ const Register = () => {
             />
           </div>
           <div className="register-info-side" id="register-info-side">
-            <input
+            <Input
               type="date"
-              className="input sm"
+              size="sm"
               placeholder="Data de Nascimento"
               onChange={(event) => {
                 setRegisterBornDate(event.target.value);
               }}
             />
             <select
-              className="select sm"
+              className="select"
               onChange={(event) => {
                 setRegisterSex(event.target.value);
               }}
@@ -247,24 +250,24 @@ const Register = () => {
               <option value="N">Feminino</option>
               <option value="NA">Prefiro não Informar</option>
             </select>
-            <input
+            <Input
               type="number"
-              className="input sm"
+              size="sm"
               placeholder="Peso"
               onChange={(event) => {
                 setRegisterHeight(event.target.value);
               }}
             />
-            <input
+            <Input
               type="number"
-              className="input sm"
+              size="sm"
               placeholder="Altura"
               onChange={(event) => {
                 setRegisterWeight(event.target.value);
               }}
             />
             <select
-              className="select sm"
+              className="select"
               onChange={(event) => {
                 setRegisterGoal(event.target.value);
               }}
