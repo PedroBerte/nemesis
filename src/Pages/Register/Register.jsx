@@ -14,8 +14,11 @@ import { auth, db } from "./../../firebase-config";
 import { setDoc, doc } from "firebase/firestore";
 import toast, { Toaster } from "react-hot-toast";
 import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 
 const Register = () => {
+  moment().format();
+
   const [registerName, setRegisterName] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerConfirmEmail, setRegisterConfirmEmail] = useState("");
@@ -31,6 +34,38 @@ const Register = () => {
 
   const navigateTo = useNavigate();
 
+  function stringContainsNumber(_string) {
+    return /\d/.test(_string);
+  }
+
+  function getCurrentDate(minAge) {
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+
+    function formatMonth(month) {
+      if (String(month).length > 1) {
+        return month;
+      } else {
+        return `0${month}`;
+      }
+    }
+    function formatDay(day) {
+      if (String(day).length > 1) {
+        return day;
+      } else {
+        return `0${day}`;
+      }
+    }
+
+    if (minAge > 0) {
+      return `${year - minAge}-${formatMonth(month)}-${formatDay(day)}`;
+    } else {
+      return `${year}-${formatMonth(month)}-${formatDay(day)}`;
+    }
+  }
+
   const RegisterUser = async (screenSize) => {
     if (screenSize >= 1100) {
       if (
@@ -45,14 +80,33 @@ const Register = () => {
         registerWeight &&
         registerGoal != ""
       ) {
+        if (stringContainsNumber(registerName)) {
+          //name with numbers
+          toast.error("Insira um nome valido!");
+          return;
+        }
         if (registerEmail != registerConfirmEmail) {
-          //Email != Confirmação
+          //Email != confirmation
           toast.error("Os E-mails não coincidem!");
           return;
         }
         if (registerPassword != registerConfirmPassword) {
-          //Senha != Confirmação
+          //Senha != confirmation
           toast.error("As senhas não coincidem!");
+          return;
+        }
+        if (String(getCurrentDate()) == registerBornDate) {
+          toast.error("Insira uma data de nascimento valida!");
+          return;
+        }
+        if (moment(registerBornDate).isAfter(getCurrentDate())) {
+          toast.error("Insira uma data de nascimento valida!");
+          return;
+        }
+        if (moment(registerBornDate).isAfter(getCurrentDate(12))) {
+          toast.error(
+            "Apenas pessoas com mais de 12 anos podem se cadastrar no Nemesis!"
+          );
           return;
         }
         try {
@@ -101,6 +155,10 @@ const Register = () => {
           registerPassword &&
           registerConfirmPassword != ""
         ) {
+          if (stringContainsNumber(registerName)) {
+            toast.error("Insira um nome valido!");
+            return;
+          }
           if (registerEmail != registerConfirmEmail) {
             //Email != Confirmação
             toast.error("Os E-mails não coincidem!");
@@ -126,6 +184,20 @@ const Register = () => {
           registerWeight &&
           registerGoal != ""
         ) {
+          if (String(getCurrentDate()) == registerBornDate) {
+            toast.error("Insira uma data de nascimento valida!");
+            return;
+          }
+          if (moment(registerBornDate).isAfter(getCurrentDate())) {
+            toast.error("Insira uma data de nascimento valida!");
+            return;
+          }
+          if (moment(registerBornDate).isAfter(getCurrentDate(12))) {
+            toast.error(
+              "Apenas pessoas com mais de 12 anos podem se cadastrar no Nemesis!"
+            );
+            return;
+          }
           try {
             const user = await createUserWithEmailAndPassword(
               auth,
@@ -236,6 +308,7 @@ const Register = () => {
               onChange={(event) => {
                 setRegisterBornDate(event.target.value);
               }}
+              min="1940-01-01"
             />
             <select
               className="select"
