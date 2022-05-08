@@ -43,11 +43,11 @@ const Login = () => {
         </form>
         <Link to="/Register">
           <a>
-            <i>Não tem uma conta? Crie Aqui!</i>
+            <i className="link-text">Não tem uma conta? Crie Aqui!</i>
           </a>
         </Link>
       </div>
-      <img src={RightWave} width="100vh" alt="" />
+      <img src={RightWave} className="wave" width="100vh" alt="" />
       <div className="login-right-side">
         <img src={AbacateAlongamento} width="50%" />
       </div>

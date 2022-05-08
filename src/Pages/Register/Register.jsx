@@ -9,7 +9,10 @@ import Button from "./../../components/Button/Button";
 import Input from "./../../components/Input/Input";
 
 import { Link, useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { auth, db } from "./../../firebase-config";
 import { setDoc, doc } from "firebase/firestore";
 import toast, { Toaster } from "react-hot-toast";
@@ -30,15 +33,21 @@ const Register = () => {
   const [registerWeight, setRegisterWeight] = useState("");
   const [registerGoal, setRegisterGoal] = useState("");
 
+  const [user, setUser] = useState({});
+
   const [nextPage, setNextPage] = useState(false);
 
   const navigateTo = useNavigate();
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });
 
   function stringContainsNumber(_string) {
     return /\d/.test(_string);
   }
 
-  function getCurrentDate(minAge) {
+  function getCurrentDate(age) {
     var date = new Date();
     var day = date.getDate();
     var month = date.getMonth() + 1;
@@ -59,8 +68,8 @@ const Register = () => {
       }
     }
 
-    if (minAge > 0) {
-      return `${year - minAge}-${formatMonth(month)}-${formatDay(day)}`;
+    if (age > 0) {
+      return `${year - age}-${formatMonth(month)}-${formatDay(day)}`;
     } else {
       return `${year}-${formatMonth(month)}-${formatDay(day)}`;
     }
@@ -109,6 +118,10 @@ const Register = () => {
           );
           return;
         }
+        if (moment(registerBornDate).isBefore(getCurrentDate(80))) {
+          toast.error("A idade máxima é de 80 anos");
+          return;
+        }
         try {
           const user = await createUserWithEmailAndPassword(
             auth,
@@ -144,7 +157,7 @@ const Register = () => {
         }
       } else {
         //Caso algum parametro seja == "".
-        toast.error("Não deixe campos vazios!");
+        toast.error("Não deixe campos vazios! 1");
       }
     } else {
       if (!nextPage) {
@@ -174,7 +187,7 @@ const Register = () => {
           document.getElementById("register-email-side").style.display = "none";
           document.getElementById("register-info-side").style.display = "flex";
         } else {
-          toast.error("Não deixe campos vazios!");
+          toast.error("Não deixe campos vazios! 2");
         }
       } else {
         if (
@@ -196,6 +209,10 @@ const Register = () => {
             toast.error(
               "Apenas pessoas com mais de 12 anos podem se cadastrar no Nemesis!"
             );
+            return;
+          }
+          if (moment(registerBornDate).isBefore(getCurrentDate(80))) {
+            toast.error("A idade máxima é de 80 anos!");
             return;
           }
           try {
@@ -232,7 +249,7 @@ const Register = () => {
             toast.error("Algo deu errado... Tente novamente mais tarde!");
           }
         } else {
-          toast.error("Não deixe campos vazios!");
+          toast.error("Não deixe campos vazios! 3");
         }
       }
     }
@@ -308,7 +325,7 @@ const Register = () => {
               onChange={(event) => {
                 setRegisterBornDate(event.target.value);
               }}
-              min="1940-01-01"
+              min="1942-01-01"
             />
             <select
               className="select"
@@ -328,7 +345,7 @@ const Register = () => {
               size="sm"
               placeholder="Peso"
               onChange={(event) => {
-                setRegisterHeight(event.target.value);
+                setRegisterWeight(event.target.value);
               }}
             />
             <Input
@@ -336,7 +353,7 @@ const Register = () => {
               size="sm"
               placeholder="Altura"
               onChange={(event) => {
-                setRegisterWeight(event.target.value);
+                setRegisterHeight(event.target.value);
               }}
             />
             <select
@@ -366,7 +383,7 @@ const Register = () => {
           Cadastre-se
         </Button>
         <Link to="/Login">
-          <i className="to-login">Já tem uma conta? Clique Aqui!</i>
+          <i className="link-text">Já tem uma conta? Clique Aqui!</i>
         </Link>
       </div>
     </div>

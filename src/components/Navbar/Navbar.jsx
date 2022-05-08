@@ -2,6 +2,7 @@ import "./Navbar.css";
 import Logo from "./../../images/NemesisV1.1.png";
 import Button from "./../Button/Button";
 import menuIcon from "./../../images/menuIcon.png";
+import user from "./../../Pages/Register/Register";
 
 import { Link } from "react-router-dom";
 const Navbar = () => {
@@ -39,6 +40,7 @@ const Navbar = () => {
           <Link to="/Login">
             <a href="">Fazer Login</a>
           </Link>
+          <h2>{user.email}</h2>
         </div>
 
         <div className="navbar-right-side-responsive">
