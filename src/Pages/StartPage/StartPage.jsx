@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 
 import Button from "../../components/Button/Button";
 import Navbar from "./../../components/Navbar/Navbar";
@@ -9,9 +9,23 @@ import Men from "./../../images/men.png";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import AbacateCorrida from "./../../images/AbacateCorrida1.png";
 import SmartphoneNotification from "./../../images/phoneNotification.png";
-import { auth, db } from "./../../firebase-config";
+
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase-config";
+
+import { AuthContext } from "./../../contexts/AuthContext";
 
 const StartPage = () => {
+  const { user, setUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+  }, []);
+
+  console.log(user);
+
   return (
     <>
       <Navbar />

@@ -1,26 +1,61 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import Logo from "./../../images/NemesisV1.1.png";
 import "./Login.css";
 import AbacateAlongamento from "./../../images/AbacateAlongamento1.png";
 import RightWave from "./../../images/wave-right.png";
 import Button from "./../../components/Button/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/Input/Input";
 
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase-config";
+
+import { AuthContext } from "./../../contexts/AuthContext";
+
+import toast, { Toaster } from "react-hot-toast";
+
 const Login = () => {
+  const navigateTo = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { user, setUser } = useContext(AuthContext);
+  const signIn = async () => {
+    try {
+      const newUser = await signInWithEmailAndPassword(auth, email, password);
+      console.log(newUser);
+      setUser(newUser);
+      toast.success("Logado!");
+      setTimeout(() => {
+        navigateTo("/");
+      }, 1800);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });
+
   return (
     <div className="login-body">
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        toastOptions={{ style: { fontFamily: "Segoe UI" } }}
+      />
       <div className="login-left-side">
         <Link to="/">
           <img className="login-logo" width="230px" src={Logo} alt="" />
         </Link>
-        <form action="" className="login-form">
+        <form className="login-form">
           <Input
             type="text"
             placeholder="Insira seu E-mail"
             size="lg"
             onChange={(event) => {
-              console.log(event.target.value);
+              setEmail(event.target.value);
             }}
           />
           <Input
@@ -28,23 +63,23 @@ const Login = () => {
             placeholder="Sua senha"
             size="lg"
             onChange={(event) => {
-              console.log(event.target.value);
+              setPassword(event.target.value);
             }}
           />
-          <Button
-            background="#45c4b0"
-            color="white"
-            width="150px"
-            height="40px"
-            shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
-          >
-            Login
-          </Button>
         </form>
+        <Button
+          onClick={() => signIn()}
+          background="#45c4b0"
+          color="white"
+          width="150px"
+          type="submit"
+          height="40px"
+          shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
+        >
+          Login
+        </Button>
         <Link to="/Register">
-          <a>
-            <i className="link-text">Não tem uma conta? Crie Aqui!</i>
-          </a>
+          <i className="link-text">Não tem uma conta? Crie Aqui!</i>
         </Link>
       </div>
       <img src={RightWave} className="wave" width="100vh" alt="" />

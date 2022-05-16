@@ -1,6 +1,4 @@
 import "./App.css";
-import StartPage from "./Pages/StartPage/StartPage";
-
 import Routes from "./routes";
 
 function App() {

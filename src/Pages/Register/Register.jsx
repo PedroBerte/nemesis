@@ -1,5 +1,5 @@
 import "./Register.css";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import AbacateAlongamento from "./../../images/AbacateAlongamento1.png";
 import Logo from "./../../images/NemesisV1.1.png";
@@ -9,14 +9,18 @@ import Button from "./../../components/Button/Button";
 import Input from "./../../components/Input/Input";
 
 import { Link, useNavigate } from "react-router-dom";
+
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
 import { auth, db } from "./../../firebase-config";
 import { setDoc, doc } from "firebase/firestore";
-import toast, { Toaster } from "react-hot-toast";
+
+import { AuthContext } from "./../../contexts/AuthContext";
+
 import "react-datepicker/dist/react-datepicker.css";
+import toast, { Toaster } from "react-hot-toast";
 import moment from "moment";
 
 const Register = () => {
@@ -33,15 +37,11 @@ const Register = () => {
   const [registerWeight, setRegisterWeight] = useState("");
   const [registerGoal, setRegisterGoal] = useState("");
 
-  const [user, setUser] = useState({});
+  const { user, setUser } = useContext(AuthContext);
 
   const [nextPage, setNextPage] = useState(false);
 
   const navigateTo = useNavigate();
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
 
   function stringContainsNumber(_string) {
     return /\d/.test(_string);
@@ -122,6 +122,14 @@ const Register = () => {
           toast.error("A idade máxima é de 80 anos");
           return;
         }
+        if (registerWeight < 40) {
+          toast.error("O peso mínimo é de 40Kg!");
+          return;
+        }
+        if (registerHeight < 145) {
+          toast.error("A altura mínima é de 1,45M!");
+          return;
+        }
         try {
           const user = await createUserWithEmailAndPassword(
             auth,
@@ -157,7 +165,7 @@ const Register = () => {
         }
       } else {
         //Caso algum parametro seja == "".
-        toast.error("Não deixe campos vazios! 1");
+        toast.error("Não deixe campos vazios!");
       }
     } else {
       if (!nextPage) {
@@ -187,7 +195,7 @@ const Register = () => {
           document.getElementById("register-email-side").style.display = "none";
           document.getElementById("register-info-side").style.display = "flex";
         } else {
-          toast.error("Não deixe campos vazios! 2");
+          toast.error("Não deixe campos vazios!");
         }
       } else {
         if (
@@ -249,7 +257,7 @@ const Register = () => {
             toast.error("Algo deu errado... Tente novamente mais tarde!");
           }
         } else {
-          toast.error("Não deixe campos vazios! 3");
+          toast.error("Não deixe campos vazios!");
         }
       }
     }
@@ -343,7 +351,7 @@ const Register = () => {
             <Input
               type="number"
               size="sm"
-              placeholder="Peso"
+              placeholder="Peso (Kg)"
               onChange={(event) => {
                 setRegisterWeight(event.target.value);
               }}
@@ -351,7 +359,7 @@ const Register = () => {
             <Input
               type="number"
               size="sm"
-              placeholder="Altura"
+              placeholder="Altura (cm)"
               onChange={(event) => {
                 setRegisterHeight(event.target.value);
               }}

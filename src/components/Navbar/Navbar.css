@@ -42,6 +42,9 @@
 .button-menu-responsive{
   margin-left: 10%;
 }
+.navbar-right-side-logged-in{
+  
+}
 
 @media screen and (max-width: 800px) {
   .navbar-right-side{

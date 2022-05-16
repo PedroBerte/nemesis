@@ -1,12 +1,26 @@
 import "./Navbar.css";
+import React, { useContext, useEffect } from "react";
 import Logo from "./../../images/NemesisV1.1.png";
 import Button from "./../Button/Button";
 import menuIcon from "./../../images/menuIcon.png";
-import user from "./../../Pages/Register/Register";
+
+import { db } from "../../firebase-config";
+import { getDocs, getFirestore } from "firebase/firestore";
+import { auth } from "./../../firebase-config";
+
+import { signOut } from "firebase/auth/";
+
+import { AuthContext } from "./../../contexts/AuthContext";
 
 import { Link } from "react-router-dom";
 const Navbar = () => {
   var isShowed = false;
+
+  const { user, setUser } = useContext(AuthContext);
+
+  const logOut = async () => {
+    signOut(auth);
+  };
 
   const showResponsiveMenu = () => {
     if (!isShowed) {
@@ -31,17 +45,34 @@ const Navbar = () => {
         <div className="navbar-left-side">
           <img src={Logo} height="65px" alt="" />
         </div>
-        <div className="navbar-right-side">
-          <Link to="/Register">
-            <Button background="#45c4b0" color="white">
-              Cadastre-se
-            </Button>
-          </Link>
-          <Link to="/Login">
-            <a href="">Fazer Login</a>
-          </Link>
-          <h2>{user.email}</h2>
-        </div>
+        {user != undefined ? (
+          <div className="navbar-right-side-logged">
+            <div className="navbar-logged-texts">
+              <h4>{}</h4>
+              <h5>{user.email}</h5>
+              <Button
+                onClick={() => logOut()}
+                background="#45c4b0"
+                color="white"
+                height="40px"
+                shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
+              >
+                Logout
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <div className="navbar-right-side">
+            <Link to="/Register">
+              <Button background="#45c4b0" color="white">
+                Cadastre-se
+              </Button>
+            </Link>
+            <Link to="/Login">
+              <a href="">Fazer Login</a>
+            </Link>
+          </div>
+        )}
 
         <div className="navbar-right-side-responsive">
           <img onClick={showResponsiveMenu} src={menuIcon} alt="" />
