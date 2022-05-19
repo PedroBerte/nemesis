@@ -8,7 +8,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/Input/Input";
 
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../firebase-config";
+import { auth, db } from "../../firebase-config";
+import { collection, getDocs } from "firebase/firestore";
 
 import { AuthContext } from "./../../contexts/AuthContext";
 
@@ -19,18 +20,23 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser, userInformation, setUserInformation } =
+    useContext(AuthContext);
+  const userCollectionRef = collection(db, "users");
+
   const signIn = async () => {
     try {
       const newUser = await signInWithEmailAndPassword(auth, email, password);
-      console.log(newUser);
+      const data = await getDocs(userCollectionRef);
+      const UserInfos = data.docs.find((uid) => newUser.user.uid);
+      setUserInformation(UserInfos._document.data.value.mapValue.fields);
       setUser(newUser);
       toast.success("Logado!");
       setTimeout(() => {
         navigateTo("/");
       }, 1800);
     } catch (e) {
-      console.log(e.message);
+      toast.error(e.message);
     }
   };
 

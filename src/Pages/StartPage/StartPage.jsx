@@ -16,7 +16,8 @@ import { auth } from "../../firebase-config";
 import { AuthContext } from "./../../contexts/AuthContext";
 
 const StartPage = () => {
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser, userInformation, setUserInformation } =
+    useContext(AuthContext);
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {

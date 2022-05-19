@@ -16,7 +16,8 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   var isShowed = false;
 
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser, userInformation, setUserInformation } =
+    useContext(AuthContext);
 
   const logOut = async () => {
     signOut(auth);
@@ -48,7 +49,7 @@ const Navbar = () => {
         {user != undefined ? (
           <div className="navbar-right-side-logged">
             <div className="navbar-logged-texts">
-              <h4>{}</h4>
+              <h4>{userInformation.name.stringValue}</h4>
               <h5>{user.email}</h5>
               <Button
                 onClick={() => logOut()}
