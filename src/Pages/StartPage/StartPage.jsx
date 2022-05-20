@@ -25,8 +25,6 @@ const StartPage = () => {
     });
   }, []);
 
-  console.log(user);
-
   return (
     <>
       <Navbar />

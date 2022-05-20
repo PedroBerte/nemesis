@@ -1,26 +1,33 @@
 import "./Navbar.css";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Logo from "./../../images/NemesisV1.1.png";
 import Button from "./../Button/Button";
 import menuIcon from "./../../images/menuIcon.png";
 
 import { db } from "../../firebase-config";
-import { getDocs, getFirestore } from "firebase/firestore";
 import { auth } from "./../../firebase-config";
+import { onAuthStateChanged } from "firebase/auth";
 
 import { signOut } from "firebase/auth/";
+import { collection, getDocs } from "firebase/firestore";
 
 import { AuthContext } from "./../../contexts/AuthContext";
 
 import { Link } from "react-router-dom";
+import { async } from "@firebase/util";
 const Navbar = () => {
   var isShowed = false;
 
   const { user, setUser, userInformation, setUserInformation } =
     useContext(AuthContext);
+  const userCollectionRef = collection(db, "users");
+  const [name, setName] = useState("");
+  const [goal, setGoal] = useState("");
 
   const logOut = async () => {
     signOut(auth);
+    setUser();
+    setUserInformation();
   };
 
   const showResponsiveMenu = () => {
@@ -40,6 +47,29 @@ const Navbar = () => {
     }
   };
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+  }, []);
+
+  useEffect(() => {
+    async function getUserDocs() {
+      if (user != undefined) {
+        const data = await getDocs(userCollectionRef);
+        const UserInfos = data.docs.find((element) => element.id == user.uid);
+        setName(
+          UserInfos._document.data.value.mapValue.fields.name.stringValue
+        );
+        setGoal(
+          UserInfos._document.data.value.mapValue.fields.goal.stringValue
+        );
+        setUserInformation(UserInfos);
+      }
+    }
+    getUserDocs();
+  }, [user]);
+
   return (
     <div className="navbar-body" id="navbar-body">
       <div className="navbar-flex">
@@ -49,8 +79,12 @@ const Navbar = () => {
         {user != undefined ? (
           <div className="navbar-right-side-logged">
             <div className="navbar-logged-texts">
-              <h4>{userInformation.name.stringValue}</h4>
-              <h5>{user.email}</h5>
+              <h3>{name}</h3>
+              {goal == "G" ? (
+                <h4>Ganhando massa 💪</h4>
+              ) : (
+                <h4>Perdendo Peso 🏃</h4>
+              )}
               <Button
                 onClick={() => logOut()}
                 background="#45c4b0"
@@ -70,7 +104,7 @@ const Navbar = () => {
               </Button>
             </Link>
             <Link to="/Login">
-              <a href="">Fazer Login</a>
+              <span href="">Fazer Login</span>
             </Link>
           </div>
         )}

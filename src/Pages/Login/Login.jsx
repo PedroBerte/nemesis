@@ -25,18 +25,31 @@ const Login = () => {
   const userCollectionRef = collection(db, "users");
 
   const signIn = async () => {
+    if ((email, password == "")) {
+      toast.error("Não deixe campos vazios!");
+      return;
+    }
     try {
       const newUser = await signInWithEmailAndPassword(auth, email, password);
       const data = await getDocs(userCollectionRef);
-      const UserInfos = data.docs.find((uid) => newUser.user.uid);
+      const UserInfos = data.docs.find(
+        (element) => element.id == newUser.user.uid
+      );
       setUserInformation(UserInfos._document.data.value.mapValue.fields);
-      setUser(newUser);
       toast.success("Logado!");
       setTimeout(() => {
         navigateTo("/");
       }, 1800);
-    } catch (e) {
-      toast.error(e.message);
+    } catch (error) {
+      if (error.code == "auth/invalid-email") {
+        toast.error("Insira um email válido!");
+        return;
+      }
+      if (error.code == "auth/wrong-password") {
+        toast.error("Senha incorreta!");
+        return;
+      }
+      toast.error(error.code);
     }
   };
 

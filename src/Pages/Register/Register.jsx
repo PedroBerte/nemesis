@@ -50,9 +50,9 @@ const Register = () => {
 
   function handleHeightNumber(height) {
     if (height.indexOf(".") > -1) {
-      console.log("tem");
+      return height.replace(".", "");
     } else {
-      console.log("nao tem");
+      return height;
     }
   }
 
@@ -88,32 +88,29 @@ const Register = () => {
   const RegisterUser = async (screenSize) => {
     if (screenSize >= 1100) {
       if (
-        registerName &&
-        registerEmail &&
-        registerConfirmEmail &&
-        registerPassword &&
-        registerConfirmPassword &&
-        registerBornDate &&
-        registerSex &&
-        registerHeight &&
-        registerWeight &&
-        registerGoal == ""
+        (registerName,
+        registerEmail,
+        registerConfirmEmail,
+        registerPassword,
+        registerConfirmPassword,
+        registerBornDate,
+        registerSex,
+        registerHeight,
+        registerWeight,
+        registerGoal == "")
       ) {
         toast.error("Não deixe campos vazios!");
         return;
       }
       if (stringContainsNumber(registerName)) {
-        //name with numbers
         toast.error("Insira um nome valido!");
         return;
       }
       if (registerEmail != registerConfirmEmail) {
-        //Email != confirmation
         toast.error("Os E-mails não coincidem!");
         return;
       }
       if (registerPassword != registerConfirmPassword) {
-        //Senha != confirmation
         toast.error("As senhas não coincidem!");
         return;
       }
@@ -139,8 +136,16 @@ const Register = () => {
         toast.error("O peso mínimo é de 40Kg!");
         return;
       }
-      if (registerHeight < 145) {
+      if (registerWeight > 200) {
+        toast.error("O peso máximo é de 200Kg!");
+        return;
+      }
+      if (handleHeightNumber(registerHeight) < 145) {
         toast.error("A altura mínima é de 1,45M!");
+        return;
+      }
+      if (handleHeightNumber(registerHeight) > 220) {
+        toast.error("A altura máxima é de 2,20M!");
         return;
       }
       try {
@@ -156,7 +161,7 @@ const Register = () => {
           email: registerEmail,
           date: registerBornDate,
           sex: registerSex,
-          height: registerHeight,
+          height: handleHeightNumber(registerHeight),
           weight: registerWeight,
           goal: registerGoal,
         });
@@ -179,10 +184,10 @@ const Register = () => {
     } else {
       if (!nextPage) {
         if (
-          registerName &&
-          registerEmail &&
-          registerConfirmEmail &&
-          registerPassword &&
+          registerName ||
+          registerEmail ||
+          registerConfirmEmail ||
+          registerPassword ||
           registerConfirmPassword == ""
         ) {
           toast.error("Não deixe campos vazios!");
@@ -193,12 +198,10 @@ const Register = () => {
           return;
         }
         if (registerEmail != registerConfirmEmail) {
-          //Email != Confirmação
           toast.error("Os E-mails não coincidem!");
           return;
         }
         if (registerPassword != registerConfirmPassword) {
-          //Senha != Confirmação
           toast.error("As senhas não coincidem!");
           return;
         }
@@ -208,10 +211,10 @@ const Register = () => {
         document.getElementById("register-info-side").style.display = "flex";
       } else {
         if (
-          registerBornDate &&
-          registerSex &&
-          registerHeight &&
-          registerWeight &&
+          registerBornDate ||
+          registerSex ||
+          registerHeight ||
+          registerWeight ||
           registerGoal == ""
         ) {
           toast.error("Não deixe campos vazios!");
@@ -235,6 +238,22 @@ const Register = () => {
           toast.error("A idade máxima é de 80 anos!");
           return;
         }
+        if (handleHeightNumber(registerHeight) < 145) {
+          toast.error("A altura mínima é de 1,45M!");
+          return;
+        }
+        if (handleHeightNumber(registerHeight) > 220) {
+          toast.error("A altura máxima é de 2,20M!");
+          return;
+        }
+        if (registerWeight < 40) {
+          toast.error("O peso mínimo é de 40Kg!");
+          return;
+        }
+        if (registerWeight > 200) {
+          toast.error("O peso máximo é de 200Kg!");
+          return;
+        }
         try {
           const user = await createUserWithEmailAndPassword(
             auth,
@@ -248,7 +267,7 @@ const Register = () => {
             email: registerEmail,
             Date: registerBornDate,
             Sex: registerSex,
-            Height: registerHeight,
+            Height: handleHeightNumber(registerHeight),
             Weight: registerWeight,
             Goal: registerGoal,
           });
