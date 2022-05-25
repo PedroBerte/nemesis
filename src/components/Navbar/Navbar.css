@@ -1,5 +1,5 @@
 .navbar-body {
-  margin-top: 1rem;
+  padding-top: 1rem;
   width: 100%;
   border-radius: 0 0 15px 15px;
   transition: all 0.5s ease-out;
@@ -42,8 +42,118 @@
 .button-menu-responsive{
   margin-left: 10%;
 }
-.navbar-right-side-logged-in{
-  
+.navbar-right-side-logged{
+  display: flex;
+  align-items: center;
+  padding-right: 1rem;
+}
+.navbar-logged-texts{
+  display: flex;
+  justify-content:center;
+  flex-direction: column;
+  margin-right: 1rem;
+}
+.navbar-username{
+  color: #303030;
+  font-family: Segoe UI;
+  font-weight: bold;
+  font-size: 18px;
+}
+.navbar-goal{
+  color: #303030;
+  font-family: Segoe UI;
+  font-weight: regular;
+  font-size: 16px;
+}
+.navbar-goal:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+.navbar-username:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+.lateral-menu-body{
+  transition: all 0.5s;
+  right: 0;
+  position:fixed;
+  display: flex;
+  flex-direction: column;
+  width: 0;
+  overflow: hidden;
+  background-color: #EDEDED;
+  height: 100%;
+  z-index: 2;
+}
+.lateral-menu-logged-texts{
+  margin-left: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.img-perfil-menu-icon{
+  margin-left: 1.5rem;
+  cursor: pointer;
+}
+.lateral-menu-user{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: 350px;
+  justify-content: center;
+}
+.img-perfil-icon{
+  cursor: pointer;
+}
+.lateral-menu-list{
+  width: 100%;
+  display: flex;
+  justify-content:center;
+  flex-direction: column;
+}
+.lateral-menu-list-item{
+  display: flex;
+  align-items: center;
+  width: 300px;
+}
+.lateral-menu-list-item:last-child{
+  margin-top: 1.3rem;
+}
+.lateral-menu-list-item img{
+  margin: 0 0.7rem 0 1rem;
+}
+.lateral-menu-list-item p{
+  cursor: pointer;
+  font-size: 17px;
+  margin-top: -3px;
+  color: #303030;
+}
+.lateral-menu-list-item p:hover{
+ text-decoration: underline;
+}
+.line{
+  align-self: center;
+  width: 280px;
+  border: 1px solid #9B9B9B;
+  overflow: hidden;
+  margin: 1rem 0 1rem 0;
+}
+#button-lateral-menu-logout{
+  margin-left: auto;
+  margin-top: auto;
+  margin-bottom: 3rem;
+  margin-right: 2rem;
+}
+.shadow-box{
+  transition: opacity 0.5s ease-in-out;
+  width: 0%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.38);
+  position: fixed;
+  opacity: 0%;
 }
 
 @media screen and (max-width: 800px) {

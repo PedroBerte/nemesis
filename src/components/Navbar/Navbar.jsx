@@ -3,6 +3,11 @@ import React, { useContext, useEffect, useState } from "react";
 import Logo from "./../../images/NemesisV1.1.png";
 import Button from "./../Button/Button";
 import menuIcon from "./../../images/menuIcon.png";
+import perfilIcon from "./../../images/perfil-icon.png";
+import perfilMenuIcon from "./../../images/perfilMenuIcon.png";
+import closeIcon from "./../../images/closeIcon.png";
+import gymIcon from "./../../images/gymIcon.svg";
+import configIcon from "./../../images/configIcon.svg";
 
 import { db } from "../../firebase-config";
 import { auth } from "./../../firebase-config";
@@ -14,9 +19,10 @@ import { collection, getDocs } from "firebase/firestore";
 import { AuthContext } from "./../../contexts/AuthContext";
 
 import { Link } from "react-router-dom";
-import { async } from "@firebase/util";
+
 const Navbar = () => {
   var isShowed = false;
+  var isPerfilMenuShowed = false;
 
   const { user, setUser, userInformation, setUserInformation } =
     useContext(AuthContext);
@@ -28,6 +34,7 @@ const Navbar = () => {
     signOut(auth);
     setUser();
     setUserInformation();
+    location.reload();
   };
 
   const showResponsiveMenu = () => {
@@ -44,6 +51,20 @@ const Navbar = () => {
       document.getElementById("responsive-menu").style.height = "0px";
       document.getElementById("navbar-body").style.boxShadow = "none";
       isShowed = false;
+    }
+  };
+
+  const showPerfilMenu = () => {
+    if (!isPerfilMenuShowed) {
+      document.getElementById("lateral-menu-body").style.width = "350px";
+      document.getElementById("shadow-box").style.width = "100%";
+      document.getElementById("shadow-box").style.opacity = "100%";
+      isPerfilMenuShowed = true;
+    } else {
+      document.getElementById("lateral-menu-body").style.width = "0px";
+      document.getElementById("shadow-box").style.width = "0%";
+      document.getElementById("shadow-box").style.opacity = "0%";
+      isPerfilMenuShowed = false;
     }
   };
 
@@ -71,70 +92,118 @@ const Navbar = () => {
   }, [user]);
 
   return (
-    <div className="navbar-body" id="navbar-body">
-      <div className="navbar-flex">
-        <div className="navbar-left-side">
-          <img src={Logo} height="65px" alt="" />
+    <>
+      <div
+        onClick={() => showPerfilMenu()}
+        id="shadow-box"
+        className="shadow-box"
+      ></div>
+      <div id="lateral-menu-body" className="lateral-menu-body">
+        <div className="lateral-menu-user">
+          <img src={perfilIcon} width="60px" />
+          <div className="lateral-menu-logged-texts">
+            <p className="navbar-username">{name}</p>
+            {goal == "G" ? (
+              <p className="navbar-goal">Ficando Fortão! 💪</p>
+            ) : (
+              <p className="navbar-goal">Perdendo Peso! 🏃</p>
+            )}
+          </div>
+          <img
+            onClick={() => showPerfilMenu()}
+            src={closeIcon}
+            className="img-perfil-menu-icon"
+            alt=""
+          />
         </div>
-        {user != undefined ? (
-          <div className="navbar-right-side-logged">
-            <div className="navbar-logged-texts">
-              <h3>{name}</h3>
-              {goal == "G" ? (
-                <h4>Ganhando massa 💪</h4>
-              ) : (
-                <h4>Perdendo Peso 🏃</h4>
-              )}
-              <Button
-                onClick={() => logOut()}
-                background="#45c4b0"
-                color="white"
-                height="40px"
-                shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
-              >
-                Logout
-              </Button>
+        <div className="line"></div>
+        <ul className="lateral-menu-list">
+          <li className="lateral-menu-list-item">
+            <img width="27px" src={configIcon} alt="" />
+            <p>Configurações da Conta</p>
+          </li>
+          <li className="lateral-menu-list-item">
+            <img width="27px" src={gymIcon} alt="" />
+            <p>Treino e Estatísticas</p>
+          </li>
+        </ul>
+        <Button
+          id="button-lateral-menu-logout"
+          background="#C44545"
+          color="white"
+          onClick={() => logOut()}
+        >
+          Deslogar
+        </Button>
+      </div>
+      <div className="navbar-body" id="navbar-body">
+        <div className="navbar-flex">
+          <div className="navbar-left-side">
+            <img src={Logo} height="65px" alt="" />
+          </div>
+          {user != undefined ? (
+            <div className="navbar-right-side-logged">
+              <div className="navbar-logged-texts">
+                <p className="navbar-username">{name}</p>
+                {goal == "G" ? (
+                  <p className="navbar-goal">Ficando Fortão! 💪</p>
+                ) : (
+                  <p className="navbar-goal">Perdendo Peso! 🏃</p>
+                )}
+              </div>
+              <img
+                src={perfilIcon}
+                className="img-perfil-icon"
+                width="60px"
+                height="60px"
+              />
+              <img
+                onClick={() => showPerfilMenu()}
+                src={perfilMenuIcon}
+                className="img-perfil-menu-icon"
+                alt=""
+              />
             </div>
-          </div>
-        ) : (
-          <div className="navbar-right-side">
-            <Link to="/Register">
-              <Button background="#45c4b0" color="white">
-                Cadastre-se
-              </Button>
-            </Link>
-            <Link to="/Login">
-              <span href="">Fazer Login</span>
-            </Link>
-          </div>
-        )}
+          ) : (
+            <div className="navbar-right-side">
+              <Link to="/Register">
+                <Button background="#45c4b0" color="white">
+                  Cadastre-se
+                </Button>
+              </Link>
+              <Link to="/Login">
+                <span href="">Fazer Login</span>
+              </Link>
+            </div>
+          )}
 
-        <div className="navbar-right-side-responsive">
-          <img onClick={showResponsiveMenu} src={menuIcon} alt="" />
+          <div className="navbar-right-side-responsive">
+            <img onClick={showResponsiveMenu} src={menuIcon} alt="" />
+          </div>
+        </div>
+
+        <div id="responsive-menu" className="responsive-menu">
+          <Link to="/Register">
+            <Button
+              className="button-menu-responsive"
+              background="#45c4b0"
+              color="white"
+            >
+              Cadastre-se
+            </Button>
+          </Link>
+          <Link to="/Login">
+            <Button
+              className="button-menu-responsive"
+              background="#9AEBA3"
+              color="white"
+            >
+              Login
+            </Button>
+          </Link>
         </div>
       </div>
-
-      <div id="responsive-menu" className="responsive-menu">
-        <Link to="/Register">
-          <Button
-            className="button-menu-responsive"
-            background="#45c4b0"
-            color="white"
-          >
-            Cadastre-se
-          </Button>
-        </Link>
-        <Link to="/Login">
-          <Button
-            className="button-menu-responsive"
-            background="#9AEBA3"
-            color="white"
-          >
-            Login
-          </Button>
-        </Link>
-      </div>
-    </div>
+    </>
   );
 };
 

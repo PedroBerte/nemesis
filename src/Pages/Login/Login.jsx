@@ -35,7 +35,10 @@ const Login = () => {
       const UserInfos = data.docs.find(
         (element) => element.id == newUser.user.uid
       );
-      setUserInformation(UserInfos._document.data.value.mapValue.fields);
+      localStorage.setItem(
+        "@Nemesis:userInformation",
+        JSON.stringify(UserInfos._document.data.value.mapValue.fields)
+      );
       toast.success("Logado!");
       setTimeout(() => {
         navigateTo("/");
@@ -49,10 +52,13 @@ const Login = () => {
         toast.error("Senha incorreta!");
         return;
       }
+      if (error.code == "auth/user-not-found") {
+        toast.error("E-mail não cadastrado!");
+        return;
+      }
       toast.error(error.code);
     }
   };
-
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   });
