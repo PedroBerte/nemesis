@@ -11,7 +11,7 @@ import AbacateCorrida from "./../../images/AbacateCorrida1.png";
 import SmartphoneNotification from "./../../images/phoneNotification.png";
 
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../firebase-config";
+import { auth } from "../../services/firebase-config";
 
 import { AuthContext } from "./../../contexts/AuthContext";
 

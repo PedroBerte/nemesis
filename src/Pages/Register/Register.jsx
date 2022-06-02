@@ -14,7 +14,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
-import { auth, db } from "./../../firebase-config";
+import { auth, db } from "./../../services/firebase-config";
 import { setDoc, doc } from "firebase/firestore";
 
 import { AuthContext } from "./../../contexts/AuthContext";

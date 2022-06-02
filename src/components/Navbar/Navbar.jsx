@@ -9,8 +9,8 @@ import closeIcon from "./../../images/closeIcon.png";
 import gymIcon from "./../../images/gymIcon.svg";
 import configIcon from "./../../images/configIcon.svg";
 
-import { db } from "../../firebase-config";
-import { auth } from "./../../firebase-config";
+import { db } from "../../services/firebase-config";
+import { auth } from "../../services/firebase-config";
 import { onAuthStateChanged } from "firebase/auth";
 
 import { signOut } from "firebase/auth/";

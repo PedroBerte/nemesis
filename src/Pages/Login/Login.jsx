@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/Input/Input";
 
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "../../firebase-config";
+import { auth, db } from "../../services/firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 
 import { AuthContext } from "./../../contexts/AuthContext";

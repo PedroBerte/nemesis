@@ -9,7 +9,7 @@
   justify-content:space-between;
 }
 .navbar-left-side {
-  padding-left: var(--default-padding);
+  padding-left: 75px;
   display: flex;
   align-items: center;
 }
@@ -17,7 +17,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding-right: var(--default-padding);
+  padding-right: 75px;
 }
 .navbar-right-side a {
   margin-left: 2rem;
