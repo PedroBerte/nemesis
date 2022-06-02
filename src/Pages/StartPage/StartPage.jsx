@@ -15,6 +15,8 @@ import { auth } from "../../firebase-config";
 
 import { AuthContext } from "./../../contexts/AuthContext";
 
+import { Link } from "react-router-dom";
+
 const StartPage = () => {
   const { user, setUser, userInformation, setUserInformation } =
     useContext(AuthContext);

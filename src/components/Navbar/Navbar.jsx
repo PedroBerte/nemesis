@@ -62,8 +62,11 @@ const Navbar = () => {
       isPerfilMenuShowed = true;
     } else {
       document.getElementById("lateral-menu-body").style.width = "0px";
-      document.getElementById("shadow-box").style.width = "0%";
       document.getElementById("shadow-box").style.opacity = "0%";
+      setTimeout(() => {
+        document.getElementById("shadow-box").style.width = "0%";
+      }, 500);
+
       isPerfilMenuShowed = false;
     }
   };
@@ -98,6 +101,7 @@ const Navbar = () => {
         id="shadow-box"
         className="shadow-box"
       ></div>
+
       <div id="lateral-menu-body" className="lateral-menu-body">
         <div className="lateral-menu-user">
           <img src={perfilIcon} width="60px" />
@@ -136,6 +140,7 @@ const Navbar = () => {
           Deslogar
         </Button>
       </div>
+
       <div className="navbar-body" id="navbar-body">
         <div className="navbar-flex">
           <div className="navbar-left-side">
