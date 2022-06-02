@@ -4,6 +4,7 @@ import React, { useState, useContext } from "react";
 import AbacateAlongamento from "./../../images/AbacateAlongamento1.png";
 import Logo from "./../../images/NemesisV1.1.png";
 import LeftWave from "./../../images/wave-left.png";
+import perfilPhoto from "./../../images/perfil-icon.png";
 
 import Button from "./../../components/Button/Button";
 import Input from "./../../components/Input/Input";
@@ -13,6 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  updateProfile,
 } from "firebase/auth";
 import { auth, db } from "./../../services/firebase-config";
 import { setDoc, doc } from "firebase/firestore";
@@ -165,10 +167,20 @@ const Register = () => {
           weight: registerWeight,
           goal: registerGoal,
         });
+        updateProfile(auth.currentUser, {
+          displayName: registerName,
+          photoURL: { perfilPhoto },
+        })
+          .then(() => {
+            toast.success("foto atualizada nome");
+          })
+          .catch((error) => {
+            toast.error("fodeu");
+          });
         toast.success("Conta criada! Aproveite!"); //Cria conta Web >= 1100
         setTimeout(() => {
           navigateTo("/");
-        }, 1800);
+        }, 2000);
       } catch (error) {
         console.log(error.code);
         if (error.code == "auth/weak-password") {
