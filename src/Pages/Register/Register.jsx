@@ -170,13 +170,7 @@ const Register = () => {
         updateProfile(auth.currentUser, {
           displayName: registerName,
           photoURL: { perfilPhoto },
-        })
-          .then(() => {
-            toast.success("foto atualizada nome");
-          })
-          .catch((error) => {
-            toast.error("fodeu");
-          });
+        });
         toast.success("Conta criada! Aproveite!"); //Cria conta Web >= 1100
         setTimeout(() => {
           navigateTo("/");

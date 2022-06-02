@@ -138,6 +138,7 @@
   align-self: center;
   width: 280px;
   border: 1px solid #9B9B9B;
+  background-color: #9B9B9B;
   overflow: hidden;
   margin: 1rem 0 1rem 0;
 }
@@ -164,9 +165,12 @@
     display: flex;
     align-items: center;
     justify-content:center;
-    padding-right: var(--responsive-padding);
+    padding-right: 50px;
   }
   .navbar-left-side{
-    padding-left: var(--responsive-padding);
+    padding-left: 50px;
+  }
+  .navbar-right-side-logged{
+    display: none;
   }
 }

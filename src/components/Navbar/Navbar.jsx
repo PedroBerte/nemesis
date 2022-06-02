@@ -101,7 +101,6 @@ const Navbar = () => {
         id="shadow-box"
         className="shadow-box"
       ></div>
-
       <div id="lateral-menu-body" className="lateral-menu-body">
         <div className="lateral-menu-user">
           <img src={perfilIcon} width="60px" />
@@ -181,9 +180,22 @@ const Navbar = () => {
               </Link>
             </div>
           )}
-
           <div className="navbar-right-side-responsive">
-            <img onClick={showResponsiveMenu} src={menuIcon} alt="" />
+            {user != undefined ? (
+              <img
+                width="50px"
+                onClick={showPerfilMenu}
+                src={perfilIcon}
+                alt=""
+              />
+            ) : (
+              <img
+                width="30px"
+                onClick={showResponsiveMenu}
+                src={perfilMenuIcon}
+                alt=""
+              />
+            )}
           </div>
         </div>
 
