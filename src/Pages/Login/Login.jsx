@@ -1,10 +1,13 @@
 import React, { useState, useContext } from "react";
-import Logo from "./../../images/NemesisV1.1.png";
 import "./Login.css";
+
+import Logo from "./../../images/NemesisV1.1.png";
 import AbacateAlongamento from "./../../images/AbacateAlongamento1.png";
 import RightWave from "./../../images/wave-right.png";
 import Button from "./../../components/Button/Button";
+
 import { Link, useNavigate } from "react-router-dom";
+
 import Input from "../../components/Input/Input";
 
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
@@ -20,16 +23,26 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, setUser, userInformation, setUserInformation } =
-    useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
   const userCollectionRef = collection(db, "users");
 
+  function getException(message) {
+    this.message = message;
+  }
+
+  function trySignIn() {
+    toast.promise(signIn(), {
+      loading: "Carregando...",
+      success: "Logado!",
+      error: (err) => err.message.toString(),
+    });
+  }
+
   const signIn = async () => {
-    if ((email, password == "")) {
-      toast.error("Não deixe campos vazios!");
-      return;
-    }
     try {
+      if ((email, password == "")) {
+        throw new getException("Não deixe campos vazios!");
+      }
       const newUser = await signInWithEmailAndPassword(auth, email, password);
       const data = await getDocs(userCollectionRef);
       const UserInfos = data.docs.find(
@@ -39,26 +52,23 @@ const Login = () => {
         "@Nemesis:userInformation",
         JSON.stringify(UserInfos._document.data.value.mapValue.fields)
       );
-      toast.success("Logado!");
       setTimeout(() => {
         navigateTo("/");
       }, 1800);
     } catch (error) {
       if (error.code == "auth/invalid-email") {
-        toast.error("Insira um email válido!");
-        return;
+        throw new getException("E-mail inválido!");
       }
       if (error.code == "auth/wrong-password") {
-        toast.error("Senha incorreta!");
-        return;
+        throw new getException("Senha Incorreta!");
       }
       if (error.code == "auth/user-not-found") {
-        toast.error("E-mail não cadastrado!");
-        return;
+        throw new getException("Usuário não encontrado!");
       }
-      toast.error(error.code);
+      throw error;
     }
   };
+
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   });
@@ -93,7 +103,7 @@ const Login = () => {
           />
         </form>
         <Button
-          onClick={() => signIn()}
+          onClick={() => trySignIn()}
           background="#45c4b0"
           color="white"
           width="150px"
@@ -103,7 +113,7 @@ const Login = () => {
         >
           Login
         </Button>
-        <Link to="/Register">
+        <Link className="link-text" to="/Register">
           <i className="link-text">Não tem uma conta? Crie Aqui!</i>
         </Link>
       </div>

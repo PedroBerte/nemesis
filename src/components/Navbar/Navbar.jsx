@@ -19,6 +19,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { AuthContext } from "./../../contexts/AuthContext";
 
 import { Link } from "react-router-dom";
+import LineSpace from "../LineSpace/LineSpace";
 
 const Navbar = () => {
   var isShowed = false;
@@ -91,6 +92,7 @@ const Navbar = () => {
         setUserInformation(UserInfos);
       }
     }
+    console.log(user);
     getUserDocs();
   }, [user]);
 
@@ -119,15 +121,17 @@ const Navbar = () => {
             alt=""
           />
         </div>
-        <div className="line"></div>
+        <LineSpace width="280px" margin="1.5rem" />
         <ul className="lateral-menu-list">
-          <li className="lateral-menu-list-item">
-            <img width="27px" src={configIcon} alt="" />
-            <p>Configurações da Conta</p>
-          </li>
           <li className="lateral-menu-list-item">
             <img width="27px" src={gymIcon} alt="" />
             <p>Treino e Estatísticas</p>
+          </li>
+          <li className="lateral-menu-list-item">
+            <img width="27px" src={configIcon} alt="" />
+            <Link to="/UserSettings">
+              <p>Configurações da Conta</p>
+            </Link>
           </li>
         </ul>
         <Button
@@ -143,7 +147,9 @@ const Navbar = () => {
       <div className="navbar-body" id="navbar-body">
         <div className="navbar-flex">
           <div className="navbar-left-side">
-            <img src={Logo} height="65px" alt="" />
+            <Link to="/">
+              <img src={Logo} height="65px" alt="" />
+            </Link>
           </div>
           {user != undefined ? (
             <div className="navbar-right-side-logged">

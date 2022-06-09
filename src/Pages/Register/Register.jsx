@@ -167,10 +167,6 @@ const Register = () => {
           weight: registerWeight,
           goal: registerGoal,
         });
-        updateProfile(auth.currentUser, {
-          displayName: registerName,
-          photoURL: { perfilPhoto },
-        });
         toast.success("Conta criada! Aproveite!"); //Cria conta Web >= 1100
         setTimeout(() => {
           navigateTo("/");
@@ -190,11 +186,11 @@ const Register = () => {
     } else {
       if (!nextPage) {
         if (
-          registerName ||
-          registerEmail ||
-          registerConfirmEmail ||
-          registerPassword ||
-          registerConfirmPassword == ""
+          (registerName,
+          registerEmail,
+          registerConfirmEmail,
+          registerPassword,
+          registerConfirmPassword == "")
         ) {
           toast.error("Não deixe campos vazios!");
           return;
@@ -217,11 +213,11 @@ const Register = () => {
         document.getElementById("register-info-side").style.display = "flex";
       } else {
         if (
-          registerBornDate ||
-          registerSex ||
-          registerHeight ||
-          registerWeight ||
-          registerGoal == ""
+          (registerBornDate,
+          registerSex,
+          registerHeight,
+          registerWeight,
+          registerGoal == "")
         ) {
           toast.error("Não deixe campos vazios!");
           return;
@@ -393,7 +389,7 @@ const Register = () => {
             <Input
               type="number"
               size="sm"
-              placeholder="Altura (cm)"
+              placeholder="Altura"
               onChange={(event) => {
                 setRegisterHeight(event.target.value);
               }}
@@ -424,7 +420,7 @@ const Register = () => {
         >
           Cadastre-se
         </Button>
-        <Link to="/Login">
+        <Link className="link-text" to="/Login">
           <i className="link-text">Já tem uma conta? Clique Aqui!</i>
         </Link>
       </div>
