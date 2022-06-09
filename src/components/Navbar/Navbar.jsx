@@ -92,7 +92,6 @@ const Navbar = () => {
         setUserInformation(UserInfos);
       }
     }
-    console.log(user);
     getUserDocs();
   }, [user]);
 

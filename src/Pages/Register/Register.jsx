@@ -4,7 +4,6 @@ import React, { useState, useContext } from "react";
 import AbacateAlongamento from "./../../images/AbacateAlongamento1.png";
 import Logo from "./../../images/NemesisV1.1.png";
 import LeftWave from "./../../images/wave-left.png";
-import perfilPhoto from "./../../images/perfil-icon.png";
 
 import Button from "./../../components/Button/Button";
 import Input from "./../../components/Input/Input";
@@ -87,70 +86,82 @@ const Register = () => {
     }
   }
 
+  function tryRegisterUser(widthScreen) {
+    if (widthScreen <= 1100) {
+      if (nextPage) {
+        toast.promise(RegisterUser(widthScreen), {
+          loading: "Carregando...",
+          success: "Logado!",
+          error: (err) => err.message.toString(),
+        });
+      } else {
+        RegisterUser(widthScreen);
+      }
+    } else {
+      toast.promise(RegisterUser(widthScreen), {
+        loading: "Carregando...",
+        success: "Logado!",
+        error: (err) => err.message.toString(),
+      });
+    }
+  }
+
+  function getException(message) {
+    this.message = message;
+  }
+
   const RegisterUser = async (screenSize) => {
     if (screenSize >= 1100) {
-      if (
-        (registerName,
-        registerEmail,
-        registerConfirmEmail,
-        registerPassword,
-        registerConfirmPassword,
-        registerBornDate,
-        registerSex,
-        registerHeight,
-        registerWeight,
-        registerGoal == "")
-      ) {
-        toast.error("Não deixe campos vazios!");
-        return;
-      }
-      if (stringContainsNumber(registerName)) {
-        toast.error("Insira um nome valido!");
-        return;
-      }
-      if (registerEmail != registerConfirmEmail) {
-        toast.error("Os E-mails não coincidem!");
-        return;
-      }
-      if (registerPassword != registerConfirmPassword) {
-        toast.error("As senhas não coincidem!");
-        return;
-      }
-      if (String(getCurrentDate()) == registerBornDate) {
-        toast.error("Insira uma data de nascimento valida!");
-        return;
-      }
-      if (moment(registerBornDate).isAfter(getCurrentDate())) {
-        toast.error("Insira uma data de nascimento valida!");
-        return;
-      }
-      if (moment(registerBornDate).isAfter(getCurrentDate(12))) {
-        toast.error(
-          "Apenas pessoas com mais de 12 anos podem se cadastrar no Nemesis!"
-        );
-        return;
-      }
-      if (moment(registerBornDate).isBefore(getCurrentDate(80))) {
-        toast.error("A idade máxima é de 80 anos");
-        return;
-      }
-      if (registerWeight < 40) {
-        toast.error("O peso mínimo é de 40Kg!");
-        return;
-      }
-      if (registerWeight > 200) {
-        toast.error("O peso máximo é de 200Kg!");
-        return;
-      }
-      if (handleHeightNumber(registerHeight) < 145) {
-        toast.error("A altura mínima é de 1,45M!");
-        return;
-      }
-      if (handleHeightNumber(registerHeight) > 220) {
-        toast.error("A altura máxima é de 2,20M!");
-        return;
-      }
       try {
+        if (
+          (registerName,
+          registerEmail,
+          registerConfirmEmail,
+          registerPassword,
+          registerConfirmPassword,
+          registerBornDate,
+          registerSex,
+          registerHeight,
+          registerWeight,
+          registerGoal == "")
+        ) {
+          throw new getException("Não deixe campos vazios!");
+        }
+        if (stringContainsNumber(registerName)) {
+          throw new getException("Insira um nome valido!");
+        }
+        if (registerEmail != registerConfirmEmail) {
+          throw new getException("Os E-mails não coincidem!");
+        }
+        if (registerPassword != registerConfirmPassword) {
+          throw new getException("As senhas não coincidem!");
+        }
+        if (String(getCurrentDate()) == registerBornDate) {
+          throw new getException("Insira uma data de nascimento valida!");
+        }
+        if (moment(registerBornDate).isAfter(getCurrentDate())) {
+          throw new getException("Insira uma data de nascimento valida!");
+        }
+        if (moment(registerBornDate).isAfter(getCurrentDate(12))) {
+          throw new getException(
+            "Apenas pessoas com mais de 12 anos podem se cadastrar no Nemesis!"
+          );
+        }
+        if (moment(registerBornDate).isBefore(getCurrentDate(80))) {
+          throw new getException("A idade máxima é de 80 anos");
+        }
+        if (registerWeight < 40) {
+          throw new getException("O peso mínimo é de 40Kg!");
+        }
+        if (registerWeight > 200) {
+          throw new getException("O peso máximo é de 200Kg!");
+        }
+        if (handleHeightNumber(registerHeight) < 145) {
+          throw new getException("A altura mínima é de 1,45M!");
+        }
+        if (handleHeightNumber(registerHeight) > 220) {
+          throw new getException("A altura máxima é de 2,20M!");
+        }
         const user = await createUserWithEmailAndPassword(
           auth,
           registerEmail,
@@ -167,21 +178,17 @@ const Register = () => {
           weight: registerWeight,
           goal: registerGoal,
         });
-        toast.success("Conta criada! Aproveite!"); //Cria conta Web >= 1100
         setTimeout(() => {
           navigateTo("/");
         }, 2000);
       } catch (error) {
-        console.log(error.code);
         if (error.code == "auth/weak-password") {
-          toast.error("Sua senha deve ter mais de 6 caracteres!");
-          return;
+          throw new getException("Sua senha deve ter mais de 6 caracteres!");
         }
         if (error.code == "auth/email-already-in-use") {
-          toast.error("Este E-mail já esta em uso!");
-          return;
+          throw new getException("Este E-mail já esta em uso!");
         }
-        toast.error("Algo deu errado... Tente novamente mais tarde!");
+        throw error;
       }
     } else {
       if (!nextPage) {
@@ -222,41 +229,33 @@ const Register = () => {
           toast.error("Não deixe campos vazios!");
           return;
         }
-        if (String(getCurrentDate()) == registerBornDate) {
-          toast.error("Insira uma data de nascimento valida!");
-          return;
-        }
-        if (moment(registerBornDate).isAfter(getCurrentDate())) {
-          toast.error("Insira uma data de nascimento valida!");
-          return;
-        }
-        if (moment(registerBornDate).isAfter(getCurrentDate(12))) {
-          toast.error(
-            "Apenas pessoas com mais de 12 anos podem se cadastrar no Nemesis!"
-          );
-          return;
-        }
-        if (moment(registerBornDate).isBefore(getCurrentDate(80))) {
-          toast.error("A idade máxima é de 80 anos!");
-          return;
-        }
-        if (handleHeightNumber(registerHeight) < 145) {
-          toast.error("A altura mínima é de 1,45M!");
-          return;
-        }
-        if (handleHeightNumber(registerHeight) > 220) {
-          toast.error("A altura máxima é de 2,20M!");
-          return;
-        }
-        if (registerWeight < 40) {
-          toast.error("O peso mínimo é de 40Kg!");
-          return;
-        }
-        if (registerWeight > 200) {
-          toast.error("O peso máximo é de 200Kg!");
-          return;
-        }
         try {
+          if (String(getCurrentDate()) == registerBornDate) {
+            throw new getException("Insira uma data de nascimento valida!");
+          }
+          if (moment(registerBornDate).isAfter(getCurrentDate())) {
+            throw new getException("Insira uma data de nascimento valida!");
+          }
+          if (moment(registerBornDate).isAfter(getCurrentDate(12))) {
+            throw new getException(
+              "Apenas pessoas com mais de 12 anos podem se cadastrar no Nemesis!"
+            );
+          }
+          if (moment(registerBornDate).isBefore(getCurrentDate(80))) {
+            throw new getException("A idade máxima é de 80 anos");
+          }
+          if (registerWeight < 40) {
+            throw new getException("O peso mínimo é de 40Kg!");
+          }
+          if (registerWeight > 200) {
+            throw new getException("O peso máximo é de 200Kg!");
+          }
+          if (handleHeightNumber(registerHeight) < 145) {
+            throw new getException("A altura mínima é de 1,45M!");
+          }
+          if (handleHeightNumber(registerHeight) > 220) {
+            throw new getException("A altura máxima é de 2,20M!");
+          }
           const user = await createUserWithEmailAndPassword(
             auth,
             registerEmail,
@@ -273,21 +272,17 @@ const Register = () => {
             Weight: registerWeight,
             Goal: registerGoal,
           });
-          toast.success("Conta criada! Aproveite!"); //Cria conta no WebMobile
           setTimeout(() => {
             navigateTo("/");
           }, 1800);
         } catch (error) {
-          console.log(error.code);
           if (error.code == "auth/weak-password") {
-            toast.error("Sua senha deve ter mais de 6 caracteres!");
-            return;
+            throw new getException("Sua senha deve ter mais de 6 caracteres!");
           }
           if (error.code == "auth/email-already-in-use") {
-            toast.error("Este E-mail já esta em uso!");
-            return;
+            throw new getException("Este E-mail já esta em uso!");
           }
-          toast.error("Algo deu errado... Tente novamente mais tarde!");
+          throw error;
         }
       }
     }
@@ -412,7 +407,7 @@ const Register = () => {
         <Button
           id="register-button"
           type="submit"
-          onClick={() => RegisterUser(window.screen.width)}
+          onClick={() => tryRegisterUser(window.screen.width)}
           background="#45c4b0"
           color="white"
           height="40px"

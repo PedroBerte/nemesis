@@ -45,7 +45,7 @@
 .navbar-right-side-logged{
   display: flex;
   align-items: center;
-  padding-right: 1rem;
+  padding-right: 50px;
 }
 .navbar-logged-texts{
   display: flex;
