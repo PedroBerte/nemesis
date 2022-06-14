@@ -10,15 +10,9 @@ import Input from "./../../components/Input/Input";
 
 import { Link, useNavigate } from "react-router-dom";
 
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  updateProfile,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "./../../services/firebase-config";
-import { setDoc, doc } from "firebase/firestore";
-
-import { AuthContext } from "./../../contexts/AuthContext";
+import { setDoc, doc, updateDoc } from "firebase/firestore";
 
 import "react-datepicker/dist/react-datepicker.css";
 import toast, { Toaster } from "react-hot-toast";
@@ -37,11 +31,13 @@ const Register = () => {
   const [registerHeight, setRegisterHeight] = useState("");
   const [registerWeight, setRegisterWeight] = useState("");
   const [registerGoal, setRegisterGoal] = useState("");
-
-  const { user, setUser, userInformation, setUserInformation } =
-    useContext(AuthContext);
+  const [gymAvailability, setGymAvailability] = useState("");
+  const [gymDays, setGymDays] = useState("");
 
   const [nextPage, setNextPage] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const [userUID, setUserUID] = useState("");
 
   const navigateTo = useNavigate();
 
@@ -86,12 +82,16 @@ const Register = () => {
     }
   }
 
+  function getException(message) {
+    this.message = message;
+  }
+
   function tryRegisterUser(widthScreen) {
     if (widthScreen <= 1100) {
       if (nextPage) {
         toast.promise(RegisterUser(widthScreen), {
           loading: "Carregando...",
-          success: "Logado!",
+          success: "Apenas mais uma etapa...",
           error: (err) => err.message.toString(),
         });
       } else {
@@ -100,14 +100,36 @@ const Register = () => {
     } else {
       toast.promise(RegisterUser(widthScreen), {
         loading: "Carregando...",
-        success: "Logado!",
+        success: "Apenas mais uma etapa..",
         error: (err) => err.message.toString(),
       });
     }
   }
 
-  function getException(message) {
-    this.message = message;
+  function trySetGymSpecs() {
+    toast.promise(setGymSpecs(), {
+      loading: "Carregando...",
+      success: "Conta Criada!",
+      error: (err) => err.message.toString(),
+    });
+  }
+
+  async function setGymSpecs() {
+    try {
+      if ((gymAvailability, gymDays == "")) {
+        throw new getException("Não deixe campos vazios!");
+      }
+      await updateDoc(doc(db, "users", userUID), {
+        gymAvail: gymAvailability,
+        gymDays: gymDays,
+      });
+      setTimeout(() => {
+        useNavigate("/");
+      }, 2000);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 
   const RegisterUser = async (screenSize) => {
@@ -168,18 +190,19 @@ const Register = () => {
           registerPassword
         );
         const uid = user.user.uid;
+        setUserUID(uid);
         await setDoc(doc(db, "users", uid), {
           uid: uid,
           name: registerName,
           email: registerEmail,
-          date: registerBornDate,
-          sex: registerSex,
-          height: handleHeightNumber(registerHeight),
-          weight: registerWeight,
-          goal: registerGoal,
+          Date: registerBornDate,
+          Sex: registerSex,
+          Height: handleHeightNumber(registerHeight),
+          Weight: registerWeight,
+          Goal: registerGoal,
         });
         setTimeout(() => {
-          navigateTo("/");
+          setIsLoggedIn(true);
         }, 2000);
       } catch (error) {
         if (error.code == "auth/weak-password") {
@@ -256,6 +279,7 @@ const Register = () => {
           if (handleHeightNumber(registerHeight) > 220) {
             throw new getException("A altura máxima é de 2,20M!");
           }
+
           const user = await createUserWithEmailAndPassword(
             auth,
             registerEmail,
@@ -273,8 +297,8 @@ const Register = () => {
             Goal: registerGoal,
           });
           setTimeout(() => {
-            navigateTo("/");
-          }, 1800);
+            setIsLoggedIn(true);
+          }, 2000);
         } catch (error) {
           if (error.code == "auth/weak-password") {
             throw new getException("Sua senha deve ter mais de 6 caracteres!");
@@ -287,137 +311,189 @@ const Register = () => {
       }
     }
   };
-
   return (
     <div className="register-body">
-      <div>
-        <Toaster
-          position="top-right"
-          reverseOrder={false}
-          toastOptions={{ style: { fontFamily: "Segoe UI" } }}
-        />
-      </div>
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+        toastOptions={{ style: { fontFamily: "Segoe UI" } }}
+      />
       <div className="register-left-side">
         <img width="70%" src={AbacateAlongamento} alt="" />
       </div>
       <img className="wave" src={LeftWave} alt="" />
       <div className="register-right-side">
         <div className="logo-div" style={{ width: "100%" }}>
-          <Link style={{ marginTop: "0px" }} to="/">
+          <Link to="/">
             <img className="register-logo" src={Logo} width="200px" alt="" />
           </Link>
         </div>
-        <form className="register-form">
-          <div className="register-email-side" id="register-email-side">
-            <Input
-              type="text"
-              size="lg"
-              placeholder="Nome Completo"
-              onChange={(event) => {
-                setRegisterName(event.target.value);
-              }}
-            />
-            <Input
-              type="email"
-              size="lg"
-              placeholder="Insira seu E-mail"
-              onChange={(event) => {
-                setRegisterEmail(event.target.value);
-              }}
-            />
-            <Input
-              type="email"
-              size="lg"
-              placeholder="Confirme seu E-mail"
-              onChange={(event) => {
-                setRegisterConfirmEmail(event.target.value);
-              }}
-            />
-            <Input
-              type="password"
-              size="lg"
-              placeholder="Sua Senha"
-              onChange={(event) => {
-                setRegisterPassword(event.target.value);
-              }}
-            />
-            <Input
-              type="password"
-              size="lg"
-              placeholder="Confirme a sua Senha"
-              onChange={(event) => {
-                setRegisterConfirmPassword(event.target.value);
-              }}
-            />
-          </div>
-          <div className="register-info-side" id="register-info-side">
-            <Input
-              type="date"
-              size="sm"
-              placeholder="Data de Nascimento"
-              onChange={(event) => {
-                setRegisterBornDate(event.target.value);
-              }}
-              min="1942-01-01"
-            />
-            <select
-              className="select"
-              onChange={(event) => {
-                setRegisterSex(event.target.value);
-              }}
+        {!isLoggedIn ? (
+          <>
+            <form className="register-form">
+              <div className="register-email-side" id="register-email-side">
+                <Input
+                  type="text"
+                  size="lg"
+                  placeholder="Nome Completo"
+                  onChange={(event) => {
+                    setRegisterName(event.target.value);
+                  }}
+                />
+                <Input
+                  type="email"
+                  size="lg"
+                  placeholder="Insira seu E-mail"
+                  onChange={(event) => {
+                    setRegisterEmail(event.target.value);
+                  }}
+                />
+                <Input
+                  type="email"
+                  size="lg"
+                  placeholder="Confirme seu E-mail"
+                  onChange={(event) => {
+                    setRegisterConfirmEmail(event.target.value);
+                  }}
+                />
+                <Input
+                  type="password"
+                  size="lg"
+                  placeholder="Sua Senha"
+                  onChange={(event) => {
+                    setRegisterPassword(event.target.value);
+                  }}
+                />
+                <Input
+                  type="password"
+                  size="lg"
+                  placeholder="Confirme a sua Senha"
+                  onChange={(event) => {
+                    setRegisterConfirmPassword(event.target.value);
+                  }}
+                />
+              </div>
+              <div className="register-info-side" id="register-info-side">
+                <Input
+                  type="date"
+                  size="sm"
+                  placeholder="Data de Nascimento"
+                  onChange={(event) => {
+                    setRegisterBornDate(event.target.value);
+                  }}
+                  min="1942-01-01"
+                />
+                <select
+                  className="select"
+                  onChange={(event) => {
+                    setRegisterSex(event.target.value);
+                  }}
+                >
+                  <option value="" selected disabled hidden>
+                    Sexo
+                  </option>
+                  <option value="M">Masculino</option>
+                  <option value="N">Feminino</option>
+                  <option value="NA">Prefiro não Informar</option>
+                </select>
+                <Input
+                  type="number"
+                  size="sm"
+                  placeholder="Peso (Kg)"
+                  onChange={(event) => {
+                    setRegisterWeight(event.target.value);
+                  }}
+                />
+                <Input
+                  type="number"
+                  size="sm"
+                  placeholder="Altura"
+                  onChange={(event) => {
+                    setRegisterHeight(event.target.value);
+                  }}
+                />
+                <select
+                  className="select"
+                  onChange={(event) => {
+                    setRegisterGoal(event.target.value);
+                  }}
+                >
+                  <option value="" selected disabled hidden>
+                    Objetivo
+                  </option>
+                  <option value="P">Perda de Peso</option>
+                  <option value="G">Ganho de Massa</option>
+                </select>
+              </div>
+            </form>
+            <Button
+              id="register-button"
+              type="submit"
+              onClick={() => tryRegisterUser(window.screen.width)}
+              background="#45c4b0"
+              color="white"
+              height="40px"
+              shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
             >
-              <option value="" selected disabled hidden>
-                Sexo
-              </option>
-              <option value="M">Masculino</option>
-              <option value="N">Feminino</option>
-              <option value="NA">Prefiro não Informar</option>
-            </select>
-            <Input
-              type="number"
-              size="sm"
-              placeholder="Peso (Kg)"
-              onChange={(event) => {
-                setRegisterWeight(event.target.value);
-              }}
-            />
-            <Input
-              type="number"
-              size="sm"
-              placeholder="Altura"
-              onChange={(event) => {
-                setRegisterHeight(event.target.value);
-              }}
-            />
-            <select
-              className="select"
-              onChange={(event) => {
-                setRegisterGoal(event.target.value);
-              }}
+              Cadastre-se
+            </Button>
+            <Link className="link-text" to="/Register">
+              <i className="link-text">Já tem uma conta? Clique Aqui!</i>
+            </Link>
+          </>
+        ) : (
+          <>
+            <form className="form-gym-specs">
+              <div className="gym-specs-text">
+                <h2 className="gym-specs-title">Certo, estamos quase lá...</h2>
+                <h2 className="gym-specs-subtitle">
+                  Por favor, preencha os seguintes dados:
+                </h2>
+              </div>
+              <select
+                className="select gymspecs"
+                onChange={(event) => {
+                  setGymAvailability(event.target.value);
+                }}
+              >
+                <option value="" selected disabled hidden>
+                  Teria uma academia disponível?
+                </option>
+                <option value="GYM-S">Sim</option>
+                <option value="GYM-N">Não</option>
+              </select>
+              <select
+                className="select gymspecs"
+                onChange={(event) => {
+                  setGymDays(event.target.value);
+                }}
+              >
+                <option value="" selected disabled hidden>
+                  Dias disponíveis para treino:
+                </option>
+                <option value="GYM-DAYS-2">2</option>
+                <option value="GYM-DAYS-3">3</option>
+                <option value="GYM-DAYS-4">4</option>
+                <option value="GYM-DAYS-5">5</option>
+                <option value="GYM-DAYS-6">6</option>
+              </select>
+            </form>
+            <Button
+              id="register-button"
+              type="submit"
+              onClick={() => trySetGymSpecs()}
+              background="#45c4b0"
+              color="white"
+              height="40px"
+              shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
             >
-              <option value="" selected disabled hidden>
-                Objetivo
-              </option>
-              <option value="P">Perda de Peso</option>
-              <option value="G">Ganho de Massa</option>
-              <option value="FR">Força e Resistencia</option>
-            </select>
-          </div>
-        </form>
-        <Button
-          id="register-button"
-          type="submit"
-          onClick={() => tryRegisterUser(window.screen.width)}
-          background="#45c4b0"
-          color="white"
-          height="40px"
-          shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
-        >
-          Cadastre-se
-        </Button>
-        <Link className="link-text" to="/Login">
-          <i className="link-text">Já tem uma conta? Clique Aqui!</i>
-        </Link>
+              Cadastre-se
+            </Button>
+            <Link className="link-text" to="/Login">
+              <i className="link-text">Já tem uma conta? Clique Aqui!</i>
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );

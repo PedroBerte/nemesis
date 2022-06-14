@@ -124,7 +124,9 @@ const Navbar = () => {
         <ul className="lateral-menu-list">
           <li className="lateral-menu-list-item">
             <img width="27px" src={gymIcon} alt="" />
-            <p>Treino e Estatísticas</p>
+            <Link to="/GymSpecs">
+              <p>Treino e Estatísticas</p>
+            </Link>
           </li>
           <li className="lateral-menu-list-item">
             <img width="27px" src={configIcon} alt="" />

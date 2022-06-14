@@ -200,7 +200,7 @@ form{
   .subtitle{
     text-align: center !important;
   }
-  form{
+  .form-start-page{
     width: 80%;
     display: flex;
     align-items: center;

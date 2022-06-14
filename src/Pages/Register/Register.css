@@ -12,7 +12,7 @@
     justify-content: center;
 }
 .register-logo{
-    margin: 0 0 4rem 3rem;
+    margin: 0 0 3rem 3rem;
 }
 .register-form{
     display: flex;
@@ -57,6 +57,7 @@
     height: 50px;
     align-items:center;
     text-align: center;
+    background: url(../../images/downArrow.png) no-repeat center right #FFF;
 }
 .input::placeholder {
     color: #adadad;
@@ -64,8 +65,30 @@
     font-family: Segoe UI;
 }
 .link-text{
-    margin-top: 10px;
+    margin-top: 15px;
 }
+.form-gym-specs{
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.gym-specs-title{
+    font-weight: normal;
+}
+.gym-specs-subtitle{
+    font-weight: lighter;
+    margin-bottom: 2rem;
+}
+.gym-specs-text{
+    margin-top: -1rem;
+    width: 60%;
+}
+
+.gymspecs{
+    width: 60%;
+}
+
 @media screen and (max-width: 1100px){
     body {
         background: linear-gradient(167.95deg, #FFFFFF 0%, #DCDCDC 100%);
@@ -103,6 +126,11 @@
     .register-logo{
         margin: 0 0 3rem 0 !important;
     }
+    .form-gym-specs{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 @media screen and (max-width: 700px){
@@ -121,5 +149,11 @@
     }
     .select{
         font-size: 15px;
+    }
+    .gym-specs-title{
+        font-size: 20px;
+    }
+    .gym-specs-subtitle{
+        font-size: 18px;
     }
 }

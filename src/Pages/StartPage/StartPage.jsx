@@ -43,7 +43,7 @@ const StartPage = () => {
               Chega de desculpas. Rápido, fácil e <br /> totalmente gratuito.
             </p>
           </div>
-          <form>
+          <form className="form-start-page">
             <input
               type="email"
               className="input-apresentation"
