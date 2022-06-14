@@ -76,9 +76,6 @@ const Navbar = () => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
-  }, []);
-
-  useEffect(() => {
     async function getUserDocs() {
       if (user != undefined) {
         const data = await getDocs(userCollectionRef);

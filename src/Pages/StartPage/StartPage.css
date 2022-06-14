@@ -126,20 +126,6 @@
   align-items: center;
   justify-content: center;
 }
-footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 200px;
-  background-color: #ededed;
-  margin-top: -5px;
-}
-footer p {
-  font-weight: bold;
-  font-size: 20px;
-  color: #303030;
-}
 .abacate-peso{
   height: 70%;
 }
@@ -262,14 +248,6 @@ form{
   .title-right{
     font-size: 5vw;
     margin-bottom: 20px !important;
-  }
-  footer{
-    height:150px;
-  }
-  footer p {
-    text-align: center;
-    font-size: 3vw;
-    margin: 1rem 1rem 0 1rem;
   }
   .nowrap{
     display: none;

@@ -16,6 +16,7 @@ import { auth } from "../../services/firebase-config";
 import { AuthContext } from "./../../contexts/AuthContext";
 
 import { Link } from "react-router-dom";
+import Footer from "../../components/Footer/Footer";
 
 const StartPage = () => {
   const { user, setUser, userInformation, setUserInformation } =
@@ -125,11 +126,7 @@ const StartPage = () => {
           />
         </div>
       </section>
-      <img src={Waves} width="100%" alt="" />
-      <footer>
-        <p>© Copyright 2022. Todos os direitos reservados.</p>
-        <p>Feito por: Leonardo Luccarelli, Matheus Pereira e Pedro Bertelli</p>
-      </footer>
+      <Footer />
     </>
   );
 };

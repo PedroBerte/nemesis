@@ -3,14 +3,62 @@
     height: 100%;
     display: flex;
     align-items: center;
-    flex-direction: column;
     margin-top: 5rem;
+    padding-left: 5rem
 }
-.line{
-    align-self: center;
-    /* width: 280px; */
-    border: 1px solid #9B9B9B;
-    background-color: #9B9B9B;
-    overflow: hidden;
-    margin: 1rem 0 1rem 0;
+.user-settings-subtitle{
+    margin: 3rem 0 0 2rem;
+    color: #303030;
+}
+
+.div-text-inline{
+    display:flex;
+}
+.userSettings-texts-left-side{
+    margin-left: 2rem;
+}
+.userSettings-texts-right-side{
+    margin-left: 2rem;
+}
+.user-title-info{
+    color: #303030;
+}
+.user-info{
+    font-weight: 400;
+    margin-left: 0.7rem;
+}
+.div-text-inline{
+    margin-bottom: 0.5rem;
+}
+.div-text-inline:last-child{
+    margin-bottom: 0px;
+}
+
+
+
+.account-options-body{
+    width: 100%;
+    margin-top: 4rem;
+}
+.account-question-body{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.account-question-body:last-child{
+    margin-bottom: 8rem;
+}
+.account-texts{
+    padding-left: 4rem
+}
+#change-name-button{
+    margin-right: 4rem;
+}
+.account-subtitle{
+    font-weight: 400;
+    color: #303030;
+}
+.account-title{
+    color: #303030;
 }

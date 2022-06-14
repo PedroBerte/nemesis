@@ -195,11 +195,11 @@ const Register = () => {
           uid: uid,
           name: registerName,
           email: registerEmail,
-          Date: registerBornDate,
-          Sex: registerSex,
-          Height: handleHeightNumber(registerHeight),
-          Weight: registerWeight,
-          Goal: registerGoal,
+          date: registerBornDate,
+          sex: registerSex,
+          height: handleHeightNumber(registerHeight),
+          weight: registerWeight,
+          goal: registerGoal,
         });
         setTimeout(() => {
           setIsLoggedIn(true);
