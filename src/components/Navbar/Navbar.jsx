@@ -21,6 +21,9 @@ import { AuthContext } from "./../../contexts/AuthContext";
 import { Link } from "react-router-dom";
 import LineSpace from "../LineSpace/LineSpace";
 
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 const Navbar = () => {
   var isShowed = false;
   var isPerfilMenuShowed = false;
@@ -35,7 +38,9 @@ const Navbar = () => {
     signOut(auth);
     setUser();
     setUserInformation();
-    location.reload();
+    setTimeout(() => {
+      location.reload();
+    }, 200);
   };
 
   const showResponsiveMenu = () => {
@@ -152,19 +157,40 @@ const Navbar = () => {
           {user != undefined ? (
             <div className="navbar-right-side-logged">
               <div className="navbar-logged-texts">
-                <p className="navbar-username">{name}</p>
-                {goal == "G" ? (
-                  <p className="navbar-goal">Ficando Fortão! 💪</p>
+                {name == "" ? (
+                  <>
+                    <Skeleton
+                      style={{ marginBottom: "7px" }}
+                      width="180px"
+                      height="1rem"
+                    />
+                    <Skeleton
+                      style={{ marginBottom: "7px" }}
+                      width="180px"
+                      height="0.8rem"
+                    />
+                  </>
                 ) : (
-                  <p className="navbar-goal">Perdendo Peso! 🏃</p>
+                  <>
+                    <p className="navbar-username">{name}</p>
+                    {goal == "G" ? (
+                      <p className="navbar-goal">Ficando Fortão! 💪</p>
+                    ) : (
+                      <p className="navbar-goal">Perdendo Peso! 🏃</p>
+                    )}
+                  </>
                 )}
               </div>
-              <img
-                src={perfilIcon}
-                className="img-perfil-icon"
-                width="60px"
-                height="60px"
-              />
+              {name == "" ? (
+                <Skeleton height="60px" width="60px" circle="true" />
+              ) : (
+                <img
+                  src={perfilIcon}
+                  className="img-perfil-icon"
+                  width="60px"
+                  height="60px"
+                />
+              )}
               <img
                 onClick={() => showPerfilMenu()}
                 src={perfilMenuIcon}

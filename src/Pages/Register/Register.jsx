@@ -203,7 +203,7 @@ const Register = () => {
         });
         setTimeout(() => {
           setIsLoggedIn(true);
-        }, 2000);
+        }, 1000);
       } catch (error) {
         if (error.code == "auth/weak-password") {
           throw new getException("Sua senha deve ter mais de 6 caracteres!");
@@ -286,6 +286,7 @@ const Register = () => {
             registerPassword
           );
           const uid = user.user.uid;
+          setUserUID(uid);
           await setDoc(doc(db, "users", uid), {
             uid: uid,
             name: registerName,
@@ -298,7 +299,7 @@ const Register = () => {
           });
           setTimeout(() => {
             setIsLoggedIn(true);
-          }, 2000);
+          }, 1000);
         } catch (error) {
           if (error.code == "auth/weak-password") {
             throw new getException("Sua senha deve ter mais de 6 caracteres!");
