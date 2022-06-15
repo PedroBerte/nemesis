@@ -19,8 +19,6 @@ import toast, { Toaster } from "react-hot-toast";
 import moment from "moment";
 
 const Register = () => {
-  moment().format();
-
   const [registerName, setRegisterName] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerConfirmEmail, setRegisterConfirmEmail] = useState("");
@@ -40,6 +38,8 @@ const Register = () => {
   const [userUID, setUserUID] = useState("");
 
   const navigateTo = useNavigate();
+
+  moment().format();
 
   function stringContainsNumber(_string) {
     return /\d/.test(_string);
@@ -86,26 +86,6 @@ const Register = () => {
     this.message = message;
   }
 
-  function tryRegisterUser(widthScreen) {
-    if (widthScreen <= 1100) {
-      if (nextPage) {
-        toast.promise(RegisterUser(widthScreen), {
-          loading: "Carregando...",
-          success: "Apenas mais uma etapa...",
-          error: (err) => err.message.toString(),
-        });
-      } else {
-        RegisterUser(widthScreen);
-      }
-    } else {
-      toast.promise(RegisterUser(widthScreen), {
-        loading: "Carregando...",
-        success: "Apenas mais uma etapa..",
-        error: (err) => err.message.toString(),
-      });
-    }
-  }
-
   function trySetGymSpecs() {
     toast.promise(setGymSpecs(), {
       loading: "Carregando...",
@@ -124,11 +104,31 @@ const Register = () => {
         gymDays: gymDays,
       });
       setTimeout(() => {
-        useNavigate("/");
+        navigateTo("/");
       }, 2000);
     } catch (error) {
       console.log(error);
       throw error;
+    }
+  }
+
+  function tryRegisterUser(widthScreen) {
+    if (widthScreen <= 1100) {
+      if (nextPage) {
+        toast.promise(RegisterUser(widthScreen), {
+          loading: "Carregando...",
+          success: "Apenas mais uma etapa...",
+          error: (err) => err.message.toString(),
+        });
+      } else {
+        RegisterUser(widthScreen);
+      }
+    } else {
+      toast.promise(RegisterUser(widthScreen), {
+        loading: "Carregando...",
+        success: "Apenas mais uma etapa..",
+        error: (err) => err.message.toString(),
+      });
     }
   }
 

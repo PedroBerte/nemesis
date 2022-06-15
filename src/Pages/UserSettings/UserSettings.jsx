@@ -16,6 +16,9 @@ import LineSpace from "../../components/LineSpace/LineSpace";
 import Button from "../../components/Button/Button";
 import Footer from "./../../components/Footer/Footer";
 
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 const UserSettings = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -33,7 +36,6 @@ const UserSettings = () => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
-    console.log(user);
   }, []);
 
   useEffect(() => {
@@ -64,7 +66,6 @@ const UserSettings = () => {
       }
     }
     getUserDocs();
-    console.log(userInformation);
   }, [user]);
 
   return (
@@ -72,51 +73,115 @@ const UserSettings = () => {
       <Navbar />
       <h2 className="user-settings-subtitle">Configurações da sua Conta:</h2>
       <div className="userSettings-body">
-        <img src={userPhoto} width="200px" alt="" />
+        {user == undefined ? (
+          <Skeleton width="200px" height="200px" circle="true" />
+        ) : (
+          <img src={userPhoto} width="200px" alt="" />
+        )}
         <div className="userSettings-texts-left-side">
-          <div className="div-text-inline">
-            <h4 className="user-title-info">Nome:</h4>
-            <h4 className="user-info">{name}</h4>
-          </div>
-          <div className="div-text-inline">
-            <h4 className="user-title-info">Email:</h4>
-            <h4 className="user-info">{email}</h4>
-          </div>
-          <div className="div-text-inline">
-            <h4 className="user-title-info">Data de Nascimento:</h4>
-            <h4 className="user-info">{date.split("-").reverse().join("")}</h4>
-          </div>
-          <div className="div-text-inline">
-            <h4 className="user-title-info">Sexo:</h4>
-            <h4 className="user-info">
-              {sex == "M" ? "Masculino" : "Feminino"}
-            </h4>
-          </div>
+          {name == "" ? (
+            <Skeleton
+              style={{ marginBottom: "7px" }}
+              width="250px"
+              height="1rem"
+            />
+          ) : (
+            <div className="div-text-inline">
+              <h4 className="user-title-info">Nome:</h4>
+              <h4 className="user-info">{name}</h4>
+            </div>
+          )}
+
+          {email == "" ? (
+            <Skeleton
+              style={{ marginBottom: "7px" }}
+              width="250px"
+              height="1rem"
+            />
+          ) : (
+            <div className="div-text-inline">
+              <h4 className="user-title-info">Email:</h4>
+              <h4 className="user-info">{email}</h4>
+            </div>
+          )}
+          {date == "" ? (
+            <Skeleton
+              style={{ marginBottom: "7px" }}
+              width="250px"
+              height="1rem"
+            />
+          ) : (
+            <div className="div-text-inline">
+              <h4 className="user-title-info">Data de Nascimento:</h4>
+              <h4 className="user-info">
+                {new Date(date.replace("-", "/")).toLocaleDateString("pt-BR")}
+              </h4>
+            </div>
+          )}
+          {sex == "" ? (
+            <Skeleton
+              style={{ marginBottom: "7px" }}
+              width="250px"
+              height="1rem"
+            />
+          ) : (
+            <div className="div-text-inline">
+              <h4 className="user-title-info">Sexo:</h4>
+              <h4 className="user-info">
+                {sex == "M" ? "Masculino" : "Feminino"}
+              </h4>
+            </div>
+          )}
         </div>
         <div className="userSettings-texts-right-side">
-          <div className="div-text-inline">
-            <h4 className="user-title-info">Peso:</h4>
-            <h4 className="user-info">{`${weight}Kg`}</h4>
-          </div>
-          <div className="div-text-inline">
-            <h4 className="user-title-info">Objetivo:</h4>
-            <h4 className="user-info">
-              {goal == "G" ? "Ganhar Massa" : "Perder Peso"}
-            </h4>
-          </div>
-          <div className="div-text-inline">
-            <h4 className="user-title-info">Altura:</h4>
-            <h4 className="user-info">{`${height}cm`}</h4>
-          </div>
+          {weight == "" ? (
+            <Skeleton
+              style={{ marginBottom: "12px" }}
+              width="180px"
+              height="1rem"
+            />
+          ) : (
+            <div className="div-text-inline">
+              <h4 className="user-title-info">Peso:</h4>
+              <h4 className="user-info">{`${weight}Kg`}</h4>
+            </div>
+          )}
+          {goal == "" ? (
+            <Skeleton
+              style={{ marginBottom: "12px" }}
+              width="180px"
+              height="1rem"
+            />
+          ) : (
+            <div className="div-text-inline">
+              <h4 className="user-title-info">Objetivo:</h4>
+              <h4 className="user-info">
+                {goal == "G" ? "Ganhar Massa" : "Perder Peso"}
+              </h4>
+            </div>
+          )}
+          {height == "" ? (
+            <Skeleton
+              style={{ marginBottom: "12px" }}
+              width="180px"
+              height="1rem"
+            />
+          ) : (
+            <div className="div-text-inline">
+              <h4 className="user-title-info">Altura:</h4>
+              <h4 className="user-info">{`${height}cm`}</h4>
+            </div>
+          )}
         </div>
       </div>
+
       <div className="account-options-body">
         <div className="account-question-body">
           <div className="account-texts">
-            <h2 className="account-title">Alterar Nome:</h2>
-            <h3 className="account-subtitle">
+            <h3 className="account-title">Alterar Nome:</h3>
+            <h4 className="account-subtitle">
               Enviaremos um e-mail para você alterar o seu nome.
-            </h3>
+            </h4>
           </div>
           <Button
             id="change-name-button"
@@ -130,10 +195,10 @@ const UserSettings = () => {
         <LineSpace width="80%" margin="40px" />
         <div className="account-question-body">
           <div className="account-texts">
-            <h2 className="account-title">Alterar Senha:</h2>
-            <h3 className="account-subtitle">
+            <h3 className="account-title">Alterar Senha:</h3>
+            <h4 className="account-subtitle">
               Enviaremos um e-mail para você alterar a sua senha.
-            </h3>
+            </h4>
           </div>
           <Button
             id="change-name-button"
