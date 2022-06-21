@@ -139,7 +139,7 @@ const Navbar = () => {
         </ul>
         <Button
           id="button-lateral-menu-logout"
-          background="#C44545"
+          type="warning"
           color="white"
           onClick={() => logOut()}
         >
@@ -201,7 +201,7 @@ const Navbar = () => {
           ) : (
             <div className="navbar-right-side">
               <Link to="/Register">
-                <Button background="#45c4b0" color="white">
+                <Button type="default" color="white">
                   Cadastre-se
                 </Button>
               </Link>
@@ -233,7 +233,7 @@ const Navbar = () => {
           <Link to="/Register">
             <Button
               className="button-menu-responsive"
-              background="#45c4b0"
+              type="default"
               color="white"
             >
               Cadastre-se
@@ -242,7 +242,7 @@ const Navbar = () => {
           <Link to="/Login">
             <Button
               className="button-menu-responsive"
-              background="#9AEBA3"
+              type="default"
               color="white"
             >
               Login

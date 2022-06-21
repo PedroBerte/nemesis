@@ -20,7 +20,11 @@ const Input = (props) => {
     <input
       className="input-body"
       {...props}
-      style={{ width: checkSize(), textAlign: align, paddingLeft: padding }}
+      style={{
+        width: checkSize(),
+        textAlign: align,
+        paddingLeft: padding,
+      }}
     />
   );
 };

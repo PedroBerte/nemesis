@@ -94,6 +94,7 @@ const Login = () => {
             }}
           />
           <Input
+            space="1rem"
             type="password"
             placeholder="Sua senha"
             size="lg"
@@ -104,10 +105,8 @@ const Login = () => {
         </form>
         <Button
           onClick={() => trySignIn()}
-          background="#45c4b0"
-          color="white"
+          type="default"
           width="150px"
-          type="submit"
           height="40px"
           shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
         >

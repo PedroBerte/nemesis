@@ -62,3 +62,104 @@
 .account-title{
     color: #303030;
 }
+
+
+.modal-title{
+    font-weight: normal;
+    color: #303030;
+}
+.modal-subtitle{
+    font-weight: normal;
+    color: #303030;
+}
+.modal-header{
+    display: flex;
+    align-items: center;
+    width: 700px;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+}
+.modal-div-input-subtitle{
+    margin-top: -11px;
+    width: 95%;
+    display: flex;
+    justify-content: end;
+}
+.modal-input-subtitle{
+    font-weight: normal;
+    color: #303030;
+}
+.modal-buttons{
+    display: flex;
+    width: 95%;
+    margin-top: 1.5rem;
+    justify-content: end;
+    margin-bottom: 4px;
+}
+#modal-button-cancel{
+    margin-right: 1rem;
+}
+
+
+.user-settings-body-responsive{
+    display: none;
+}
+
+@media screen and (max-width: 810px){
+    .userSettings-body{
+        padding-left: 20px;
+    }
+    .account-texts{
+        padding-left: 1.5rem;
+        margin-right: 2rem;
+    }
+    #change-name-button{
+        margin-right: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 750px){
+    .userSettings-body{
+        display: none;
+    }
+    .user-settings-body-responsive{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+    .user-settings-texts-responsive{
+        margin-left: 1rem;
+    }
+    .read-more-user-settings{
+        float: right;
+        padding-top: 6px;
+        color: #1E90C0;
+        font-weight: normal;
+        cursor: pointer;
+    }
+}
+@media screen and (max-width: 660px){
+    .account-title{
+        font-size: 16px;
+    }
+    .account-subtitle{
+        font-size: 13px;
+    }
+}
+
+
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: all 200ms linear;
+}
+
+.ReactModal__Overlay--after-open{
+    margin-top: 0px;
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+    opacity: 0;
+}

@@ -429,16 +429,15 @@ const Register = () => {
             </form>
             <Button
               id="register-button"
-              type="submit"
+              type="default"
               onClick={() => tryRegisterUser(window.screen.width)}
-              background="#45c4b0"
               color="white"
               height="40px"
               shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
             >
               Cadastre-se
             </Button>
-            <Link className="link-text" to="/Register">
+            <Link className="link-text" to="/Login">
               <i className="link-text">Já tem uma conta? Clique Aqui!</i>
             </Link>
           </>
@@ -481,9 +480,8 @@ const Register = () => {
             </form>
             <Button
               id="register-button"
-              type="submit"
+              type="default"
               onClick={() => trySetGymSpecs()}
-              background="#45c4b0"
               color="white"
               height="40px"
               shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"

@@ -24,3 +24,8 @@ p{
     height: 25px;
   }
 }
+@media screen and (max-width: 500px){
+  .button-body p{
+    font-size: 12px;
+  }
+}

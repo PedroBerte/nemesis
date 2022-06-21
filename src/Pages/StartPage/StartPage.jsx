@@ -51,12 +51,10 @@ const StartPage = () => {
               placeholder="Insira seu E-mail"
             />
             <Button
-              text="Cadastre-se"
-              background="#45c4b0"
-              color="white"
+              type="default"
               width="200px"
               height="50px"
-              shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
+              shadow="2px 5px 4px rgba(0, 0, 0, 0.20)"
             >
               Cadastre-se
             </Button>
