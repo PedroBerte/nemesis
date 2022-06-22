@@ -75,7 +75,6 @@
 .modal-header{
     display: flex;
     align-items: center;
-    width: 700px;
     justify-content: space-between;
     margin-bottom: 1.2rem;
 }
@@ -103,6 +102,12 @@
 
 .user-settings-body-responsive{
     display: none;
+}
+
+@media screen and (max-width: 880px){
+    .ReactModal__Content{
+        width: 90% !important;
+    }
 }
 
 @media screen and (max-width: 810px){
@@ -147,6 +152,18 @@
     .account-subtitle{
         font-size: 13px;
     }
+    .modal-title{
+        font-size: 1.3rem;
+    }
+    .modal-subtitle{
+        font-size: 0.8rem;
+    }
+    .modal-small-logo{
+        width: 25px;
+    }
+    .modal-input-subtitle{
+        font-size: 0.7rem;
+    }
 }
 
 
@@ -154,12 +171,13 @@
     opacity: 0;
     transition: all 200ms linear;
 }
-
 .ReactModal__Overlay--after-open{
     margin-top: 0px;
     opacity: 1;
 }
-
 .ReactModal__Overlay--before-close{
     opacity: 0;
+}
+.ReactModal__Content{
+    width: 70%;
 }

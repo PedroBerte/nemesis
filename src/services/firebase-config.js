@@ -3,13 +3,13 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: import.meta.env.VITE_APP_API_KEY,
-    authDomain: import.meta.env.VITE_APP_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_APP_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_APP_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_APP_MESSAGE_SENDER_ID,
-    appId: import.meta.env.VITE_APP_APP_ID,
-    measurementId: import.meta.env.VITE_APP_MEASUREMENT_ID
+    apiKey: "AIzaSyCxHY3Zm4PvIzm5oLovwEulUyy8ttSuUSo",
+  authDomain: "nemesis-dc980.firebaseapp.com",
+  projectId: "nemesis-dc980",
+  storageBucket: "nemesis-dc980.appspot.com",
+  messagingSenderId: "122657386356",
+  appId: "1:122657386356:web:3e5cd13e87c593386e0621",
+  measurementId: "G-CGGFPNLB2R"
 }
 
 const app = initializeApp(firebaseConfig);

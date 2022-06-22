@@ -339,7 +339,7 @@ const UserSettings = () => {
               Se você apagar a sua conta, nunca mais terá acesso à ela!
             </h4>
           </div>
-          <img width="35px" src={smallLogo} alt="" />
+          <img className="modal-small-logo" width="35px" src={smallLogo} alt="" />
         </div>
         <Input
           type="email"
@@ -372,7 +372,6 @@ const UserSettings = () => {
           </Button>
         </div>
       </Modal>
-
       <Footer />
     </>
   );
