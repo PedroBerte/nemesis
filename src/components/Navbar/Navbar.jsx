@@ -35,12 +35,10 @@ const Navbar = () => {
   const [goal, setGoal] = useState("");
 
   const logOut = async () => {
-    signOut(auth);
     setUser();
     setUserInformation();
-    setTimeout(() => {
-      location.reload();
-    }, 200);
+    await signOut(auth);
+    location.reload();
   };
 
   const showResponsiveMenu = () => {

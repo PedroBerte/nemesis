@@ -1,5 +1,5 @@
 import "./Register.css";
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 
 import AbacateAlongamento from "./../../images/AbacateAlongamento1.png";
 import Logo from "./../../images/NemesisV1.1.png";

@@ -98,7 +98,30 @@
 #modal-button-cancel{
     margin-right: 1rem;
 }
-
+.modal-content{
+    width: 100%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+}
+.div-text-user-name{
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+.user-title-info-modal{
+    margin-left: 0.7rem;
+    font-size: 14px
+}
+.user-info-modal{
+    font-weight: 400;
+    margin-left: 0.7rem;
+    font-size: 14px
+}
+.ad{
+    font-size: 10px;
+    margin: 20px 0 -10px 0;
+}
 
 .user-settings-body-responsive{
     display: none;
