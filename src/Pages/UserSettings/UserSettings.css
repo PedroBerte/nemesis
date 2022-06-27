@@ -108,6 +108,10 @@
     .ReactModal__Content{
         width: 90% !important;
     }
+    .modal-buttons{
+        justify-content: center;
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 810px){

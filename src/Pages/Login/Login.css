@@ -26,6 +26,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    width: 85% !important;
 }
 
 @media screen and (max-width: 1100px){
