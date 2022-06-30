@@ -3,21 +3,21 @@
   min-height: 80vh;
   display: flex;
 }
-.text-left-side {
+.leftSide {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 50%;
   padding-left: 75px;
 }
-.image-right-side {
+.rightSide {
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
   width: 50%;
 }
-.title {
+.titleNowrap {
   font-size: 36px;
   color: #303030;
   font-weight: bold;
@@ -35,11 +35,14 @@
   font-size: 20px;
   color: #303030;
 }
-.apresentation form {
+.apresentation .form {
+  width: 100%;
   display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 1rem;
 }
-.input-apresentation {
+.inputApresentation {
   width: 410px;
   height: 50px;
   border-radius: 10px;
@@ -49,15 +52,10 @@
   box-shadow: 2px 6px 4px rgba(0, 0, 0, 0.25);
   margin-right: 1rem;
 }
-.input-apresentation::placeholder {
+.inputApresentation::placeholder {
   color: #868686;
   font-size: 18px;
   font-family: Segoe UI;
-}
-.shadow-div {
-  box-shadow: 2px 6px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-  width: 150px;
 }
 .results {
   background-color: #ededed;
@@ -66,13 +64,13 @@
   display: flex;
   flex-direction: row;
 }
-.results-left-side {
+.resultsLeftSide {
   display: flex;
   padding-left: 85px;
   flex-direction: column;
   width: 55%;
 }
-.results-right-side {
+.resultsRightSide {
   width: 45%;
   display: flex;
   flex-direction: column;
@@ -80,7 +78,7 @@
   justify-content: flex-end;
   padding-right: 75px;
 }
-.statistics-men {
+.statisticsMen {
   margin-top: 4rem;
   display: flex;
   margin-bottom: 70px;
@@ -92,13 +90,13 @@
   width: 40%;
   margin-left: 3rem;
 }
-.wave-inverted {
+.waveInverted {
   margin-top: -5px;
   transform: rotate(180deg);
   margin-bottom: 5rem;
 }
 
-.texts-right {
+.textsRight {
   width: 100%;
   align-items: flex-end;
   display: flex;
@@ -106,13 +104,13 @@
   margin-bottom: 3rem;
 }
 
-.notification-area {
+.notificationArea {
   width: 100%;
   padding-right: 75px;
   margin-bottom: 5rem;
 }
 
-.title-right {
+.titleRightNowrap {
   text-align: right;
   font-size: 36px;
   color: #303030;
@@ -120,73 +118,75 @@
   margin-bottom: 1rem;
   white-space: nowrap;
 }
-.image-center {
+.imageCenter {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.abacate-peso{
+.abacatePeso{
   height: 70%;
 }
-.abacate-corrida {
+.abacateCorrida {
   width: 200;
 }
-.wrap{
+.titleWrap{
   display: none;
 }
-form{
+.titleRightWrap{
+  display: none
+}
+.form{
   width: 80%;
 }
 
 
 @media screen and (max-width: 1200px) {
-  
-  .notification-area{
+  .notificationArea{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
-  .texts-right{
+  .textsRight{
     display:flex;
     justify-content: center;
     align-items: center;
     width: 80%;
   }
-  .title-right{
+  .titleRight{
     text-align: center;
   }
-  .text-left-side{
+  .leftSide{
     width: 100%;
     padding: 0;
   }
-  .notification-area{
+  .notificationArea{
     padding: 0;
   }
-  .image-right-side {
+  .rightSide {
     display: none;
   }
-  .text-left-side {
+  .textLeftSide {
     width: 100%;
     align-items: center;
     text-align: center;
   }
-  .results-right-side{
+  .resultsRightSide{
     display: none;
   }
-  .results-left-side{
+  .resultsLeftSide{
     width: 100%;
     align-items: center;
     padding:0;
   }
-  .title{
+  .titleNowrap{
     text-align: center;
   }
   .subtitle{
     text-align: center !important;
   }
-  .form-start-page{
+  .form{
     width: 80%;
     display: flex;
     align-items: center;
@@ -196,27 +196,37 @@ form{
 }
 
 @media screen and (max-width: 900px) {
-  .title{
+  .titleWrap{
+    text-align: center
+  }
+  .titleNowrap{
     font-size: 30px;
   }
   .subtitle{
     font-size: 20px;
     text-align: center;
   }
-  .title-right{
+  .titleRightNowrap{
+    display: none;
+  }
+  .titleRightWrap{
+    display: block;
     font-size: 30px;
     text-align: center;
+    flex-wrap: wrap;
+    text-align: right;
+    color: #303030;
+    font-weight: bold;
+    margin-bottom: 1rem;
   }
+  
 }
 
-@media screen and (max-width: 665px){
-  .input-apresentation{
+@media screen and (max-width: 700px){
+  .inputApresentation{
     display: none
   }
-  .shadow-div{
-    width: 100%;
-  }
-  .image-right-side {
+  .rightSide {
     display: flex !important;
     align-items: center;
     justify-content: center;
@@ -226,18 +236,22 @@ form{
     margin-top: 3rem;
     flex-direction: column;
   }
-  .abacate-peso {
+  .abacatePeso {
     max-width: 300px;
     width: 70% !important;
     margin-top: 3rem;
   }
-  .men-img{
+  .menImg{
     width: 35%;
   }
-  .title{
-    font-size: 5vw;
+  .titleWrap{
+    font-size: 5vw !important;
     margin-left: 0.8rem;
     margin-right: 0.8rem;
+    font-size: 36px;
+    color: #303030;
+    font-weight: bold;
+    margin-bottom: 1rem;
   }
   .text{
     font-size: 4vw
@@ -245,16 +259,15 @@ form{
   .subtitle{
     font-size: 3.5vw
   }
-  .title-right{
+  .titleRightWrap{
     font-size: 5vw;
     margin-bottom: 20px !important;
   }
-  .nowrap{
-    display: none;
-  }
-  .wrap{
+  .titleWrap{
     display: block;
-    white-space: normal;
+  }
+  .titleNowrap{
+    display: none
   }
 
 }
