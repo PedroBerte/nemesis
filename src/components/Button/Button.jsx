@@ -1,4 +1,4 @@
-import "./Button.css";
+import styles from "./Button.module.css";
 
 const Button = (props) => {
   var backColor;
@@ -18,7 +18,7 @@ const Button = (props) => {
         height: props.height,
         boxShadow: props.shadow,
       }}
-      className="button-body"
+      className={styles.buttonBody}
     >
       <p>{props.children}</p>
     </button>

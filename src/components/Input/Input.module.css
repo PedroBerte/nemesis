@@ -1,4 +1,4 @@
-.input-body{
+.inputBody{
     border-radius: 10px;
     border: 1px solid #c6c6c6;
     outline: none;
@@ -10,7 +10,7 @@
     box-sizing:border-box;
     height: 50px;
 }
-.input-body::placeholder {
+.inputBody::placeholder {
     color: #adadad;
     font-size: 18px;
     font-family: Segoe UI;
@@ -23,11 +23,11 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 @media screen and (max-width: 700px){
-    .input-body{
+    .inputBody{
         font-size: 15px;
         height: 45px;
     }
-    .input-body::placeholder {
+    .inputBody::placeholder {
         font-size: 15px;
     }
 }

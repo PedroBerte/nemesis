@@ -1,8 +1,7 @@
-import "./Navbar.css";
+import styles from "./Navbar.module.css";
 import React, { useContext, useEffect, useState } from "react";
+
 import Logo from "./../../images/NemesisV1.1.png";
-import Button from "./../Button/Button";
-import menuIcon from "./../../images/menuIcon.png";
 import perfilIcon from "./../../images/perfil-icon.png";
 import perfilMenuIcon from "./../../images/perfilMenuIcon.png";
 import closeIcon from "./../../images/closeIcon.png";
@@ -18,9 +17,10 @@ import { collection, getDocs } from "firebase/firestore";
 
 import { AuthContext } from "./../../contexts/AuthContext";
 
-import { Link } from "react-router-dom";
 import LineSpace from "../LineSpace/LineSpace";
+import Button from "./../Button/Button";
 
+import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -43,32 +43,34 @@ const Navbar = () => {
 
   const showResponsiveMenu = () => {
     if (!isShowed) {
-      document.getElementById("responsive-menu").style.visibility = "visible";
-      document.getElementById("responsive-menu").style.opacity = "100%";
-      document.getElementById("responsive-menu").style.height = "100px";
-      document.getElementById("navbar-body").style.boxShadow =
+      document.getElementById(styles.responsiveMenu).style.visibility =
+        "visible";
+      document.getElementById(styles.responsiveMenu).style.opacity = "100%";
+      document.getElementById(styles.responsiveMenu).style.height = "100px";
+      document.getElementById(styles.navbarBody).style.boxShadow =
         "0px 3px 3px rgba(0, 0, 0, 0.25)";
       isShowed = true;
     } else {
-      document.getElementById("responsive-menu").style.visibility = "hidden";
-      document.getElementById("responsive-menu").style.opacity = "0%";
-      document.getElementById("responsive-menu").style.height = "0px";
-      document.getElementById("navbar-body").style.boxShadow = "none";
+      document.getElementById(styles.responsiveMenu).style.visibility =
+        "hidden";
+      document.getElementById(styles.responsiveMenu).style.opacity = "0%";
+      document.getElementById(styles.responsiveMenu).style.height = "0px";
+      document.getElementById(styles.navbarBody).style.boxShadow = "none";
       isShowed = false;
     }
   };
 
   const showPerfilMenu = () => {
     if (!isPerfilMenuShowed) {
-      document.getElementById("lateral-menu-body").style.width = "350px";
-      document.getElementById("shadow-box").style.width = "100%";
-      document.getElementById("shadow-box").style.opacity = "100%";
+      document.getElementById(styles.lateralMenuBody).style.width = "350px";
+      document.getElementById(styles.shadowBox).style.width = "100%";
+      document.getElementById(styles.shadowBox).style.opacity = "100%";
       isPerfilMenuShowed = true;
     } else {
-      document.getElementById("lateral-menu-body").style.width = "0px";
-      document.getElementById("shadow-box").style.opacity = "0%";
+      document.getElementById(styles.lateralMenuBody).style.width = "0px";
+      document.getElementById(styles.shadowBox).style.opacity = "0%";
       setTimeout(() => {
-        document.getElementById("shadow-box").style.width = "0%";
+        document.getElementById(styles.shadowBox).style.width = "0%";
       }, 500);
 
       isPerfilMenuShowed = false;
@@ -99,36 +101,36 @@ const Navbar = () => {
     <>
       <div
         onClick={() => showPerfilMenu()}
-        id="shadow-box"
-        className="shadow-box"
+        id={styles.shadowBox}
+        className={styles.shadowBox}
       ></div>
-      <div id="lateral-menu-body" className="lateral-menu-body">
-        <div className="lateral-menu-user">
+      <div id={styles.lateralMenuBody} className={styles.lateralMenuBody}>
+        <div className={styles.lateralMenuUser}>
           <img src={perfilIcon} width="60px" />
-          <div className="lateral-menu-logged-texts">
-            <p className="navbar-username">{name}</p>
+          <div className={styles.lateralMenuLoggedTexts}>
+            <p className={styles.navbarUsername}>{name}</p>
             {goal == "G" ? (
-              <p className="navbar-goal">Ficando Fortão! 💪</p>
+              <p className={styles.navbarGoal}>Ficando Fortão! 💪</p>
             ) : (
-              <p className="navbar-goal">Perdendo Peso! 🏃</p>
+              <p className={styles.navbarGoal}>Perdendo Peso! 🏃</p>
             )}
           </div>
           <img
             onClick={() => showPerfilMenu()}
             src={closeIcon}
-            className="img-perfil-menu-icon"
+            className={styles.imgPerfilMenuIcon}
             alt=""
           />
         </div>
         <LineSpace width="280px" margin="1.5rem" />
-        <ul className="lateral-menu-list">
-          <li className="lateral-menu-list-item">
+        <ul className={styles.lateralMenuList}>
+          <li className={styles.lateralMenuListItem}>
             <img width="27px" src={gymIcon} alt="" />
             <Link to="/UserPage">
               <p>Treino e Estatísticas</p>
             </Link>
           </li>
-          <li className="lateral-menu-list-item">
+          <li className={styles.lateralMenuListItem}>
             <img width="27px" src={configIcon} alt="" />
             <Link to="/UserSettings">
               <p>Configurações da Conta</p>
@@ -136,7 +138,7 @@ const Navbar = () => {
           </li>
         </ul>
         <Button
-          id="button-lateral-menu-logout"
+          id={styles.buttonLateralMenuLogout}
           type="warning"
           color="white"
           onClick={() => logOut()}
@@ -145,16 +147,16 @@ const Navbar = () => {
         </Button>
       </div>
 
-      <div className="navbar-body" id="navbar-body">
-        <div className="navbar-flex">
-          <div className="navbar-left-side">
+      <div className={styles.navbarBody} id={styles.navbarBody}>
+        <div className={styles.navbarFlex}>
+          <div className={styles.navbarLeftSide}>
             <Link to="/">
               <img src={Logo} height="65px" alt="" />
             </Link>
           </div>
           {user != undefined ? (
-            <div className="navbar-right-side-logged">
-              <div className="navbar-logged-texts">
+            <div className={styles.navbarRightSideLogged}>
+              <div className={styles.navbarLoggedTexts}>
                 {name == "" ? (
                   <>
                     <Skeleton
@@ -172,9 +174,9 @@ const Navbar = () => {
                   <>
                     <p className="navbar-username">{name}</p>
                     {goal == "G" ? (
-                      <p className="navbar-goal">Ficando Fortão! 💪</p>
+                      <p className={styles.navbarGoal}>Ficando Fortão! 💪</p>
                     ) : (
-                      <p className="navbar-goal">Perdendo Peso! 🏃</p>
+                      <p className={styles.navbarGoal}>Perdendo Peso! 🏃</p>
                     )}
                   </>
                 )}
@@ -184,7 +186,7 @@ const Navbar = () => {
               ) : (
                 <img
                   src={perfilIcon}
-                  className="img-perfil-icon"
+                  className={styles.imgPerfilIcon}
                   width="60px"
                   height="60px"
                 />
@@ -192,12 +194,12 @@ const Navbar = () => {
               <img
                 onClick={() => showPerfilMenu()}
                 src={perfilMenuIcon}
-                className="img-perfil-menu-icon"
+                className={styles.imgPerfilIcon}
                 alt=""
               />
             </div>
           ) : (
-            <div className="navbar-right-side">
+            <div className={styles.navbarRightSide}>
               <Link to="/Register">
                 <Button type="default" color="white">
                   Cadastre-se
@@ -208,7 +210,7 @@ const Navbar = () => {
               </Link>
             </div>
           )}
-          <div className="navbar-right-side-responsive">
+          <div className={styles.navbarRightSideResponsive}>
             {user != undefined ? (
               <img
                 width="50px"
@@ -227,10 +229,10 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div id="responsive-menu" className="responsive-menu">
+        <div id={styles.responsiveMenu} className={styles.responsiveMenu}>
           <Link to="/Register">
             <Button
-              className="button-menu-responsive"
+              className={styles.buttonMenuResponsive}
               type="default"
               color="white"
             >
@@ -239,7 +241,7 @@ const Navbar = () => {
           </Link>
           <Link to="/Login">
             <Button
-              className="button-menu-responsive"
+              className={styles.buttonMenuResponsive}
               type="default"
               color="white"
             >

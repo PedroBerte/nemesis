@@ -1,9 +1,9 @@
-import "./LineSpace.css";
+import styles from "./LineSpace.module.css";
 
 const LineSpace = ({ width, margin }) => {
   return (
     <div
-      className="lineSpace-body"
+      className={styles.lineSpaceBody}
       style={{ width: width, marginTop: margin, marginBottom: margin }}
     ></div>
   );

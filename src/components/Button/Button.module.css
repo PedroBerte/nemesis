@@ -1,4 +1,4 @@
-.button-body {
+.buttonBody {
   width: 150px;
   height: 30px;
   display: flex;
@@ -9,7 +9,7 @@
   outline: none;
   border: none;
 }
-.button-body p {
+.buttonBody p {
   font-weight: bold;
   font-size: 15px;
 }
@@ -17,15 +17,15 @@ p{
   text-decoration: none;
 }
 @media screen and (max-width: 700px){
-  .button-body p{
+  .buttonBody p{
       font-size: 13px;
   }
-  .button-body{
+  .buttonBody{
     height: 25px !important;
   }
 }
 @media screen and (max-width: 500px){
-  .button-body p{
+  .buttonBody p{
     font-size: 12px;
   }
 }

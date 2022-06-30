@@ -1,31 +1,31 @@
-.navbar-body {
+.navbarBody {
   padding-top: 1rem;
   width: 100%;
   border-radius: 0 0 15px 15px;
   transition: all 0.5s ease-out;
 }
-.navbar-flex{
+.navbarFlex{
   display: flex;
   justify-content:space-between;
 }
-.navbar-left-side {
+.navbarLeftSide {
   padding-left: 75px;
   display: flex;
   align-items: center;
 }
-.navbar-right-side {
+.navbarRightSide {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding-right: 75px;
 }
-.navbar-right-side a {
+.navbarRightSide a {
   margin-left: 2rem;
   text-decoration: none;
   color: black;
   font-weight: bold;
 }
-.responsive-menu{
+.responsiveMenu{
   visibility: hidden;
   display: flex;
   opacity: 0%;
@@ -36,46 +36,46 @@
   overflow: hidden;
   transition: all 0.5s ease-out;
 }
-.navbar-right-side-responsive{
+.navbarRightSideResponsive{
   display: none;
 }
-.button-menu-responsive{
+.buttonMenuResponsive{
   margin-left: 10%;
 }
-.navbar-right-side-logged{
+.navbarRightSideLogged{
   display: flex;
   align-items: center;
   padding-right: 50px;
 }
-.navbar-logged-texts{
+.navbarLoggedTexts{
   display: flex;
   justify-content:center;
   flex-direction: column;
   margin-right: 1rem;
 }
-.navbar-username{
+.navbarUsername{
   color: #303030;
   font-family: Segoe UI;
   font-weight: bold;
   font-size: 18px;
 }
-.navbar-goal{
+.navbarGoal{
   color: #303030;
   font-family: Segoe UI;
   font-weight: regular;
   font-size: 16px;
 }
-.navbar-goal:hover{
+.navbarGoal:hover{
   text-decoration: underline;
   cursor: pointer;
 }
-.navbar-username:hover{
+.navbarUsername:hover{
   text-decoration: underline;
   cursor: pointer;
 }
 
 
-.lateral-menu-body{
+.lateralMenuBody{
   transition: all 0.5s;
   right: 0;
   position:fixed;
@@ -87,17 +87,17 @@
   height: 100%;
   z-index: 2;
 }
-.lateral-menu-logged-texts{
+.lateralMenuLoggedTexts{
   margin-left: 1rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
-.img-perfil-menu-icon{
+.imgPerfilMenuIcon{
   margin-left: 1.5rem;
   cursor: pointer;
 }
-.lateral-menu-user{
+.lateralMenuUser{
   margin-top: 20px;
   display: flex;
   align-items: center;
@@ -105,33 +105,33 @@
   width: 350px;
   justify-content: center;
 }
-.img-perfil-icon{
+.imgPerfilIcon{
   cursor: pointer;
 }
-.lateral-menu-list{
+.lateralMenuList{
   width: 100%;
   display: flex;
   justify-content:center;
   flex-direction: column;
 }
-.lateral-menu-list-item{
+.lateralMenuListItem{
   display: flex;
   align-items: center;
   width: 300px;
 }
-.lateral-menu-list-item:last-child{
+.lateralMenuListItem:last-child{
   margin-top: 1.3rem;
 }
-.lateral-menu-list-item img{
+.lateralMenuListItem img{
   margin: 0 0.7rem 0 1rem;
 }
-.lateral-menu-list-item p{
+.lateralMenuListItem p{
   cursor: pointer;
   font-size: 17px;
   margin-top: -3px;
   color: #303030;
 }
-.lateral-menu-list-item p:hover{
+.lateralMenuListItem p:hover{
  text-decoration: underline;
 }
 .line{
@@ -142,13 +142,13 @@
   overflow: hidden;
   margin: 1rem 0 1rem 0;
 }
-#button-lateral-menu-logout{
+#buttonLateralmMenuLogout{
   margin-left: auto;
   margin-top: auto;
   margin-bottom: 3rem;
   margin-right: 2rem;
 }
-.shadow-box{
+.shadowBox{
   transition: opacity 0.5s ease-in-out;
   width: 0%;
   height: 100%;
@@ -158,19 +158,19 @@
 }
 
 @media screen and (max-width: 800px) {
-  .navbar-right-side{
+  .navbarRightSide{
     display: none;
   }
-  .navbar-right-side-responsive{
+  .navbarRightSideResponsive{
     display: flex;
     align-items: center;
     justify-content:center;
     padding-right: 50px;
   }
-  .navbar-left-side{
+  .navbarLeftSide{
     padding-left: 50px;
   }
-  .navbar-right-side-logged{
+  .navbarRightSideLogged{
     display: none;
   }
 }

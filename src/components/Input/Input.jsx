@@ -1,4 +1,4 @@
-import "./Input.css";
+import styles from "./Input.module.css";
 
 const Input = (props) => {
   var align;
@@ -18,7 +18,7 @@ const Input = (props) => {
   };
   return (
     <input
-      className="input-body"
+      className={styles.inputBody}
       {...props}
       style={{
         width: checkSize(),
