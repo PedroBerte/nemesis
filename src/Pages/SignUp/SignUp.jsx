@@ -1,24 +1,24 @@
-import "./Register.css";
+import styles from "./SignUp.module.css";
 import React, { useState } from "react";
 
 import AbacateAlongamento from "./../../images/AbacateAlongamento1.png";
 import Logo from "./../../images/NemesisV1.1.png";
 import LeftWave from "./../../images/wave-left.png";
 
-import Button from "./../../components/Button/Button";
-import Input from "./../../components/Input/Input";
+import Button from "../../components/Button/Button";
+import Input from "../../components/Input/Input";
 
 import { Link, useNavigate } from "react-router-dom";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "./../../services/firebase-config";
+import { auth, db } from "../../services/firebase-config";
 import { setDoc, doc, updateDoc } from "firebase/firestore";
 
 import "react-datepicker/dist/react-datepicker.css";
 import toast, { Toaster } from "react-hot-toast";
 import moment from "moment";
 
-const Register = () => {
+const SignUp = () => {
   const [registerName, setRegisterName] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerConfirmEmail, setRegisterConfirmEmail] = useState("");
@@ -498,4 +498,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default SignUp;

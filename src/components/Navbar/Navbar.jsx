@@ -200,12 +200,12 @@ const Navbar = () => {
             </div>
           ) : (
             <div className={styles.navbarRightSide}>
-              <Link to="/Register">
+              <Link to="/SignUp">
                 <Button type="default" color="white">
                   Cadastre-se
                 </Button>
               </Link>
-              <Link to="/Login">
+              <Link to="/SignIn">
                 <span href="">Fazer Login</span>
               </Link>
             </div>
@@ -230,7 +230,7 @@ const Navbar = () => {
         </div>
 
         <div id={styles.responsiveMenu} className={styles.responsiveMenu}>
-          <Link to="/Register">
+          <Link to="/SignUp">
             <Button
               className={styles.buttonMenuResponsive}
               type="default"
@@ -239,7 +239,7 @@ const Navbar = () => {
               Cadastre-se
             </Button>
           </Link>
-          <Link to="/Login">
+          <Link to="/SignIn">
             <Button
               className={styles.buttonMenuResponsive}
               type="default"

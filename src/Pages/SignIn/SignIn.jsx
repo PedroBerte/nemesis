@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
-import "./Login.css";
+import styles from "./SignIn.module.css";
 
 import Logo from "./../../images/NemesisV1.1.png";
 import AbacateAlongamento from "./../../images/AbacateAlongamento1.png";
 import RightWave from "./../../images/wave-right.png";
-import Button from "./../../components/Button/Button";
+import Button from "../../components/Button/Button";
 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -14,7 +14,7 @@ import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../../services/firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 
-import { AuthContext } from "./../../contexts/AuthContext";
+import { AuthContext } from "../../contexts/AuthContext";
 
 import toast, { Toaster } from "react-hot-toast";
 
@@ -74,17 +74,17 @@ const Login = () => {
   });
 
   return (
-    <div className="login-body">
+    <div className={styles.body}>
       <Toaster
         position="top-right"
         reverseOrder={false}
         toastOptions={{ style: { fontFamily: "Segoe UI" } }}
       />
-      <div className="login-left-side">
+      <div className={styles.bodyLeftSide}>
         <Link to="/">
-          <img className="login-logo" width="230px" src={Logo} alt="" />
+          <img className={styles.logo} width="230px" src={Logo} alt="" />
         </Link>
-        <form className="login-form">
+        <form className={styles.form}>
           <Input
             type="text"
             placeholder="Insira seu E-mail"
@@ -94,7 +94,6 @@ const Login = () => {
             }}
           />
           <Input
-            space="1rem"
             type="password"
             placeholder="Sua senha"
             size="lg"
@@ -112,12 +111,12 @@ const Login = () => {
         >
           Login
         </Button>
-        <Link className="link-text" to="/Register">
-          <i className="link-text">Não tem uma conta? Crie Aqui!</i>
+        <Link className={styles.linkText} to="/Register">
+          <i className={styles.linkText}>Não tem uma conta? Crie Aqui!</i>
         </Link>
       </div>
-      <img src={RightWave} className="wave" width="100vh" alt="" />
-      <div className="login-right-side">
+      <img src={RightWave} className={styles.wave} width="100vh" />
+      <div className={styles.bodyRightSide}>
         <img src={AbacateAlongamento} width="50%" />
       </div>
     </div>
