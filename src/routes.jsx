@@ -4,6 +4,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import LoginScreen from "./Pages/Login/Login";
 import RegisterScreen from "./Pages/Register/Register";
 import StartPage from "./Pages/StartPage/StartPage";
+import UserPage from "./Pages/UserPage/UserPage";
 import UserSettings from "./Pages/UserSettings/UserSettings";
 
 const routes = () => {
@@ -14,6 +15,7 @@ const routes = () => {
         <Route path="/Login" element={<LoginScreen />} />
         <Route path="/Register" element={<RegisterScreen />} />
         <Route path="/UserSettings" element={<UserSettings />} />
+        <Route path="/UserPage" element={<UserPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
+import "./StartPage.css";
 
 import Button from "../../components/Button/Button";
 import Navbar from "./../../components/Navbar/Navbar";
-import "./StartPage.css";
 import AbacatePeso from "./../../images/AbacatePeso1.png";
 import Waves from "./../../images/waves.png";
 import Men from "./../../images/men.png";
