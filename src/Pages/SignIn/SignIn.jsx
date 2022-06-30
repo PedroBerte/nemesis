@@ -111,7 +111,7 @@ const Login = () => {
         >
           Login
         </Button>
-        <Link className={styles.linkText} to="/Register">
+        <Link className={styles.linkText} to="/SignUp">
           <i className={styles.linkText}>Não tem uma conta? Crie Aqui!</i>
         </Link>
       </div>

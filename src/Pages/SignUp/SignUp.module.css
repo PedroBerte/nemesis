@@ -1,9 +1,9 @@
-.register-body{
+.body{
     width: 100%;
     height: 100vh;
     display:flex;
 }
-.register-left-side{
+.bodyLeftSide{
     background-color: #ededed;
     height: 100vh;
     width: 30%;
@@ -11,13 +11,13 @@
     align-items: center;
     justify-content: center;
 }
-.register-logo{
+.logo{
     margin: 0 0 3rem 3rem;
 }
-.register-form{
+.form{
     display: flex;
 }
-.register-right-side{
+.bodyRightSide{
     height: 100vh;
     width: 70%;
     display: flex;
@@ -25,7 +25,7 @@
     justify-content: center;
     flex-direction: column;
 }
-.register-email-side{
+.emailSide{
     width: 60%;
     height: 100%;
     display: flex;
@@ -33,7 +33,7 @@
     justify-content: center;
     flex-direction: column;
 }
-.register-info-side{
+.infoSide{
     width: 40%;
     display: flex;
     align-items: center;
@@ -64,23 +64,23 @@
     font-size: 18px;
     font-family: Segoe UI;
 }
-.link-text{
+.linkText{
     margin-top: 15px;
 }
-.form-gym-specs{
+.formSpecs{
     width: 100%;
     display:flex;
     flex-direction: column;
     align-items: center;
 }
-.gym-specs-title{
+.title{
     font-weight: normal;
 }
-.gym-specs-subtitle{
+.subtitle{
     font-weight: lighter;
     margin-bottom: 2rem;
 }
-.gym-specs-text{
+.text{
     margin-top: -1rem;
     width: 60%;
 }
@@ -90,43 +90,43 @@
 }
 
 @media screen and (max-width: 1100px){
-    .register-body {
+    .body {
         background: linear-gradient(167.95deg, #FFFFFF 0%, #DCDCDC 100%);
     }
-    .register-left-side{
+    .bodyLeftSide{
         display: none;
     }
     .wave{
         display: none;
     }
-    .register-right-side{
+    .bodyRightSide{
         display:flex;
         align-items: center;
         justify-content: center;
         width: 100%;
         height: 100vh;
     }
-    .register-info-side{
+    .infoSide{
         display: none;
         width: 100%;
     }
-    .register-email-side{
+    .emailSide{
         width: 100%;
     }
-    .register-form{
+    .form{
         margin: 0;
         padding: 0;
     }
-    .logo-div{
+    .logoDiv{
         width: auto !important;
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    .register-logo{
+    .logo{
         margin: 0 0 3rem 0 !important;
     }
-    .form-gym-specs{
+    .form{
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -136,10 +136,6 @@
 @media screen and (max-width: 700px){
     .input{
         font-size: 15px;
-    }
-    .lg{
-        width: 100%;
-        height: 45px;
     }
     .input::placeholder {
         font-size: 15px;

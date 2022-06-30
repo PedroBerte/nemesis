@@ -313,26 +313,26 @@ const SignUp = () => {
     }
   };
   return (
-    <div className="register-body">
+    <div className={styles.body}>
       <Toaster
         position="top-right"
         reverseOrder={false}
         toastOptions={{ style: { fontFamily: "Segoe UI" } }}
       />
-      <div className="register-left-side">
+      <div className={styles.bodyLeftSide}>
         <img width="70%" src={AbacateAlongamento} alt="" />
       </div>
-      <img className="wave" src={LeftWave} alt="" />
-      <div className="register-right-side">
-        <div className="logo-div" style={{ width: "100%" }}>
+      <img className={styles.wave} src={LeftWave} alt="" />
+      <div className={styles.bodyRightSide}>
+        <div className={styles.logoDiv} style={{ width: "100%" }}>
           <Link to="/">
-            <img className="register-logo" src={Logo} width="200px" alt="" />
+            <img className={styles.logo} src={Logo} width="200px" alt="" />
           </Link>
         </div>
         {!isLoggedIn ? (
           <>
-            <form className="register-form">
-              <div className="register-email-side" id="register-email-side">
+            <form className={styles.form}>
+              <div className={styles.emailSide} id={styles.emailSide}>
                 <Input
                   type="text"
                   size="lg"
@@ -374,7 +374,7 @@ const SignUp = () => {
                   }}
                 />
               </div>
-              <div className="register-info-side" id="register-info-side">
+              <div className={styles.infoSide} id={styles.infoSide}>
                 <Input
                   type="date"
                   size="sm"
@@ -385,7 +385,7 @@ const SignUp = () => {
                   min="1942-01-01"
                 />
                 <select
-                  className="select"
+                  className={styles.select}
                   onChange={(event) => {
                     setRegisterSex(event.target.value);
                   }}
@@ -414,7 +414,7 @@ const SignUp = () => {
                   }}
                 />
                 <select
-                  className="select"
+                  className={styles.select}
                   onChange={(event) => {
                     setRegisterGoal(event.target.value);
                   }}
@@ -428,7 +428,6 @@ const SignUp = () => {
               </div>
             </form>
             <Button
-              id="register-button"
               type="default"
               onClick={() => tryRegisterUser(window.screen.width)}
               color="white"
@@ -437,21 +436,22 @@ const SignUp = () => {
             >
               Cadastre-se
             </Button>
-            <Link className="link-text" to="/Login">
-              <i className="link-text">Já tem uma conta? Clique Aqui!</i>
+            <Link className={styles.linkText} to="/SignIn">
+              <i className={styles.linkText}>Já tem uma conta? Clique Aqui!</i>
             </Link>
           </>
         ) : (
           <>
-            <form className="form-gym-specs">
-              <div className="gym-specs-text">
-                <h2 className="gym-specs-title">Certo, estamos quase lá...</h2>
-                <h2 className="gym-specs-subtitle">
+            <form className={styles.formSpecs}>
+              <div className={styles.text}>
+                <h2 className={styles.title}>Certo, estamos quase lá...</h2>
+                <h2 className={styles.subtitle}>
                   Por favor, preencha os seguintes dados:
                 </h2>
               </div>
               <select
-                className="select gymspecs"
+                className={styles.select}
+                style={{ width: "60%" }}
                 onChange={(event) => {
                   setGymAvailability(event.target.value);
                 }}
@@ -463,7 +463,8 @@ const SignUp = () => {
                 <option value="GYM-N">Não</option>
               </select>
               <select
-                className="select gymspecs"
+                className={styles.select}
+                style={{ width: "60%" }}
                 onChange={(event) => {
                   setGymDays(event.target.value);
                 }}
@@ -479,7 +480,6 @@ const SignUp = () => {
               </select>
             </form>
             <Button
-              id="register-button"
               type="default"
               onClick={() => trySetGymSpecs()}
               color="white"
@@ -488,8 +488,8 @@ const SignUp = () => {
             >
               Cadastre-se
             </Button>
-            <Link className="link-text" to="/Login">
-              <i className="link-text">Já tem uma conta? Clique Aqui!</i>
+            <Link className={styles.linkText} to="/SignIn">
+              <i className={styles.linkText}>Já tem uma conta? Clique Aqui!</i>
             </Link>
           </>
         )}
