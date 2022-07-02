@@ -7,7 +7,7 @@ import ProgressBar from "../../components/ProgressBar/ProgressBar";
 
 import Men from "./../../images/men.png";
 
-import "./UserPage.css";
+import styles from "./UserPage.module.css";
 
 export default function UserPage() {
   return (

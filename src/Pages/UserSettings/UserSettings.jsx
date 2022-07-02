@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
-import "./UserSettings.css";
+import styles from "./UserSettings.module.css";
+import "./ModalStyle.css";
 
 import userPhoto from "./../../images/perfil-icon.png";
 import smallLogo from "./../../images/Logo.png";
@@ -153,16 +154,16 @@ const UserSettings = () => {
         style={customStyles}
         closeTimeoutMS={200}
       >
-        <div className="modal-header">
-          <h3 className="modal-title">Informações da conta:</h3>
+        <div className={styles.modalHeader}>
+          <h3 className={styles.modalTitle}>Informações da conta:</h3>
           <img
-            className="modal-small-logo"
+            className={styles.modalSmallLogo}
             width="35px"
             src={smallLogo}
             alt=""
           />
         </div>
-        <div className="modal-content">
+        <div className={styles.modalContent}>
           <img src={userPhoto} width="100px" alt="" />
           {name == "" ? (
             <Skeleton
@@ -171,11 +172,11 @@ const UserSettings = () => {
               height="1rem"
             />
           ) : (
-            <div className="div-text-user-name">
-              <h4 className="user-info">{name}</h4>
+            <div className={styles.divTextUserName}>
+              <h4 className={styles.userInfo}>{name}</h4>
             </div>
           )}
-          <div className="modal-responsive-infos">
+          <div className={styles.modalResponsiveInfos}>
             {email == "" ? (
               <Skeleton
                 style={{ marginBottom: "7px" }}
@@ -183,9 +184,9 @@ const UserSettings = () => {
                 height="1rem"
               />
             ) : (
-              <div className="div-text-inline">
-                <h4 className="user-title-info-modal">Email:</h4>
-                <h4 className="user-info-modal">{email}</h4>
+              <div className={styles.divTextInline}>
+                <h4 className={styles.userTitleInfoModal}>Email:</h4>
+                <h4 className={styles.userInfoModal}>{email}</h4>
               </div>
             )}
             {date == "" ? (
@@ -195,9 +196,11 @@ const UserSettings = () => {
                 height="1rem"
               />
             ) : (
-              <div className="div-text-inline">
-                <h4 className="user-title-info-modal">Data de Nascimento:</h4>
-                <h4 className="user-info-modal">
+              <div className={styles.divTextInline}>
+                <h4 className={styles.userTitleInfoModal}>
+                  Data de Nascimento:
+                </h4>
+                <h4 className={styles.userInfoModal}>
                   {new Date(date.replace("-", "/")).toLocaleDateString("pt-BR")}
                 </h4>
               </div>
@@ -209,9 +212,9 @@ const UserSettings = () => {
                 height="1rem"
               />
             ) : (
-              <div className="div-text-inline">
-                <h4 className="user-title-info-modal">Sexo:</h4>
-                <h4 className="user-info-modal">
+              <div className={styles.divTextInline}>
+                <h4 className={styles.userTitleInfoModal}>Sexo:</h4>
+                <h4 className={styles.userInfoModal}>
                   {sex == "M" ? "Masculino" : "Feminino"}
                 </h4>
               </div>
@@ -223,9 +226,9 @@ const UserSettings = () => {
                 height="1rem"
               />
             ) : (
-              <div className="div-text-inline">
-                <h4 className="user-title-info-modal">Peso:</h4>
-                <h4 className="user-info-modal">{`${weight}Kg`}</h4>
+              <div className={styles.divTextInline}>
+                <h4 className={styles.userTitleInfoModal}>Peso:</h4>
+                <h4 className={styles.userInfoModal}>{`${weight}Kg`}</h4>
               </div>
             )}
             {goal == "" ? (
@@ -235,9 +238,9 @@ const UserSettings = () => {
                 height="1rem"
               />
             ) : (
-              <div className="div-text-inline">
-                <h4 className="user-title-info-modal">Objetivo:</h4>
-                <h4 className="user-info-modal">
+              <div className={styles.divTextInline}>
+                <h4 className={styles.userTitleInfoModal}>Objetivo:</h4>
+                <h4 className={styles.userInfoModal}>
                   {goal == "G" ? "Ganhar Massa" : "Perder Peso"}
                 </h4>
               </div>
@@ -249,13 +252,13 @@ const UserSettings = () => {
                 height="1rem"
               />
             ) : (
-              <div className="div-text-inline">
-                <h4 className="user-title-info-modal">Altura:</h4>
-                <h4 className="user-info-modal">{`${height}cm`}</h4>
+              <div className={styles.divTextInline}>
+                <h4 className={styles.userTitleInfoModal}>Altura:</h4>
+                <h4 className={styles.userInfoModal}>{`${height}cm`}</h4>
               </div>
             )}
           </div>
-          <p className="ad">
+          <p className={styles.ad}>
             Baixe o nosso aplicativo para mais funcionalidades!
           </p>
         </div>
@@ -271,15 +274,15 @@ const UserSettings = () => {
         style={customStyles}
         closeTimeoutMS={200}
       >
-        <div className="modal-header">
-          <div className="modal-texts">
-            <h2 className="modal-title">Você tem certeza disso?</h2>
-            <h4 className="modal-subtitle">
+        <div className={styles.modalHeader}>
+          <div className={styles.modalTexts}>
+            <h2 className={styles.modalTitle}>Você tem certeza disso?</h2>
+            <h4 className={styles.modalSubtitle}>
               Se você apagar a sua conta, nunca mais terá acesso à ela!
             </h4>
           </div>
           <img
-            className="modal-small-logo"
+            className={styles.modalSmallLogo}
             width="35px"
             src={smallLogo}
             alt=""
@@ -293,14 +296,14 @@ const UserSettings = () => {
             setConfirmationEmail(event.target.value);
           }}
         />
-        <div className="modal-div-input-subtitle">
-          <h5 className="modal-input-subtitle">
+        <div className={styles.modalDivInputSubtitle}>
+          <h5 className={styles.modalInputSubtitle}>
             Insira seu E-mail para confirmar a exclusão da conta.
           </h5>
         </div>
-        <div className="modal-buttons">
+        <div className={styles.modalButtons}>
           <Button
-            id="modal-button-cancel"
+            id={styles.modalButtonCancel}
             type="default"
             shadow="2px 4px 4px rgba(0, 0, 0, 0.20)"
             onClick={() => closeModal()}
@@ -319,17 +322,17 @@ const UserSettings = () => {
 
       {/* Fim do modal para apagar a conta */}
 
-      <h2 className="user-settings-subtitle">Configurações da sua Conta:</h2>
+      <h2 className={styles.subtitle}>Configurações da sua Conta:</h2>
 
       {/* Inicio dos elementos Responsivos */}
 
-      <div className="user-settings-body-responsive">
+      <div className={styles.bodyResponsive}>
         {user == undefined ? (
           <Skeleton width="130px" height="130px" circle="true" />
         ) : (
           <img src={userPhoto} width="130px" alt="" />
         )}
-        <div className="user-settings-texts-responsive">
+        <div className={styles.textsResponsive}>
           {name == "" ? (
             <Skeleton
               style={{ marginBottom: "7px" }}
@@ -337,8 +340,8 @@ const UserSettings = () => {
               height="1rem"
             />
           ) : (
-            <div className="div-text-inline">
-              <p className="user-info">{name}</p>
+            <div className={styles.divTextInline}>
+              <p className={styles.userInfo}>{name}</p>
             </div>
           )}
           {email == "" ? (
@@ -348,8 +351,8 @@ const UserSettings = () => {
               height="1rem"
             />
           ) : (
-            <div className="div-text-inline">
-              <p className="user-info">{email}</p>
+            <div className={styles.divTextInline}>
+              <p className={styles.userInfo}>{email}</p>
             </div>
           )}
           {date == "" ? (
@@ -359,17 +362,14 @@ const UserSettings = () => {
               height="1rem"
             />
           ) : (
-            <div className="div-text-inline">
-              <p className="user-info">
+            <div className={styles.divTextInline}>
+              <p className={styles.userInfo}>
                 Nascido em:{" "}
                 {new Date(date.replace("-", "/")).toLocaleDateString("pt-BR")}
               </p>
             </div>
           )}
-          <p
-            className="read-more-user-settings"
-            onClick={() => openReadMoreModal()}
-          >
+          <p className={styles.readMore} onClick={() => openReadMoreModal()}>
             <i>Ler mais...</i>
           </p>
         </div>
@@ -377,13 +377,13 @@ const UserSettings = () => {
 
       {/* Fim dos elementos Responsivos */}
 
-      <div className="userSettings-body">
+      <div className={styles.body}>
         {user == undefined ? (
           <Skeleton width="200px" height="200px" circle="true" />
         ) : (
           <img src={userPhoto} width="200px" alt="" />
         )}
-        <div className="userSettings-texts-left-side">
+        <div className={styles.textsLeftSide}>
           {name == "" ? (
             <Skeleton
               style={{ marginBottom: "7px" }}
@@ -391,9 +391,9 @@ const UserSettings = () => {
               height="1rem"
             />
           ) : (
-            <div className="div-text-inline">
-              <h4 className="user-title-info">Nome:</h4>
-              <h4 className="user-info">{name}</h4>
+            <div className={styles.divTextInline}>
+              <h4 className={styles.userTitleInfo}>Nome:</h4>
+              <h4 className={styles.userInfo}>{name}</h4>
             </div>
           )}
           {email == "" ? (
@@ -403,9 +403,9 @@ const UserSettings = () => {
               height="1rem"
             />
           ) : (
-            <div className="div-text-inline">
-              <h4 className="user-title-info">Email:</h4>
-              <h4 className="user-info">{email}</h4>
+            <div className={styles.divTextInline}>
+              <h4 className={styles.userTitleInfo}>Email:</h4>
+              <h4 className={styles.userInfo}>{email}</h4>
             </div>
           )}
           {date == "" ? (
@@ -415,9 +415,9 @@ const UserSettings = () => {
               height="1rem"
             />
           ) : (
-            <div className="div-text-inline">
-              <h4 className="user-title-info">Data de Nascimento:</h4>
-              <h4 className="user-info">
+            <div className={styles.divTextInline}>
+              <h4 className={styles.userTitleInfo}>Data de Nascimento:</h4>
+              <h4 className={styles.userInfo}>
                 {new Date(date.replace("-", "/")).toLocaleDateString("pt-BR")}
               </h4>
             </div>
@@ -429,15 +429,15 @@ const UserSettings = () => {
               height="1rem"
             />
           ) : (
-            <div className="div-text-inline">
-              <h4 className="user-title-info">Sexo:</h4>
-              <h4 className="user-info">
+            <div className={styles.divTextInline}>
+              <h4 className={styles.userTitleInfo}>Sexo:</h4>
+              <h4 className={styles.userInfo}>
                 {sex == "M" ? "Masculino" : "Feminino"}
               </h4>
             </div>
           )}
         </div>
-        <div className="userSettings-texts-right-side">
+        <div className={styles.textsRightSide}>
           {weight == "" ? (
             <Skeleton
               style={{ marginBottom: "12px" }}
@@ -445,9 +445,9 @@ const UserSettings = () => {
               height="1rem"
             />
           ) : (
-            <div className="div-text-inline">
-              <h4 className="user-title-info">Peso:</h4>
-              <h4 className="user-info">{`${weight}Kg`}</h4>
+            <div className={styles.divTextInline}>
+              <h4 className={styles.userTitleInfo}>Peso:</h4>
+              <h4 className={styles.userInfo}>{`${weight}Kg`}</h4>
             </div>
           )}
           {goal == "" ? (
@@ -457,9 +457,9 @@ const UserSettings = () => {
               height="1rem"
             />
           ) : (
-            <div className="div-text-inline">
-              <h4 className="user-title-info">Objetivo:</h4>
-              <h4 className="user-info">
+            <div className={styles.divTextInline}>
+              <h4 className={styles.userTitleInfo}>Objetivo:</h4>
+              <h4 className={styles.userInfo}>
                 {goal == "G" ? "Ganhar Massa" : "Perder Peso"}
               </h4>
             </div>
@@ -471,23 +471,23 @@ const UserSettings = () => {
               height="1rem"
             />
           ) : (
-            <div className="div-text-inline">
-              <h4 className="user-title-info">Altura:</h4>
-              <h4 className="user-info">{`${height}cm`}</h4>
+            <div className={styles.divTextInline}>
+              <h4 className={styles.userTitleInfo}>Altura:</h4>
+              <h4 className={styles.userInfo}>{`${height}cm`}</h4>
             </div>
           )}
         </div>
       </div>
-      <div className="account-options-body">
-        <div className="account-question-body">
-          <div className="account-texts">
-            <h3 className="account-title">Alterar Senha:</h3>
-            <h4 className="account-subtitle">
+      <div className={styles.accountOptionsBody}>
+        <div className={styles.accountQuestionBody}>
+          <div className={styles.accountTexts}>
+            <h3 className={styles.accountTitle}>Alterar Senha:</h3>
+            <h4 className={styles.accountSubtitle}>
               Enviaremos um e-mail para você alterar a sua senha.
             </h4>
           </div>
           <Button
-            id="change-name-button"
+            id={styles.changeNameButton}
             type="warning"
             onClick={() => changePassword()}
           >
@@ -495,15 +495,15 @@ const UserSettings = () => {
           </Button>
         </div>
         <LineSpace width="80%" margin="40px" />
-        <div className="account-question-body">
-          <div className="account-texts">
-            <h3 className="account-title">Excluir conta:</h3>
-            <h4 className="account-subtitle">
+        <div className={styles.accountQuestionBody}>
+          <div className={styles.accountTexts}>
+            <h3 className={styles.accountTitle}>Excluir conta:</h3>
+            <h4 className={styles.accountSubtitle}>
               Exclua todos os seus dados, preferências e acesso a conta.
             </h4>
           </div>
           <Button
-            id="change-name-button"
+            id={styles.changeNameButton}
             type="warning"
             onClick={() => openRemoveModal()}
           >

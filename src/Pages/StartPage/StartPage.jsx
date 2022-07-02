@@ -96,7 +96,7 @@ const StartPage = () => {
           </div>
         </div>
         <div className={styles.resultsRightSide}>
-          <p style={{ marginBottom: "40px" }} className="subtitle">
+          <p style={{ marginBottom: "40px" }} className={styles.subtitle}>
             Cronograma de treinos alinhado com seus objetivos.
           </p>
           <img className={styles.AbacateCorrida} src={AbacateCorrida} alt="" />

@@ -172,7 +172,7 @@ const Navbar = () => {
                   </>
                 ) : (
                   <>
-                    <p className="navbar-username">{name}</p>
+                    <p className={styles.navbarUsername}>{name}</p>
                     {goal == "G" ? (
                       <p className={styles.navbarGoal}>Ficando Fortão! 💪</p>
                     ) : (
@@ -194,7 +194,7 @@ const Navbar = () => {
               <img
                 onClick={() => showPerfilMenu()}
                 src={perfilMenuIcon}
-                className={styles.imgPerfilIcon}
+                className={styles.imgPerfilMenuIcon}
                 alt=""
               />
             </div>

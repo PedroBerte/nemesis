@@ -18,7 +18,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 import toast, { Toaster } from "react-hot-toast";
 
-const Login = () => {
+const SignIn = () => {
   const navigateTo = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -123,4 +123,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignIn;
