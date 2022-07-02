@@ -306,7 +306,7 @@ const UserSettings = () => {
             id={styles.modalButtonCancel}
             type="default"
             shadow="2px 4px 4px rgba(0, 0, 0, 0.20)"
-            onClick={() => closeModal()}
+            onClick={() => closeRemoveModal()}
           >
             Cancelar
           </Button>
