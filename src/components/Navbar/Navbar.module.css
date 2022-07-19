@@ -4,9 +4,17 @@
   border-radius: 0 0 15px 15px;
   transition: all 0.5s ease-out;
 }
+.navbarLogo{
+  background-image: url(../../images/NemesisV1.1.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 65px;
+  width: 150px;
+}
 .navbarFlex{
   display: flex;
   justify-content:space-between;
+  align-items:center;
 }
 .navbarLeftSide {
   padding-left: 75px;
@@ -172,5 +180,16 @@
   }
   .navbarRightSideLogged{
     display: none;
+  }
+  .navbarLogo{
+    background-image: url(../../images/Logo.png);
+    width: 50px;
+    height: 50px;
+  }
+  .navbarUsername{
+    font-size: 15px;
+  }
+  .navbarGoal{
+    font-size: 15px;
   }
 }

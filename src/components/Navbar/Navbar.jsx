@@ -1,7 +1,5 @@
 import styles from "./Navbar.module.css";
 import React, { useContext, useEffect, useState } from "react";
-
-import Logo from "./../../images/NemesisV1.1.png";
 import perfilIcon from "./../../images/perfil-icon.png";
 import perfilMenuIcon from "./../../images/perfilMenuIcon.png";
 import closeIcon from "./../../images/closeIcon.png";
@@ -151,7 +149,7 @@ const Navbar = () => {
         <div className={styles.navbarFlex}>
           <div className={styles.navbarLeftSide}>
             <Link to="/">
-              <img src={Logo} height="65px" alt="" />
+              <div className={styles.navbarLogo}></div>
             </Link>
           </div>
           {user != undefined ? (
@@ -212,12 +210,46 @@ const Navbar = () => {
           )}
           <div className={styles.navbarRightSideResponsive}>
             {user != undefined ? (
-              <img
-                width="50px"
-                onClick={showPerfilMenu}
-                src={perfilIcon}
-                alt=""
-              />
+              <div style={{ display: "flex" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    marginRight: "10px",
+                  }}
+                >
+                  {name == "" ? (
+                    <>
+                      <Skeleton
+                        style={{ marginBottom: "7px" }}
+                        width="130px"
+                        height="1rem"
+                      />
+                      <Skeleton
+                        style={{ marginBottom: "7px" }}
+                        width="130px"
+                        height="0.8rem"
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <p className={styles.navbarUsername}>{name}</p>
+                      {goal == "G" ? (
+                        <p className={styles.navbarGoal}>Ficando Fortão! 💪</p>
+                      ) : (
+                        <p className={styles.navbarGoal}>Perdendo Peso! 🏃</p>
+                      )}
+                    </>
+                  )}
+                </div>
+                <img
+                  width="50px"
+                  onClick={showPerfilMenu}
+                  src={perfilIcon}
+                  alt=""
+                />
+              </div>
             ) : (
               <img
                 width="30px"
