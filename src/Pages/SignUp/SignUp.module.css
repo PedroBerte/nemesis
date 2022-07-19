@@ -16,6 +16,7 @@
 }
 .form{
     display: flex;
+    width: 80%;
 }
 .bodyRightSide{
     height: 100vh;

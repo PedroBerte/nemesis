@@ -1,20 +1,259 @@
-.div-specs{
-    display: flex;
-}
-.user-page-title{
-    color: #303030;
+.title{
+    margin-top: 2rem;
     margin-left: 75px;
-    margin-bottom: 2rem;
+    color: #303030;
 }
-.user-page-subtitle{
-    font-weight: 500;
-    margin-left: 90px;
-}
-.user-page-specs-left-side{
+.infoAndWorkout{
+    width: 100%;
     display: flex;
     flex-direction: row;
+    margin-top: 2rem;
+    justify-content: space-around;
+    padding: 0 5rem 0 5rem;
 }
-.user-page-progress{
+.line{
+    width: 1px;
+    height: 230px;
+    background-color: #BEBEBE;
+    margin: auto 0 auto 0;
+}
+.userInformationBody{
     display: flex;
     flex-direction: column;
+    margin-right: 1rem;
+}
+.subtitle{
+    text-align: left;
+    margin-bottom: 2rem;
+    color: #303030;
+    font-weight: 500
+}
+.userIlustration{
+    display: flex;
+    flex-direction: row;
+    margin-left: 2rem;
+}
+.userProgressBars{
+    width: 250px;
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.progressItem{
+    margin-bottom: 1rem;
+}
+.rightDiv{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+#updateInfosButton{
+    margin-top: 1.2rem;
+}
+.workouts{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.inlineTitle{
+    display: flex;
+    justify-content: space-between;
+    width: 450px;
+    margin-bottom: 2rem;
+}
+.workoutList{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.rightSubtitle{
+    color: #303030;
+    font-weight: 500;
+}
+.workoutList li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+    margin: 0.7rem 0 0.7rem 0;
+}
+.texts{
+    display: flex;
+}
+.weekName{
+    margin-right: 0.4rem;
+    font-weight: 500;
+}
+.spacer{
+    display: none;
+}
+.food{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.foodContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 2rem;
+    overflow: hidden;
+    max-width: 900px;
+    margin-bottom: 4rem;
+    transition: all 0.5s ease-in-out;
+    scroll-behavior: smooth;
+}
+.foodItem{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-width: 200px;
+    height: 200px;
+    background-color: #DADADA;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+    border-radius: 12px;
+}
+.foodItem:hover p{
+    opacity: 100%;
+    margin-top: 0.7rem;
+}
+.itemControl{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    width: 70%;
+}
+.itemControl img{
+    margin-left: 0.7rem;
+    cursor: pointer;
+}
+.cardName{
+    font-weight: 500;
+    font-size: 1rem;
+    color: #303030;
+    opacity: 0%;
+    transition: all 0.5s ease-out;
+}
+.foodItem img{
+    height: 80px;
+}
+.inlineFooterTexts{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 5rem;
+}
+.inlineFooterTexts h3:first-child{
+    font-weight: 600;
+}
+.inlineFooterTexts h3:last-child{
+    font-weight: 400;
+}
+
+@media screen and (max-width: 1150px) {
+    .inlineTitle{
+        width: 350px;
+    }
+}
+
+@media screen and (max-width: 970px){
+    .line{
+        display: none;
+    }
+    .infoAndWorkout{
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+    }
+    .userInformationBody{
+        width: 80%;
+        margin: 0;
+    }
+    .userIlustration{
+        align-items: center;
+        margin: 0;
+        justify-content: center;
+    }
+    .workouts{
+        width: 80%;
+    }
+    .inlineTitle{
+        width: 70%;
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+    .spacer{
+        display: block;
+        width: 70%;
+        margin: 3rem 0 3rem 0;
+    }
+    .subtitle{
+        display: none;
+    }
+    .title{
+        margin-left: 6rem;
+    }
+    .itemControl{
+        display: none;
+    }
+
+    .foodContainer{
+        width: 100%;
+        flex-wrap: wrap;
+        max-width: 80%;
+        display: flex;
+        justify-content: center;
+    }
+    .foodItem{
+        margin-top: 1rem;
+    }
+    .cardName{
+        opacity: 100%;
+        margin-top: 0.7rem;
+    }
+    .inlineFooterTexts{
+        display: none
+    }
+}
+@media screen and (max-width: 560px){
+    .title{
+        margin-left: 2rem;
+    }
+    .foodContainer{
+        max-width: 100%;
+        width: 100% !important;
+    }
+    .inlineTitle{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+    }
+    #changeButton{
+        width: 100px;
+    }
+    .foodItem{
+        height: 140px;
+        min-width: 140px;
+        margin: 0 0.5rem 1rem 0.5rem;
+    }
+    .foodItem img{
+        height: 40px;
+    }
+    .foodItem p{
+        font-size: 0.8rem;
+    }
 }

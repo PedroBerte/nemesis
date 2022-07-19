@@ -30,6 +30,10 @@ const SignIn = () => {
     this.message = message;
   }
 
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });
+
   function trySignIn() {
     toast.promise(signIn(), {
       loading: "Carregando...",
@@ -68,10 +72,6 @@ const SignIn = () => {
       throw error;
     }
   };
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
 
   return (
     <div className={styles.body}>
