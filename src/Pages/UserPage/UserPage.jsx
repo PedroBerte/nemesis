@@ -1,31 +1,123 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Button from "../../components/Button/Button";
-import LineSpace from "../../components/LineSpace/LineSpace";
 
 import Navbar from "../../components/Navbar/Navbar";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import Footer from "../../components/Footer/Footer";
 
+import { db } from "../../services/firebase-config";
+import { auth } from "../../services/firebase-config";
+import {
+  onAuthStateChanged,
+  sendPasswordResetEmail,
+  deleteUser,
+} from "firebase/auth";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+
+import { AuthContext } from "./../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+
 import Men from "./../../images/men.png";
 import listArrow from "../../images/listArrow.png";
 import leftArrow from "../../images/leftArrow.png";
 import rightArrow from "../../images/rightArrow.png";
-
 import coffeeIcon from "../../images/coffeIcon.png";
 import appleIcon from "../../images/appleIcon.png";
 import dinnerIcon from "../../images/dinner.png";
 import breakfastIcon from "../../images/breakfastIcon.png";
 import supperIcon from "../../images/supperIcon.png";
 
+import moment from "moment";
+
 import styles from "./UserPage.module.css";
 
 export default function UserPage() {
+  moment().format();
+  const navigateTo = useNavigate();
+
+  const [date, setDate] = useState("");
+  const [age, setAge] = useState("");
+  const [ageProgress, setAgeProgress] = useState("");
+  const [height, setHeight] = useState("");
+  const [heightProgress, setHeightProgress] = useState("");
+  const [weight, setWeight] = useState("");
+  const [weightProgress, setWeightProgress] = useState("");
+
+  const { user, setUser } = useContext(AuthContext);
+  const userCollectionRef = collection(db, "users");
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    if (user == undefined) {
+      navigateTo("/");
+    }
+    async function getUserDocs() {
+      if (user != undefined) {
+        const data = await getDocs(userCollectionRef);
+        const UserInfos = data.docs.find((element) => element.id == user.uid)
+          ._document.data.value.mapValue.fields;
+        setDate(UserInfos.date.stringValue);
+        setWeight(UserInfos.weight.stringValue);
+        setHeight(UserInfos.height.stringValue);
+      }
+    }
+    getUserDocs();
+  }, []);
+
+  useEffect(() => {
+    if (date != "") {
+      setAge(moment().diff(date, "years"));
+    }
+  }, [date]);
+
+  useEffect(() => {
+    handleSetHeightProgressBar();
+  }, [height]);
+
+  useEffect(() => {
+    handleSetAgeProgressBar();
+  }, [age]);
+
+  useEffect(() => {
+    handleSetWeightProgressBar();
+  }),
+    [weight];
+
   function handleCardController(side) {
     if (side == "left") {
       document.getElementById("foodContainer").scrollLeft -= 210;
     } else {
       document.getElementById("foodContainer").scrollLeft += 210;
     }
+  }
+
+  function handleSetHeightProgressBar() {
+    var heightFormated = height - 145;
+
+    var a = 75;
+    var b = 100 * heightFormated;
+    var result = b / a;
+    setHeightProgress(result);
+  }
+
+  function handleSetAgeProgressBar() {
+    var ageFormated = age - 12;
+
+    var a = 68;
+    var b = 100 * ageFormated;
+    var result = b / a;
+    setAgeProgress(result);
+  }
+
+  function handleSetWeightProgressBar() {
+    var weightFormated = weight - 40;
+
+    var a = 160;
+    var b = 100 * weightFormated;
+    var result = b / a;
+    setWeightProgress(result);
   }
 
   return (
@@ -41,23 +133,38 @@ export default function UserPage() {
               <div className={styles.progressItem}>
                 <div className={styles.textInformations}>
                   <p className={styles.informationTitle}>Idade: </p>
-                  <p className={styles.informationText}></p>
+                  <p className={styles.informationText}>{age} Anos</p>
                 </div>
-                <ProgressBar value="60" color="red" width="100%" />
+                <ProgressBar value={ageProgress} color="red" width="100%" />
               </div>
               <div className={styles.progressItem}>
                 <div className={styles.textInformations}>
                   <p className={styles.informationTitle}>Altura: </p>
-                  <p className={styles.informationText}></p>
+                  <p
+                    className={styles.informationText}
+                    onClick={() => {
+                      handleSetHeightProgressBar();
+                    }}
+                  >
+                    {String(height / 100).replace(".", ",")}m
+                  </p>
                 </div>
-                <ProgressBar value="70" color="#05FF00" width="100%" />
+                <ProgressBar
+                  value={heightProgress}
+                  color="#05FF00"
+                  width="100%"
+                />
               </div>
               <div className={styles.progressItem}>
                 <div className={styles.textInformations}>
                   <p className={styles.informationTitle}>Peso: </p>
-                  <p className={styles.informationText}></p>
+                  <p className={styles.informationText}>{weight}Kg</p>
                 </div>
-                <ProgressBar value="40" color="yellow" width="100%" />
+                <ProgressBar
+                  value={weightProgress}
+                  color="yellow"
+                  width="100%"
+                />
               </div>
               <div className={styles.rightDiv}>
                 <Button id={styles.updateInfosButton} type="default">

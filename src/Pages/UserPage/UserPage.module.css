@@ -160,6 +160,18 @@
 .inlineFooterTexts h3:last-child{
     font-weight: 400;
 }
+.textInformations{
+    display: flex;
+}
+.informationTitle{
+    font-weight: 500;
+    color: #303030;
+    margin-right: 0.3rem;
+}
+.informationText{
+    font-weight: 400;
+    color: #303030;
+}
 
 @media screen and (max-width: 1150px) {
     .inlineTitle{
