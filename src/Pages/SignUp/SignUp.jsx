@@ -35,6 +35,7 @@ const SignUp = () => {
     registerGoal,
     gymAvailability,
     gymDays,
+    userRes,
     userUID,
     setUserUID,
     step,
@@ -88,7 +89,11 @@ const SignUp = () => {
 
   function tryRegisterUser() {
     if (step == 0) {
-      toast.success("Apenas mais uma etapa... 🏋🏻‍♀️");
+      toast.promise(RegisterUser(), {
+        loading: "Carregando...",
+        success: "Apenas mais uma etapa... 🏋🏻‍♀️",
+        error: (err) => err.message.toString(),
+      });
     } else {
       toast.promise(RegisterUser(), {
         loading: "Carregando...",
@@ -100,27 +105,31 @@ const SignUp = () => {
 
   async function RegisterUser() {
     if (step == 0) {
-      if (
-        (registerName,
-        registerEmail,
-        registerConfirmEmail,
-        registerPassword,
-        registerConfirmPassword == "")
-      ) {
-        throw new getException("Não deixe campos vazios!");
+      try {
+        if (
+          (registerName,
+          registerEmail,
+          registerConfirmEmail,
+          registerPassword,
+          registerConfirmPassword == "")
+        ) {
+          throw new getException("Não deixe campos vazios!");
+        }
+        if (stringContainsNumber(registerName)) {
+          throw new getException("Insira um nome valido!");
+        }
+        if (registerEmail != registerConfirmEmail) {
+          throw new getException("Os E-mails não coincidem!");
+        }
+        if (registerPassword != registerConfirmPassword) {
+          throw new getException("As senhas não coincidem!");
+        }
+        setTimeout(() => {
+          setStep(1);
+        }, 1000);
+      } catch (error) {
+        throw error;
       }
-      if (stringContainsNumber(registerName)) {
-        throw new getException("Insira um nome valido!");
-      }
-      if (registerEmail != registerConfirmEmail) {
-        throw new getException("Os E-mails não coincidem!");
-      }
-      if (registerPassword != registerConfirmPassword) {
-        throw new getException("As senhas não coincidem!");
-      }
-      setTimeout(() => {
-        setStep(1);
-      }, 1000);
     } else {
       if (
         (registerBornDate,
@@ -168,8 +177,9 @@ const SignUp = () => {
           registerPassword
         );
         setUserUID(user.user.uid);
-        await setDoc(doc(db, "users", userUID), {
-          uid: UserUID,
+        const uid = user.user.uid;
+        await setDoc(doc(db, "users", uid), {
+          uid: uid,
           name: registerName,
           email: registerEmail,
           date: registerBornDate,
@@ -179,8 +189,9 @@ const SignUp = () => {
           goal: registerGoal,
           gymAvail: gymAvailability,
           gymDays: gymDays,
+          userRes: userRes,
         });
-        createWorkout(gymAvailability, gymDays, userUID);
+        createWorkout(gymAvailability, gymDays, uid);
         setTimeout(() => {
           navigateTo("/");
         }, 1000);

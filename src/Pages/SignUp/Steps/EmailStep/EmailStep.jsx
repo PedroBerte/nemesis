@@ -7,7 +7,7 @@ import { useSignUp } from "../../../../contexts/SignUpContext";
 
 import { Link } from "react-router-dom";
 
-export default function EmailStep() {
+export default function EmailStep({ tryRegisterUser }) {
   const {
     setRegisterName,
     setRegisterEmail,

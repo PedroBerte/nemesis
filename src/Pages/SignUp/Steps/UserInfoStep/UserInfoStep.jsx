@@ -5,7 +5,7 @@ import Button from "../../../../components/Button/Button";
 import Input from "../../../../components/Input/Input";
 import { useSignUp } from "../../../../contexts/SignUpContext";
 
-export default function UserInfoStep() {
+export default function UserInfoStep({ tryRegisterUser }) {
   const {
     setRegisterBornDate,
     setRegisterSex,
@@ -15,6 +15,7 @@ export default function UserInfoStep() {
     gymAvailability,
     setGymAvailability,
     setGymDays,
+    setUserRes,
   } = useSignUp();
 
   return (
@@ -134,7 +135,7 @@ export default function UserInfoStep() {
           <select
             className={styles.select}
             onChange={(event) => {
-              setGymDays(event.target.value);
+              setUserRes(event.target.value);
             }}
           >
             <option value="" selected disabled hidden>
@@ -148,7 +149,7 @@ export default function UserInfoStep() {
       <div className={styles.rightDiv}>
         <Button
           type="default"
-          onClick={() => trySetGymSpecs()}
+          onClick={() => tryRegisterUser()}
           color="white"
           height="40px"
           shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
