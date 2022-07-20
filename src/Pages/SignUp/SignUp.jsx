@@ -17,6 +17,7 @@ import { setDoc, doc, updateDoc } from "firebase/firestore";
 import "react-datepicker/dist/react-datepicker.css";
 import toast, { Toaster } from "react-hot-toast";
 import moment from "moment";
+import createWorkout from "./createWorkout";
 
 const SignUp = () => {
   const [registerName, setRegisterName] = useState("");
@@ -103,6 +104,7 @@ const SignUp = () => {
         gymAvail: gymAvailability,
         gymDays: gymDays,
       });
+      createWorkout(gymAvailability, gymDays, userUID);
       setTimeout(() => {
         navigateTo("/");
       }, 2000);

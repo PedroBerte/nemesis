@@ -12,7 +12,13 @@ import {
   sendPasswordResetEmail,
   deleteUser,
 } from "firebase/auth";
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  deleteDoc,
+  doc,
+  getDoc,
+} from "firebase/firestore";
 
 import { AuthContext } from "./../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -31,6 +37,15 @@ import moment from "moment";
 
 import styles from "./UserPage.module.css";
 
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel,
+} from "react-accessible-accordion";
+import "react-accessible-accordion/dist/fancy-example.css";
+
 export default function UserPage() {
   moment().format();
   const navigateTo = useNavigate();
@@ -42,6 +57,7 @@ export default function UserPage() {
   const [heightProgress, setHeightProgress] = useState("");
   const [weight, setWeight] = useState("");
   const [weightProgress, setWeightProgress] = useState("");
+  const [workout, setWorkout] = useState([{}]);
 
   const { user, setUser } = useContext(AuthContext);
   const userCollectionRef = collection(db, "users");
@@ -55,21 +71,21 @@ export default function UserPage() {
     }
     async function getUserDocs() {
       if (user != undefined) {
-        const data = await getDocs(userCollectionRef);
-        const UserInfos = data.docs.find((element) => element.id == user.uid)
-          ._document.data.value.mapValue.fields;
-        setDate(UserInfos.date.stringValue);
-        setWeight(UserInfos.weight.stringValue);
-        setHeight(UserInfos.height.stringValue);
+        const userDocs = await getDoc(doc(db, "users", user.uid));
+        setDate(userDocs.data().date);
+        setWeight(userDocs.data().weight);
+        setHeight(userDocs.data().height);
+        setWorkout(userDocs.data().workouts);
       }
     }
     getUserDocs();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (date != "") {
       setAge(moment().diff(date, "years"));
     }
+    console.log(workout);
   }, [date]);
 
   useEffect(() => {
@@ -87,9 +103,9 @@ export default function UserPage() {
 
   function handleCardController(side) {
     if (side == "left") {
-      document.getElementById("foodContainer").scrollLeft -= 210;
+      document.getElementById("foodContainer").scrollLeft -= 500;
     } else {
-      document.getElementById("foodContainer").scrollLeft += 210;
+      document.getElementById("foodContainer").scrollLeft += 500;
     }
   }
 
@@ -184,45 +200,26 @@ export default function UserPage() {
             </Button>
           </div>
           <ul className={styles.workoutList}>
-            <li>
-              <div className={styles.texts}>
-                <p className={styles.weekName}>Segunda-Feira:</p>
-                <p className={styles.workoutName}>Peito e triceps</p>
-              </div>
-              <img src={listArrow} alt="" />
-            </li>
-            <hr style={{ borderTop: "1px dotted #BEBEBE", width: "110%" }} />
-            <li>
-              <div className={styles.texts}>
-                <p className={styles.weekName}>Terça-Feira:</p>
-                <p className={styles.workoutName}>Costa e biceps</p>
-              </div>
-              <img src={listArrow} alt="" />
-            </li>
-            <hr style={{ borderTop: "1px dotted #BEBEBE", width: "110%" }} />
-            <li>
-              <div className={styles.texts}>
-                <p className={styles.weekName}>Quarta-Feira:</p>
-                <p className={styles.workoutName}>Ombro e panturrilha</p>
-              </div>
-              <img src={listArrow} alt="" />
-            </li>
-            <hr style={{ borderTop: "1px dotted #BEBEBE", width: "110%" }} />
-            <li>
-              <div className={styles.texts}>
-                <p className={styles.weekName}>Sexta-Feira:</p>
-                <p className={styles.workoutName}>Abdomêm (completo)</p>
-              </div>
-              <img src={listArrow} alt="" />
-            </li>
-            <hr style={{ borderTop: "1px dotted #BEBEBE", width: "110%" }} />
-            <li>
-              <div className={styles.texts}>
-                <p className={styles.weekName}>Sábado:</p>
-                <p className={styles.workoutName}>Perna (completo)</p>
-              </div>
-              <img src={listArrow} alt="" />
-            </li>
+            {workout.map((workouts) => {
+              return (
+                <>
+                  <li>
+                    <div className={styles.texts}>
+                      <p className={styles.weekName}>{workouts.day}:</p>
+                      <p className={styles.workoutName}>{workouts.muscles}</p>
+                    </div>
+                    <img src={listArrow} alt="" />
+                  </li>
+                  {workout.lastIndexOf(workouts) == workout.length - 1 ? (
+                    ""
+                  ) : (
+                    <hr
+                      style={{ borderTop: "1px dotted #BEBEBE", width: "110%" }}
+                    />
+                  )}
+                </>
+              );
+            })}
           </ul>
         </div>
       </section>
