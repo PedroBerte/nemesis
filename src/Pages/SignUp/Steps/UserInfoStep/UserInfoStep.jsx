@@ -3,10 +3,20 @@ import styles from "./UserInfoStep.module.css";
 
 import Button from "../../../../components/Button/Button";
 import Input from "../../../../components/Input/Input";
-
-import { Link } from "react-router-dom";
+import { useSignUp } from "../../../../contexts/SignUpContext";
 
 export default function UserInfoStep() {
+  const {
+    setRegisterBornDate,
+    setRegisterSex,
+    setRegisterHeight,
+    setRegisterWeight,
+    setRegisterGoal,
+    gymAvailability,
+    setGymAvailability,
+    setGymDays,
+  } = useSignUp();
+
   return (
     <>
       <div className={styles.body}>
@@ -80,20 +90,47 @@ export default function UserInfoStep() {
             <option value="GYM-S">Sim</option>
             <option value="GYM-N">Não</option>
           </select>
-          <select
-            className={styles.select}
-            onChange={(event) => {
-              setGymDays(event.target.value);
-            }}
-          >
-            <option value="" selected disabled hidden>
-              Dias disponíveis para treino:
-            </option>
-            <option value="GYM-DAYS-3">3</option>
-            <option value="GYM-DAYS-4">4</option>
-            <option value="GYM-DAYS-5">5</option>
-            <option value="GYM-DAYS-6">6</option>
-          </select>
+          {gymAvailability == "" ? (
+            <select className={styles.select}>
+              <option value="" selected disabled hidden>
+                Dias disponíveis para treino:
+              </option>
+              <option value="" disabled>
+                Selecione a disponíbilidade da academia primeiro!
+              </option>
+            </select>
+          ) : (
+            <>
+              {gymAvailability == "GYM-S" ? (
+                <select
+                  className={styles.select}
+                  onChange={(event) => {
+                    setGymDays(event.target.value);
+                  }}
+                >
+                  <option value="" selected disabled hidden>
+                    Dias disponíveis para treino:
+                  </option>
+                  <option value="GYM-DAYS-3">3</option>
+                  <option value="GYM-DAYS-4">4</option>
+                  <option value="GYM-DAYS-5">5</option>
+                  <option value="GYM-DAYS-6">6</option>
+                </select>
+              ) : (
+                <select
+                  className={styles.select}
+                  onChange={(event) => {
+                    setGymDays(event.target.value);
+                  }}
+                >
+                  <option value="" selected disabled hidden>
+                    Dias disponíveis para treino:
+                  </option>
+                  <option value="GYM-DAYS-3">3</option>
+                </select>
+              )}
+            </>
+          )}
           <select
             className={styles.select}
             onChange={(event) => {

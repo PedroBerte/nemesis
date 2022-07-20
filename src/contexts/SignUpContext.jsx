@@ -20,7 +20,38 @@ export default function SignUpContextProvider(props) {
   const [userUID, setUserUID] = useState("");
 
   return (
-    <SignUpContext.Provider value={{ step, setStep }}>
+    <SignUpContext.Provider
+      value={{
+        step,
+        setStep,
+        registerName,
+        setRegisterName,
+        registerEmail,
+        setRegisterEmail,
+        registerConfirmEmail,
+        setRegisterConfirmEmail,
+        registerPassword,
+        setRegisterPassword,
+        registerConfirmPassword,
+        setRegisterConfirmPassword,
+        registerBornDate,
+        setRegisterBornDate,
+        registerSex,
+        setRegisterSex,
+        registerHeight,
+        setRegisterHeight,
+        registerWeight,
+        setRegisterWeight,
+        registerGoal,
+        setRegisterGoal,
+        gymAvailability,
+        setGymAvailability,
+        gymDays,
+        setGymDays,
+        userUID,
+        setUserUID,
+      }}
+    >
       {props.children}
     </SignUpContext.Provider>
   );

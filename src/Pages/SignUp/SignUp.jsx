@@ -22,7 +22,24 @@ import { useSignUp } from "../../contexts/SignUpContext";
 const SignUp = () => {
   moment().format();
   const navigateTo = useNavigate();
-  const { step, setStep } = useSignUp();
+  const {
+    registerName,
+    registerEmail,
+    registerConfirmEmail,
+    registerPassword,
+    registerConfirmPassword,
+    registerBornDate,
+    registerSex,
+    registerHeight,
+    registerWeight,
+    registerGoal,
+    gymAvailability,
+    gymDays,
+    userUID,
+    setUserUID,
+    step,
+    setStep,
+  } = useSignUp();
 
   function stringContainsNumber(_string) {
     return /\d/.test(_string);

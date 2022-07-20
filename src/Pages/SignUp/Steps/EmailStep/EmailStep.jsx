@@ -3,10 +3,19 @@ import styles from "./EmailStep.module.css";
 
 import Button from "../../../../components/Button/Button";
 import Input from "../../../../components/Input/Input";
+import { useSignUp } from "../../../../contexts/SignUpContext";
 
 import { Link } from "react-router-dom";
 
 export default function EmailStep() {
+  const {
+    setRegisterName,
+    setRegisterEmail,
+    setRegisterConfirmEmail,
+    setRegisterPassword,
+    setRegisterConfirmPassword,
+  } = useSignUp();
+
   return (
     <>
       <form className={styles.form}>
