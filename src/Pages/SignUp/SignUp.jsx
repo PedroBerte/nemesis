@@ -5,9 +5,6 @@ import AbacateAlongamento from "./../../images/AbacateAlongamento1.png";
 import Logo from "./../../images/NemesisV1.1.png";
 import LeftWave from "./../../images/wave-left.png";
 
-import Button from "../../components/Button/Button";
-import Input from "../../components/Input/Input";
-
 import { Link, useNavigate } from "react-router-dom";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -18,29 +15,14 @@ import "react-datepicker/dist/react-datepicker.css";
 import toast, { Toaster } from "react-hot-toast";
 import moment from "moment";
 import createWorkout from "./createWorkout";
+import EmailStep from "./Steps/EmailStep/EmailStep";
+import UserInfoStep from "./Steps/UserInfoStep/UserInfoStep";
+import { useSignUp } from "../../contexts/SignUpContext";
 
 const SignUp = () => {
-  const [registerName, setRegisterName] = useState("");
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerConfirmEmail, setRegisterConfirmEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-  const [registerConfirmPassword, setRegisterConfirmPassword] = useState("");
-  const [registerBornDate, setRegisterBornDate] = useState("");
-  const [registerSex, setRegisterSex] = useState("");
-  const [registerHeight, setRegisterHeight] = useState("");
-  const [registerWeight, setRegisterWeight] = useState("");
-  const [registerGoal, setRegisterGoal] = useState("");
-  const [gymAvailability, setGymAvailability] = useState("");
-  const [gymDays, setGymDays] = useState("");
-
-  const [nextPage, setNextPage] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const [userUID, setUserUID] = useState("");
-
-  const navigateTo = useNavigate();
-
   moment().format();
+  const navigateTo = useNavigate();
+  const { step, setStep } = useSignUp();
 
   function stringContainsNumber(_string) {
     return /\d/.test(_string);
@@ -87,79 +69,53 @@ const SignUp = () => {
     this.message = message;
   }
 
-  function trySetGymSpecs() {
-    toast.promise(setGymSpecs(), {
-      loading: "Carregando...",
-      success: "Conta Criada!",
-      error: (err) => err.message.toString(),
-    });
-  }
-
-  async function setGymSpecs() {
-    try {
-      if ((gymAvailability, gymDays == "")) {
-        throw new getException("Não deixe campos vazios!");
-      }
-      await updateDoc(doc(db, "users", userUID), {
-        gymAvail: gymAvailability,
-        gymDays: gymDays,
-      });
-      createWorkout(gymAvailability, gymDays, userUID);
-      setTimeout(() => {
-        navigateTo("/");
-      }, 2000);
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  }
-
-  function tryRegisterUser(widthScreen) {
-    if (widthScreen <= 1100) {
-      if (nextPage) {
-        toast.promise(RegisterUser(widthScreen), {
-          loading: "Carregando...",
-          success: "Apenas mais uma etapa...",
-          error: (err) => err.message.toString(),
-        });
-      } else {
-        RegisterUser(widthScreen);
-      }
+  function tryRegisterUser() {
+    if (step == 0) {
+      toast.success("Apenas mais uma etapa... 🏋🏻‍♀️");
     } else {
-      toast.promise(RegisterUser(widthScreen), {
+      toast.promise(RegisterUser(), {
         loading: "Carregando...",
-        success: "Apenas mais uma etapa..",
+        success: "Conta criada! Aproveite 🥳",
         error: (err) => err.message.toString(),
       });
     }
   }
 
-  const RegisterUser = async (screenSize) => {
-    if (screenSize >= 1100) {
+  async function RegisterUser() {
+    if (step == 0) {
+      if (
+        (registerName,
+        registerEmail,
+        registerConfirmEmail,
+        registerPassword,
+        registerConfirmPassword == "")
+      ) {
+        throw new getException("Não deixe campos vazios!");
+      }
+      if (stringContainsNumber(registerName)) {
+        throw new getException("Insira um nome valido!");
+      }
+      if (registerEmail != registerConfirmEmail) {
+        throw new getException("Os E-mails não coincidem!");
+      }
+      if (registerPassword != registerConfirmPassword) {
+        throw new getException("As senhas não coincidem!");
+      }
+      setTimeout(() => {
+        setStep(1);
+      }, 1000);
+    } else {
+      if (
+        (registerBornDate,
+        registerSex,
+        registerHeight,
+        registerWeight,
+        registerGoal == "")
+      ) {
+        toast.error("Não deixe campos vazios!");
+        return;
+      }
       try {
-        if (
-          (registerName,
-          registerEmail,
-          registerConfirmEmail,
-          registerPassword,
-          registerConfirmPassword,
-          registerBornDate,
-          registerSex,
-          registerHeight,
-          registerWeight,
-          registerGoal == "")
-        ) {
-          throw new getException("Não deixe campos vazios!");
-        }
-        if (stringContainsNumber(registerName)) {
-          throw new getException("Insira um nome valido!");
-        }
-        if (registerEmail != registerConfirmEmail) {
-          throw new getException("Os E-mails não coincidem!");
-        }
-        if (registerPassword != registerConfirmPassword) {
-          throw new getException("As senhas não coincidem!");
-        }
         if (String(getCurrentDate()) == registerBornDate) {
           throw new getException("Insira uma data de nascimento valida!");
         }
@@ -186,15 +142,17 @@ const SignUp = () => {
         if (handleHeightNumber(registerHeight) > 220) {
           throw new getException("A altura máxima é de 2,20M!");
         }
+        if ((gymAvailability, gymDays == "")) {
+          throw new getException("Não deixe campos vazios!");
+        }
         const user = await createUserWithEmailAndPassword(
           auth,
           registerEmail,
           registerPassword
         );
-        const uid = user.user.uid;
-        setUserUID(uid);
-        await setDoc(doc(db, "users", uid), {
-          uid: uid,
+        setUserUID(user.user.uid);
+        await setDoc(doc(db, "users", userUID), {
+          uid: UserUID,
           name: registerName,
           email: registerEmail,
           date: registerBornDate,
@@ -202,9 +160,12 @@ const SignUp = () => {
           height: handleHeightNumber(registerHeight),
           weight: registerWeight,
           goal: registerGoal,
+          gymAvail: gymAvailability,
+          gymDays: gymDays,
         });
+        createWorkout(gymAvailability, gymDays, userUID);
         setTimeout(() => {
-          setIsLoggedIn(true);
+          navigateTo("/");
         }, 1000);
       } catch (error) {
         if (error.code == "auth/weak-password") {
@@ -215,105 +176,9 @@ const SignUp = () => {
         }
         throw error;
       }
-    } else {
-      if (!nextPage) {
-        if (
-          (registerName,
-          registerEmail,
-          registerConfirmEmail,
-          registerPassword,
-          registerConfirmPassword == "")
-        ) {
-          toast.error("Não deixe campos vazios!");
-          return;
-        }
-        if (stringContainsNumber(registerName)) {
-          toast.error("Insira um nome valido!");
-          return;
-        }
-        if (registerEmail != registerConfirmEmail) {
-          toast.error("Os E-mails não coincidem!");
-          return;
-        }
-        if (registerPassword != registerConfirmPassword) {
-          toast.error("As senhas não coincidem!");
-          return;
-        }
-        toast.success("Só mais uma etapa...");
-        setNextPage(true);
-        document.getElementById("register-email-side").style.display = "none";
-        document.getElementById("register-info-side").style.display = "flex";
-      } else {
-        if (
-          (registerBornDate,
-          registerSex,
-          registerHeight,
-          registerWeight,
-          registerGoal == "")
-        ) {
-          toast.error("Não deixe campos vazios!");
-          return;
-        }
-        try {
-          if (String(getCurrentDate()) == registerBornDate) {
-            throw new getException("Insira uma data de nascimento valida!");
-          }
-          if (moment(registerBornDate).isAfter(getCurrentDate())) {
-            throw new getException("Insira uma data de nascimento valida!");
-          }
-          if (moment(registerBornDate).isAfter(getCurrentDate(12))) {
-            throw new getException(
-              "Apenas pessoas com mais de 12 anos podem se cadastrar no Nemesis!"
-            );
-          }
-          if (moment(registerBornDate).isBefore(getCurrentDate(80))) {
-            throw new getException("A idade máxima é de 80 anos");
-          }
-          if (registerWeight < 40) {
-            throw new getException("O peso mínimo é de 40Kg!");
-          }
-          if (registerWeight > 200) {
-            throw new getException("O peso máximo é de 200Kg!");
-          }
-          if (handleHeightNumber(registerHeight) < 145) {
-            throw new getException("A altura mínima é de 1,45M!");
-          }
-          if (handleHeightNumber(registerHeight) > 220) {
-            throw new getException("A altura máxima é de 2,20M!");
-          }
-
-          const user = await createUserWithEmailAndPassword(
-            auth,
-            registerEmail,
-            registerPassword
-          );
-          const uid = user.user.uid;
-          setUserUID(uid);
-          await setDoc(doc(db, "users", uid), {
-            uid: uid,
-            name: registerName,
-            email: registerEmail,
-            Date: registerBornDate,
-            Sex: registerSex,
-            Height: handleHeightNumber(registerHeight),
-            Weight: registerWeight,
-            Goal: registerGoal,
-          });
-          setTimeout(() => {
-            setIsLoggedIn(true);
-          }, 1000);
-        } catch (error) {
-          if (error.code == "auth/weak-password") {
-            throw new getException("Sua senha deve ter mais de 6 caracteres!");
-          }
-          if (error.code == "auth/email-already-in-use") {
-            throw new getException("Este E-mail já esta em uso!");
-          }
-          throw error;
-        }
-      }
     }
-  };
+  }
+
   return (
     <div className={styles.body}>
       <Toaster
@@ -331,169 +196,10 @@ const SignUp = () => {
             <img className={styles.logo} src={Logo} width="200px" alt="" />
           </Link>
         </div>
-        {!isLoggedIn ? (
-          <>
-            <form className={styles.form}>
-              <div className={styles.emailSide} id={styles.emailSide}>
-                <Input
-                  type="text"
-                  size="lg"
-                  placeholder="Nome Completo"
-                  onChange={(event) => {
-                    setRegisterName(event.target.value);
-                  }}
-                />
-                <Input
-                  type="email"
-                  size="lg"
-                  placeholder="Insira seu E-mail"
-                  onChange={(event) => {
-                    setRegisterEmail(event.target.value);
-                  }}
-                />
-                <Input
-                  type="email"
-                  size="lg"
-                  placeholder="Confirme seu E-mail"
-                  onChange={(event) => {
-                    setRegisterConfirmEmail(event.target.value);
-                  }}
-                />
-                <Input
-                  type="password"
-                  size="lg"
-                  placeholder="Sua Senha"
-                  onChange={(event) => {
-                    setRegisterPassword(event.target.value);
-                  }}
-                />
-                <Input
-                  type="password"
-                  size="lg"
-                  placeholder="Confirme a sua Senha"
-                  onChange={(event) => {
-                    setRegisterConfirmPassword(event.target.value);
-                  }}
-                />
-              </div>
-              <div className={styles.infoSide} id={styles.infoSide}>
-                <Input
-                  type="date"
-                  size="sm"
-                  placeholder="Data de Nascimento"
-                  onChange={(event) => {
-                    setRegisterBornDate(event.target.value);
-                  }}
-                  min="1942-01-01"
-                />
-                <select
-                  className={styles.select}
-                  onChange={(event) => {
-                    setRegisterSex(event.target.value);
-                  }}
-                >
-                  <option value="" selected disabled hidden>
-                    Sexo
-                  </option>
-                  <option value="M">Masculino</option>
-                  <option value="N">Feminino</option>
-                  <option value="NA">Prefiro não Informar</option>
-                </select>
-                <Input
-                  type="number"
-                  size="sm"
-                  placeholder="Peso (Kg)"
-                  onChange={(event) => {
-                    setRegisterWeight(event.target.value);
-                  }}
-                />
-                <Input
-                  type="number"
-                  size="sm"
-                  placeholder="Altura"
-                  onChange={(event) => {
-                    setRegisterHeight(event.target.value);
-                  }}
-                />
-                <select
-                  className={styles.select}
-                  onChange={(event) => {
-                    setRegisterGoal(event.target.value);
-                  }}
-                >
-                  <option value="" selected disabled hidden>
-                    Objetivo
-                  </option>
-                  <option value="P">Perda de Peso</option>
-                  <option value="G">Ganho de Massa</option>
-                </select>
-              </div>
-            </form>
-            <Button
-              type="default"
-              onClick={() => tryRegisterUser(window.screen.width)}
-              color="white"
-              height="40px"
-              shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
-            >
-              Cadastre-se
-            </Button>
-            <Link className={styles.linkText} to="/SignIn">
-              <i className={styles.linkText}>Já tem uma conta? Clique Aqui!</i>
-            </Link>
-          </>
+        {step == 0 ? (
+          <EmailStep tryRegisterUser={tryRegisterUser} />
         ) : (
-          <>
-            <form className={styles.formSpecs}>
-              <div className={styles.text}>
-                <h2 className={styles.title}>Certo, estamos quase lá...</h2>
-                <h2 className={styles.subtitle}>
-                  Por favor, preencha os seguintes dados:
-                </h2>
-              </div>
-              <select
-                className={styles.select}
-                style={{ width: "60%" }}
-                onChange={(event) => {
-                  setGymAvailability(event.target.value);
-                }}
-              >
-                <option value="" selected disabled hidden>
-                  Teria uma academia disponível?
-                </option>
-                <option value="GYM-S">Sim</option>
-                <option value="GYM-N">Não</option>
-              </select>
-              <select
-                className={styles.select}
-                style={{ width: "60%" }}
-                onChange={(event) => {
-                  setGymDays(event.target.value);
-                }}
-              >
-                <option value="" selected disabled hidden>
-                  Dias disponíveis para treino:
-                </option>
-                <option value="GYM-DAYS-2">2</option>
-                <option value="GYM-DAYS-3">3</option>
-                <option value="GYM-DAYS-4">4</option>
-                <option value="GYM-DAYS-5">5</option>
-                <option value="GYM-DAYS-6">6</option>
-              </select>
-            </form>
-            <Button
-              type="default"
-              onClick={() => trySetGymSpecs()}
-              color="white"
-              height="40px"
-              shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
-            >
-              Cadastre-se
-            </Button>
-            <Link className={styles.linkText} to="/SignIn">
-              <i className={styles.linkText}>Já tem uma conta? Clique Aqui!</i>
-            </Link>
-          </>
+          <UserInfoStep tryRegisterUser={tryRegisterUser} />
         )}
       </div>
     </div>

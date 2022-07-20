@@ -9,7 +9,8 @@ const Input = (props) => {
       return "95%";
     }
     if (props.size == "md") {
-      return "90%";
+      align = "center";
+      return "100%";
     }
     if (props.size == "sm") {
       align = "center";
