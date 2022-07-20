@@ -115,7 +115,6 @@ export default function UserInfoStep({ tryRegisterUser }) {
                   <option value="GYM-DAYS-3">3</option>
                   <option value="GYM-DAYS-4">4</option>
                   <option value="GYM-DAYS-5">5</option>
-                  <option value="GYM-DAYS-6">6</option>
                 </select>
               ) : (
                 <select
@@ -141,6 +140,7 @@ export default function UserInfoStep({ tryRegisterUser }) {
             <option value="" selected disabled hidden>
               Alguma Restrição alimentar?
             </option>
+            <option value="RES-N">Sem restrição</option>
             <option value="RES-LAC">Intolerancia à Lactose</option>
             <option value="RES-GLU">Restrição de Glúten</option>
           </select>

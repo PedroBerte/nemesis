@@ -9,10 +9,15 @@ import { Link } from "react-router-dom";
 
 export default function EmailStep({ tryRegisterUser }) {
   const {
+    registerName,
     setRegisterName,
+    registerEmail,
     setRegisterEmail,
+    registerConfirmEmail,
     setRegisterConfirmEmail,
+    registerPassword,
     setRegisterPassword,
+    registerConfirmPassword,
     setRegisterConfirmPassword,
   } = useSignUp();
 
@@ -23,6 +28,7 @@ export default function EmailStep({ tryRegisterUser }) {
           <Input
             type="text"
             size="lg"
+            value={registerName}
             placeholder="Nome Completo"
             onChange={(event) => {
               setRegisterName(event.target.value);
@@ -31,6 +37,7 @@ export default function EmailStep({ tryRegisterUser }) {
           <Input
             type="email"
             size="lg"
+            value={registerEmail}
             placeholder="Insira seu E-mail"
             onChange={(event) => {
               setRegisterEmail(event.target.value);
@@ -39,6 +46,7 @@ export default function EmailStep({ tryRegisterUser }) {
           <Input
             type="email"
             size="lg"
+            value={registerConfirmEmail}
             placeholder="Confirme seu E-mail"
             onChange={(event) => {
               setRegisterConfirmEmail(event.target.value);
@@ -47,6 +55,7 @@ export default function EmailStep({ tryRegisterUser }) {
           <Input
             type="password"
             size="lg"
+            value={registerPassword}
             placeholder="Sua Senha"
             onChange={(event) => {
               setRegisterPassword(event.target.value);
@@ -55,6 +64,7 @@ export default function EmailStep({ tryRegisterUser }) {
           <Input
             type="password"
             size="lg"
+            value={registerConfirmPassword}
             placeholder="Confirme a sua Senha"
             onChange={(event) => {
               setRegisterConfirmPassword(event.target.value);

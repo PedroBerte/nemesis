@@ -131,17 +131,16 @@ const SignUp = () => {
         throw error;
       }
     } else {
-      if (
-        (registerBornDate,
-        registerSex,
-        registerHeight,
-        registerWeight,
-        registerGoal == "")
-      ) {
-        toast.error("Não deixe campos vazios!");
-        return;
-      }
       try {
+        if (
+          (registerBornDate,
+          registerSex,
+          registerHeight,
+          registerWeight,
+          registerGoal == "")
+        ) {
+          throw new getException("Não deixe campos vazios!");
+        }
         if (String(getCurrentDate()) == registerBornDate) {
           throw new getException("Insira uma data de nascimento valida!");
         }
@@ -197,9 +196,11 @@ const SignUp = () => {
         }, 1000);
       } catch (error) {
         if (error.code == "auth/weak-password") {
+          setStep(0);
           throw new getException("Sua senha deve ter mais de 6 caracteres!");
         }
         if (error.code == "auth/email-already-in-use") {
+          setStep(0);
           throw new getException("Este E-mail já esta em uso!");
         }
         throw error;
