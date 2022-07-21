@@ -32,6 +32,8 @@ import appleIcon from "../../images/appleIcon.png";
 import dinnerIcon from "../../images/dinner.png";
 import breakfastIcon from "../../images/breakfastIcon.png";
 import supperIcon from "../../images/supperIcon.png";
+import workoutIcon from "../../images/workoutIcon.png";
+import listWeight from "../../images/listWeight.png";
 
 import moment from "moment";
 
@@ -57,7 +59,10 @@ export default function UserPage() {
   const [heightProgress, setHeightProgress] = useState("");
   const [weight, setWeight] = useState("");
   const [weightProgress, setWeightProgress] = useState("");
-  const [workout, setWorkout] = useState([{}]);
+  const [workout, setWorkout] = useState([]);
+
+  const [accordionIsOpen, setAccordionIsOpen] = useState(false);
+  const [lastAccordionOpen, setLastAccordionOpen] = useState();
 
   const { user, setUser } = useContext(AuthContext);
   const userCollectionRef = collection(db, "users");
@@ -85,7 +90,6 @@ export default function UserPage() {
     if (date != "") {
       setAge(moment().diff(date, "years"));
     }
-    console.log(workout);
   }, [date]);
 
   useEffect(() => {
@@ -134,6 +138,39 @@ export default function UserPage() {
     var b = 100 * weightFormated;
     var result = b / a;
     setWeightProgress(result);
+  }
+
+  function handleToggleAccordion(e) {
+    var accordionItens = document.getElementsByClassName(
+      styles.hiddenWorkoutInfos
+    );
+    setLastAccordionOpen(e);
+    if (lastAccordionOpen == e) {
+      document.getElementsByClassName(styles.hiddenWorkoutInfos)[
+        lastAccordionOpen
+      ].style.height = "0px";
+      setAccordionIsOpen(false);
+      setLastAccordionOpen();
+      return;
+    }
+    if (accordionIsOpen == false) {
+      setAccordionIsOpen(true);
+      setLastAccordionOpen(e);
+      document.getElementsByClassName(styles.hiddenWorkoutInfos)[
+        e
+      ].style.height = "140px";
+    } else {
+      for (var i = 0; i < accordionItens.length; i++) {
+        document.getElementsByClassName(styles.hiddenWorkoutInfos)[
+          i
+        ].style.height = "0px";
+      }
+      document.getElementsByClassName(styles.hiddenWorkoutInfos)[
+        e
+      ].style.height = "140px";
+      setLastAccordionOpen(e);
+      setAccordionIsOpen(true);
+    }
   }
 
   return (
@@ -200,15 +237,47 @@ export default function UserPage() {
             </Button>
           </div>
           <ul className={styles.workoutList}>
-            {workout.map((workouts) => {
+            {workout.map((workouts, i) => {
               return (
                 <>
-                  <li>
-                    <div className={styles.texts}>
-                      <p className={styles.weekName}>{workouts.day}:</p>
-                      <p className={styles.workoutName}>{workouts.muscles}</p>
+                  <li onClick={() => handleToggleAccordion(i)}>
+                    <div className={styles.rowDiv}>
+                      <div className={styles.texts}>
+                        <p className={styles.weekName}>{workouts.day}:</p>
+                        <p className={styles.workoutName}>{workouts.muscles}</p>
+                      </div>
+                      <img src={listArrow} alt="" />
                     </div>
-                    <img src={listArrow} alt="" />
+                    <div className={styles.hiddenWorkoutInfos}>
+                      {workouts.workoutsInfos.map((exercise) => {
+                        return (
+                          <>
+                            <div className={styles.itemBody}>
+                              <div className={styles.workoutNameBody}>
+                                <img src={listWeight} alt="" />
+                                <p className={styles.workoutName}>
+                                  {exercise.name}
+                                </p>
+                              </div>
+                              <p className={styles.workoutName}>
+                                {exercise.rep}
+                              </p>
+                            </div>
+                            {workouts.workoutsInfos.lastIndexOf(exercise) ==
+                            workouts.workoutsInfos.length - 1 ? (
+                              ""
+                            ) : (
+                              <hr
+                                style={{
+                                  borderTop: "1px dotted #BEBEBE",
+                                  width: "100%",
+                                }}
+                              />
+                            )}
+                          </>
+                        );
+                      })}
+                    </div>
                   </li>
                   {workout.lastIndexOf(workouts) == workout.length - 1 ? (
                     ""

@@ -78,11 +78,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-direction: column;
     width: 300px;
     margin: 0.7rem 0 0.7rem 0;
 }
 .texts{
     display: flex;
+    cursor: pointer;
 }
 .weekName{
     margin-right: 0.4rem;
@@ -172,6 +174,53 @@
 .informationText{
     font-weight: 400;
     color: #303030;
+}
+.rowDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.hiddenWorkoutInfos{
+    width: 100%;
+    max-height: 140px;
+    overflow-y: scroll;
+    /* margin-top: 0.7rem; */
+    height: 0px;
+    transition: all 0.3s ease-in-out;
+}
+.hiddenWorkoutInfos::-webkit-scrollbar {
+    width: 8px;     
+}
+.hiddenWorkoutInfos::-webkit-scrollbar-track {
+    border-radius: 10px;
+    border: 1px solid #BEBEBE;
+    width: 100%;
+}
+.hiddenWorkoutInfos::-webkit-scrollbar-thumb {
+    background-color: #BEBEBE;   
+    border-radius: 20px;
+    border: 5px solid none;       
+}
+.itemBody{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin: 0.5rem 0 0.5rem 0;
+}
+.itemBody img {
+    margin-right: 0.5rem;
+}
+.workoutNameBody{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+.active{
+    height: 140px;
 }
 
 @media screen and (max-width: 1150px) {
