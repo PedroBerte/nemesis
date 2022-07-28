@@ -21,7 +21,7 @@ p{
       font-size: 13px;
   }
   .buttonBody{
-    height: 25px !important;
+    height: 35px !important;
   }
 }
 @media screen and (max-width: 500px){

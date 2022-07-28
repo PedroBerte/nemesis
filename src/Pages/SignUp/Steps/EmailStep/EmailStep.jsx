@@ -5,9 +5,11 @@ import Button from "../../../../components/Button/Button";
 import Input from "../../../../components/Input/Input";
 import { useSignUp } from "../../../../contexts/SignUpContext";
 
+import googleIcon from "../../../../images/googleIcon.png";
+
 import { Link } from "react-router-dom";
 
-export default function EmailStep({ tryRegisterUser }) {
+export default function EmailStep({ tryRegisterUser, loginWithGoogle }) {
   const {
     registerName,
     setRegisterName,
@@ -72,18 +74,30 @@ export default function EmailStep({ tryRegisterUser }) {
           />
         </div>
       </form>
-      <Button
-        type="default"
-        onClick={() => tryRegisterUser(window.screen.width)}
-        color="white"
-        height="40px"
-        shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
-      >
-        Cadastre-se
-      </Button>
-      <Link className={styles.linkText} to="/SignIn">
-        <i className={styles.linkText}>Já tem uma conta? Clique Aqui!</i>
-      </Link>
+      <div className={styles.divButtons}>
+        <div className={styles.inlineButtons}>
+          <div
+            className={styles.googleButton}
+            onClick={() => loginWithGoogle()}
+          >
+            <img src={googleIcon} />
+            <p className={styles.responsiveGoogleButtonText}>Login</p>
+          </div>
+          <div className={styles.verticalLine}></div>
+          <Button
+            type="default"
+            onClick={() => tryRegisterUser(window.screen.width)}
+            color="white"
+            height="50px"
+            shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
+          >
+            Cadastre-se
+          </Button>
+        </div>
+        <Link className={styles.linkText} to="/SignIn">
+          <i className={styles.linkText}>Já tem uma conta? Clique Aqui!</i>
+        </Link>
+      </div>
     </>
   );
 }
