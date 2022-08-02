@@ -38,6 +38,7 @@ const SignUp = () => {
     registerWeight,
     registerGoal,
     gymAvailability,
+    gymFreq,
     gymDays,
     userRes,
     userUID,
@@ -146,9 +147,6 @@ const SignUp = () => {
         }
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const credential = GoogleAuthProvider.credentialFromError(error);
         setStep(0);
         toast.error(errorMessage);
       });
@@ -232,6 +230,7 @@ const SignUp = () => {
             weight: registerWeight,
             goal: registerGoal,
             gymAvail: gymAvailability,
+            gymFreq: gymFreq,
             gymDays: gymDays,
             userRes: userRes,
           });
@@ -303,6 +302,7 @@ const SignUp = () => {
             weight: registerWeight,
             goal: registerGoal,
             gymAvail: gymAvailability,
+            gymFreq: gymFreq,
             gymDays: gymDays,
             userRes: userRes,
           });

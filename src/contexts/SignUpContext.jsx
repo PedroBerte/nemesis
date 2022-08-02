@@ -16,10 +16,11 @@ export default function SignUpContextProvider(props) {
   const [gymAvailability, setGymAvailability] = useState("");
   const [gymDays, setGymDays] = useState("");
   const [userRes, setUserRes] = useState("");
+  const [gymFreq, setGymFreq] = useState("");
 
   const [user, setUser] = useState("");
 
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const [userUID, setUserUID] = useState("");
 
   return (
@@ -57,6 +58,8 @@ export default function SignUpContextProvider(props) {
         setUserRes,
         user,
         setUser,
+        gymFreq,
+        setGymFreq,
       }}
     >
       {props.children}

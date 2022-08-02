@@ -14,11 +14,12 @@ export default function UserInfoStep({ tryRegisterUser }) {
     setRegisterGoal,
     gymAvailability,
     setGymAvailability,
+    gymDays,
     setGymDays,
     setUserRes,
+    gymFreq,
+    setGymFreq,
   } = useSignUp();
-
-  const [inputValue, setInputValue] = useState(1);
 
   function setLabelPosition() {
     if (inputValue == 1) {
@@ -105,46 +106,18 @@ export default function UserInfoStep({ tryRegisterUser }) {
             <option value="GYM-S">Sim</option>
             <option value="GYM-N">Não</option>
           </select>
-          {gymAvailability == "" ? (
-            <select className={styles.select}>
-              <option value="" selected disabled hidden>
-                Dias disponíveis para treino:
-              </option>
-              <option value="" disabled>
-                Selecione a disponíbilidade da academia primeiro!
-              </option>
-            </select>
-          ) : (
-            <>
-              {gymAvailability == "GYM-S" ? (
-                <select
-                  className={styles.select}
-                  onChange={(event) => {
-                    setGymDays(event.target.value);
-                  }}
-                >
-                  <option value="" selected disabled hidden>
-                    Dias disponíveis para treino:
-                  </option>
-                  <option value="GYM-DAYS-3">3</option>
-                  <option value="GYM-DAYS-4">4</option>
-                  <option value="GYM-DAYS-5">5</option>
-                </select>
-              ) : (
-                <select
-                  className={styles.select}
-                  onChange={(event) => {
-                    setGymDays(event.target.value);
-                  }}
-                >
-                  <option value="" selected disabled hidden>
-                    Dias disponíveis para treino:
-                  </option>
-                  <option value="GYM-DAYS-3">3</option>
-                </select>
-              )}
-            </>
-          )}
+          <select
+            className={styles.select}
+            onChange={(event) => {
+              setGymFreq(event.target.value);
+            }}
+          >
+            <option value="" selected disabled hidden>
+              Já frequentou uma academia?
+            </option>
+            <option value="GYM-FREQ-S">Sim</option>
+            <option value="GYM-FREQ-N">Não</option>
+          </select>
           <select
             className={styles.select}
             onChange={(event) => {
@@ -164,15 +137,24 @@ export default function UserInfoStep({ tryRegisterUser }) {
         <div className={styles.texts}>
           <p className={styles.text}>Dias disponíveis para treino:</p>
           <p className={styles.value}>
-            {inputValue == 1 ? `${inputValue} dia` : `${inputValue} dias`}
+            {gymDays == "" ? (
+              <></>
+            ) : (
+              <>
+                {gymDays == 1
+                  ? `${gymDays.replace("GYM-DAYS-", "")} dia`
+                  : `${gymDays.replace("GYM-DAYS-", "")} dias`}
+              </>
+            )}
           </p>
         </div>
         <input
           type="range"
           className={styles.inputRange}
-          onChange={(e) => setInputValue(e.target.value)}
-          min="1"
-          max="4"
+          onChange={(e) => setGymDays(`GYM-DAYS-${e.target.value}`)}
+          min="3"
+          max="6"
+          defaultValue={3}
         />
       </div>
       <div className={styles.rightDiv}>
