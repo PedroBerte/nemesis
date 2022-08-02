@@ -19,7 +19,7 @@ export default function SignUpContextProvider(props) {
 
   const [user, setUser] = useState("");
 
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
   const [userUID, setUserUID] = useState("");
 
   return (

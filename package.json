@@ -8,8 +8,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
     "firebase": "^9.6.10",
     "framer-motion": "^6",
     "moment": "^2.29.3",

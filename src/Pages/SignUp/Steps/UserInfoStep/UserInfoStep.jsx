@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./UserInfoStep.module.css";
 
 import Button from "../../../../components/Button/Button";
@@ -17,6 +17,20 @@ export default function UserInfoStep({ tryRegisterUser }) {
     setGymDays,
     setUserRes,
   } = useSignUp();
+
+  const [inputValue, setInputValue] = useState(1);
+
+  function setLabelPosition() {
+    if (inputValue == 1) {
+      return "0%";
+    } else if (inputValue == 2) {
+      return "25%";
+    } else if (inputValue == 3) {
+      return "50%";
+    } else {
+      return "100%";
+    }
+  }
 
   return (
     <>
@@ -145,6 +159,21 @@ export default function UserInfoStep({ tryRegisterUser }) {
             <option value="RES-GLU">Restrição de Glúten</option>
           </select>
         </div>
+      </div>
+      <div className={styles.availGymDaysBody}>
+        <div className={styles.texts}>
+          <p className={styles.text}>Dias disponíveis para treino:</p>
+          <p className={styles.value}>
+            {inputValue == 1 ? `${inputValue} dia` : `${inputValue} dias`}
+          </p>
+        </div>
+        <input
+          type="range"
+          className={styles.inputRange}
+          onChange={(e) => setInputValue(e.target.value)}
+          min="1"
+          max="4"
+        />
       </div>
       <div className={styles.rightDiv}>
         <Button
