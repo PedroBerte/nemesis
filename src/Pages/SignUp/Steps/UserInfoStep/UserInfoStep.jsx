@@ -59,7 +59,6 @@ export default function UserInfoStep({ tryRegisterUser }) {
               </option>
               <option value="M">Masculino</option>
               <option value="N">Feminino</option>
-              <option value="NA">Prefiro não Informar</option>
             </select>
             <Input
               type="number"
