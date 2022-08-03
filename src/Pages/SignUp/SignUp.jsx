@@ -1,5 +1,5 @@
 import styles from "./SignUp.module.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import AbacateAlongamento from "./../../images/AbacateAlongamento1.png";
 import Logo from "./../../images/NemesisV1.1.png";
@@ -20,6 +20,7 @@ import UserInfoStep from "./Steps/UserInfoStep/UserInfoStep";
 import { useSignUp } from "../../contexts/SignUpContext";
 
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import createDiet from "./createDiet";
 
 const SignUp = () => {
   const provider = new GoogleAuthProvider();
@@ -50,6 +51,7 @@ const SignUp = () => {
   } = useSignUp();
 
   const [isLoggedWithGoogle, setIsLoggedWithGoogle] = useState(false);
+  const [age, setAge] = useState("");
 
   function stringContainsNumber(_string) {
     return /\d/.test(_string);
@@ -116,10 +118,8 @@ const SignUp = () => {
     try {
       const auser = await getDoc(doc(db, "users", e.uid));
       if (auser._document == null) {
-        console.log("false");
         return false;
       } else {
-        console.log("true");
         return true;
       }
     } catch (error) {
@@ -235,6 +235,15 @@ const SignUp = () => {
             userRes: userRes,
           });
           createWorkout(gymAvailability, gymDays, user.uid);
+          createDiet(
+            registerBornDate,
+            registerWeight,
+            registerHeight,
+            registerSex,
+            registerGoal,
+            userRes,
+            user.uid
+          );
           setTimeout(() => {
             navigateTo("/");
           }, 1000);
@@ -307,6 +316,15 @@ const SignUp = () => {
             userRes: userRes,
           });
           createWorkout(gymAvailability, gymDays, uid);
+          createDiet(
+            registerBornDate,
+            registerWeight,
+            registerHeight,
+            registerSex,
+            registerGoal,
+            userRes,
+            uid
+          );
           setTimeout(() => {
             navigateTo("/");
           }, 1000);

@@ -8,7 +8,7 @@ import configIcon from "./../../images/configIcon.svg";
 
 import { db } from "../../services/firebase-config";
 import { auth } from "../../services/firebase-config";
-import { onAuthStateChanged } from "firebase/auth";
+import { getRedirectResult, onAuthStateChanged } from "firebase/auth";
 
 import { signOut } from "firebase/auth/";
 import { collection, getDocs } from "firebase/firestore";
@@ -31,6 +31,26 @@ const Navbar = () => {
   const userCollectionRef = collection(db, "users");
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    async function getUserDocs() {
+      if (user != undefined) {
+        const data = await getDocs(userCollectionRef);
+        const UserInfos = data.docs.find((element) => element.id == user.uid);
+        setName(
+          UserInfos._document.data.value.mapValue.fields.name.stringValue
+        );
+        setGoal(
+          UserInfos._document.data.value.mapValue.fields.goal.stringValue
+        );
+        setUserInformation(UserInfos);
+      }
+    }
+    getUserDocs();
+  }, [user]);
 
   const logOut = async () => {
     setUser();
@@ -74,26 +94,6 @@ const Navbar = () => {
       isPerfilMenuShowed = false;
     }
   };
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    async function getUserDocs() {
-      if (user != undefined) {
-        const data = await getDocs(userCollectionRef);
-        const UserInfos = data.docs.find((element) => element.id == user.uid);
-        setName(
-          UserInfos._document.data.value.mapValue.fields.name.stringValue
-        );
-        setGoal(
-          UserInfos._document.data.value.mapValue.fields.goal.stringValue
-        );
-        setUserInformation(UserInfos);
-      }
-    }
-    getUserDocs();
-  }, [user]);
 
   return (
     <>
