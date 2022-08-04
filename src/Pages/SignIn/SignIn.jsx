@@ -12,18 +12,25 @@ import Input from "../../components/Input/Input";
 
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../../services/firebase-config";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+
+import { useSignUp } from "../../contexts/SignUpContext";
 
 import { AuthContext } from "../../contexts/AuthContext";
+import googleIcon from "../../images/googleIcon.png";
 
 import toast, { Toaster } from "react-hot-toast";
 
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+
 const SignIn = () => {
   const navigateTo = useNavigate();
+  const provider = new GoogleAuthProvider();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setUser } = useContext(AuthContext);
+  const { setUser, setStep, setIsLoggedWithGoogle, isLoggedWithGoogle } =
+    useSignUp();
   const userCollectionRef = collection(db, "users");
 
   function getException(message) {
@@ -40,6 +47,51 @@ const SignIn = () => {
       success: "Logado!",
       error: (err) => err.message.toString(),
     });
+  }
+  function trySignInWithGoogle() {
+    toast.promise(signInWithGoogle(), {
+      loading: "Carregando...",
+      success: "Logado!",
+      error: (err) => err.message.toString(),
+    });
+  }
+
+  async function userExists(e) {
+    try {
+      const auser = await getDoc(doc(db, "users", e.uid));
+      if (auser._document == null) {
+        return false;
+      } else {
+        return true;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function signInWithGoogle() {
+    signInWithPopup(auth, provider)
+      .then(async (result) => {
+        const newUser = result.user;
+        setUser(newUser);
+        const isUserAlreadyExist = await userExists(newUser);
+        if (!isUserAlreadyExist) {
+          toast.error("Conclua o resgistro para continuar!");
+          setTimeout(() => {
+            setStep(1);
+            setIsLoggedWithGoogle(true);
+            navigateTo("/SignUp");
+          }, 1200);
+        } else {
+          toast.success("Bem-vindo!");
+          setTimeout(() => {
+            navigateTo("/");
+          }, 1200);
+        }
+      })
+      .catch((error) => {
+        toast.error(error);
+      });
   }
 
   const signIn = async () => {
@@ -102,18 +154,30 @@ const SignIn = () => {
             }}
           />
         </form>
-        <Button
-          onClick={() => trySignIn()}
-          type="default"
-          width="150px"
-          height="40px"
-          shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
-        >
-          Login
-        </Button>
-        <Link className={styles.linkText} to="/SignUp">
-          <i className={styles.linkText}>Não tem uma conta? Crie Aqui!</i>
-        </Link>
+        <div className={styles.divButtons}>
+          <div className={styles.inlineButtons}>
+            <div
+              className={styles.googleButton}
+              onClick={() => signInWithGoogle()}
+            >
+              <img src={googleIcon} />
+              <p className={styles.responsiveGoogleButtonText}>Login</p>
+            </div>
+            <div className={styles.verticalLine}></div>
+            <Button
+              onClick={() => trySignIn()}
+              type="default"
+              width="150px"
+              height="40px"
+              shadow="2px 6px 4px rgba(0, 0, 0, 0.25)"
+            >
+              Login
+            </Button>
+          </div>
+          <Link className={styles.linkText} to="/SignUp">
+            <i className={styles.linkText}>Não tem uma conta? Crie Aqui!</i>
+          </Link>
+        </div>
       </div>
       <img src={RightWave} className={styles.wave} width="100vh" />
       <div className={styles.bodyRightSide}>

@@ -16,9 +16,7 @@ export default async function createDiet(
 ) {
   moment().format();
   var age = moment().diff(bornDate, "years");
-
   var totalCal;
-
   try {
     if (goal == "G") {
       if (sex == "M") {

@@ -48,9 +48,10 @@ const SignUp = () => {
     setStep,
     setUser,
     user,
+    setIsLoggedWithGoogle,
+    isLoggedWithGoogle,
   } = useSignUp();
 
-  const [isLoggedWithGoogle, setIsLoggedWithGoogle] = useState(false);
   const [age, setAge] = useState("");
 
   function stringContainsNumber(_string) {
@@ -130,14 +131,12 @@ const SignUp = () => {
   function loginWithGoogle() {
     signInWithPopup(auth, provider)
       .then(async (result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
         const newUser = result.user;
         setUser(newUser);
         setUserUID(user.uid);
         setIsLoggedWithGoogle(true);
-        const aviso = await userExists(newUser);
-        if (!aviso) {
+        const isUserAlreadyExist = await userExists(newUser);
+        if (!isUserAlreadyExist) {
           setStep(1);
         } else {
           toast.success("Você já está cadastrado!");
@@ -148,7 +147,7 @@ const SignUp = () => {
       })
       .catch((error) => {
         setStep(0);
-        toast.error(errorMessage);
+        toast.error(error);
       });
   }
 
@@ -220,6 +219,7 @@ const SignUp = () => {
           if ((gymAvailability, gymDays == "")) {
             throw new getException("Não deixe campos vazios!");
           }
+
           await setDoc(doc(db, "users", user.uid), {
             uid: user.uid,
             name: user.displayName,
