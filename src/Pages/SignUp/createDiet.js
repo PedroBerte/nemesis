@@ -322,6 +322,251 @@ export default async function createDiet(
           ],
         });
       }
+      if (totalCal >= 2000 && totalCal <= 2500) {
+        await updateDoc(doc(db, "users", uid), {
+          diet: [
+            {
+              meal: "Café da manhã",
+              option: [
+                {
+                  id: 1,
+                  foods: [
+                    {
+                      name: "Café sem açúcar",
+                      quantity: "1 copo pequeno",
+                    },
+                    {
+                      name: "Leite de vaca integral",
+                      quantity: "2 copos cheios",
+                    },
+                    {
+                      name: "Pão frances sem miolo",
+                      quantity: "2 unidades",
+                    },
+                    {
+                      name: "Queijo prato",
+                      quantity: "3 fatias pequenas",
+                    },
+                  ],
+                },
+                {
+                  id: 2,
+                  foods: [
+                    {
+                      name: "Suco de laranja",
+                      quantity: "1 copo",
+                    },
+                    {
+                      name: "Peito de frango desfiado",
+                      quantity: "3 colheres de sopa",
+                    },
+                    {
+                      name: "Tapioca",
+                      quantity: "5 colheres de sopa",
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              meal: "Lanche da manhã",
+              option: [
+                {
+                  id: 1,
+                  foods: [
+                    {
+                      name: "Banana",
+                      quantity: "1 unidade",
+                    },
+                    {
+                      name: "Granola",
+                      quantity: "1 colher de chá",
+                    },
+                  ],
+                },
+                {
+                  id: 2,
+                  foods: [
+                    {
+                      name: "Mamão",
+                      quantity: "1/2 unidade",
+                    },
+                    {
+                      name: "Granola",
+                      quantity: "1 colher de chá",
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              meal: "Almoço",
+              option: [
+                {
+                  id: 1,
+                  foods: [
+                    {
+                      name: "Folhosos",
+                      quantity: "À vontade",
+                      instruction:
+                        "Temperar com uma colher de sopa de azeite extra virgem.",
+                    },
+                    {
+                      name: "Tomate salada",
+                      quantity: "4 fatias grandes",
+                    },
+                    {
+                      name: "Peito de frango",
+                      quantity: "2 bifes pequenos",
+                    },
+                    {
+                      name: "Arroz branco",
+                      quantity: "10 colheres de sopa",
+                    },
+                    {
+                      name: "Abacaxi",
+                      quantity: "3 fatias pequenas",
+                    },
+                  ],
+                },
+                {
+                  id: 2,
+                  foods: [
+                    {
+                      name: "Folhosos",
+                      quantity: "À vontade",
+                      instruction:
+                        "Temperar com uma colher de sopa de azeite extra virgem.",
+                    },
+                    {
+                      name: "Tomate salada",
+                      quantity: "meia unidade",
+                    },
+                    {
+                      name: "Legumes",
+                      quantity: "4 colheres de sopa",
+                    },
+                    {
+                      name: "Contra filé",
+                      quantity: "2 bifes",
+                    },
+                    {
+                      name: "Arroz branco",
+                      quantity: "6 colheres de sopa",
+                    },
+                    {
+                      name: "Feijão",
+                      quantity: "2 conchas",
+                    },
+                    {
+                      name: "Suco de laranja",
+                      quantity: "1 copo cheio",
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              meal: "Lanche da tarde",
+              option: [
+                {
+                  id: 1,
+                  foods: [
+                    {
+                      name: "Iogurte natural desnatado",
+                      quantity: "1 unidade",
+                    },
+                    {
+                      name: "Granola",
+                      quantity: "1 colher de sopa",
+                    },
+                  ],
+                },
+                {
+                  id: 2,
+                  foods: [
+                    {
+                      name: "Pão de forma integral",
+                      quantity: "1 fatia",
+                    },
+                    {
+                      name: "Requeijão",
+                      quantity: "1 colher de chá",
+                    },
+                    {
+                      name: "Morango",
+                      quantity: "5 unidades médias",
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              meal: "Jantar",
+              option: [
+                {
+                  id: 1,
+                  foods: [
+                    {
+                      name: "Macarrão cozido",
+                      quantity: "9 colheres de sopa",
+                    },
+                    {
+                      name: "Patinho",
+                      quantity: "1 e 1/2 bife pequeno",
+                    },
+                    {
+                      name: "Queijo parmesão",
+                      quantity: "1 colher de sopa",
+                    },
+                    {
+                      name: "Folhosos",
+                      quantity: "À vontade",
+                      instruction:
+                        "Temperar com uma colher de sopa de azeite extra virgem.",
+                    },
+                  ],
+                },
+                {
+                  id: 2,
+                  foods: [
+                    {
+                      name: "Arroz branco",
+                      quantity: "10 colheres de sopa"
+                    },
+                    {
+                      name: "Batata",
+                      quantity: "2 unidades médias"
+                    },
+                    {
+                      name: "Feijão Preto",
+                      quantity: "1 concha"
+                    },
+                    {
+                      name: "Peito de frango",
+                      quantity: "2 bifes pequenos"
+                    },
+                    {
+                      name: "Folhosos",
+                      quantity: "À vontade",
+                      instruction:
+                        "Temperar com uma colher e meia de sopa de azeite extra virgem.",
+                    },
+                    {
+                      name: "Tomate",
+                      quantity: "4 fatias grandes",
+                    },
+                    {
+                      name: "Abacaxi",
+                      quantity: "3 fatias pequenas",
+                    },
+                  ]
+                },
+              ],
+            },
+          ],
+        });
+      }
     }
   } catch (error) {
     console.error(error);
