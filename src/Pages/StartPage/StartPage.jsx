@@ -21,8 +21,7 @@ import Footer from "../../components/Footer/Footer";
 import Input from "../../components/Input/Input";
 
 const StartPage = () => {
-  const { user, setUser, userInformation, setUserInformation } =
-    useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {

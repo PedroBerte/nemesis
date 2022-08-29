@@ -270,7 +270,8 @@ export default function UserPage() {
                               <hr
                                 style={{
                                   borderTop: "1px dotted #BEBEBE",
-                                  width: "100%",
+                                  width: "85%",
+                                  margin: "0 auto 0 auto",
                                 }}
                               />
                             )}

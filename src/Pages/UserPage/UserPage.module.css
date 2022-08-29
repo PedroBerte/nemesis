@@ -1,321 +1,322 @@
-.title{
-    margin-top: 2rem;
-    margin-left: 75px;
-    color: #303030;
+.title {
+  margin-top: 2rem;
+  margin-left: 75px;
+  color: #303030;
 }
-.infoAndWorkout{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    margin-top: 2rem;
-    justify-content: space-around;
-    padding: 0 5rem 0 5rem;
+.infoAndWorkout {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 2rem;
+  justify-content: space-around;
+  padding: 0 5rem 0 5rem;
 }
-.line{
-    width: 1px;
-    height: 230px;
-    background-color: #BEBEBE;
-    margin: auto 0 auto 0;
+.line {
+  width: 1px;
+  height: 230px;
+  background-color: #bebebe;
+  margin: auto 0 auto 0;
 }
-.userInformationBody{
-    display: flex;
-    flex-direction: column;
-    margin-right: 1rem;
+.userInformationBody {
+  display: flex;
+  flex-direction: column;
+  margin-right: 1rem;
 }
-.subtitle{
-    text-align: left;
-    margin-bottom: 2rem;
-    color: #303030;
-    font-weight: 500
+.subtitle {
+  text-align: left;
+  margin-bottom: 2rem;
+  color: #303030;
+  font-weight: 500;
 }
-.userIlustration{
-    display: flex;
-    flex-direction: row;
-    margin-left: 2rem;
+.userIlustration {
+  display: flex;
+  flex-direction: row;
+  margin-left: 2rem;
 }
-.userProgressBars{
-    width: 250px;
-    margin-left: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.userProgressBars {
+  width: 250px;
+  margin-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.progressItem{
-    margin-bottom: 1rem;
+.progressItem {
+  margin-bottom: 1rem;
 }
-.rightDiv{
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
+.rightDiv {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
-#updateInfosButton{
-    margin-top: 1.2rem;
+#updateInfosButton {
+  margin-top: 1.2rem;
 }
-.workouts{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.workouts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.inlineTitle{
-    display: flex;
-    justify-content: space-between;
-    width: 450px;
-    margin-bottom: 2rem;
+.inlineTitle {
+  display: flex;
+  justify-content: space-between;
+  width: 450px;
+  margin-bottom: 2rem;
 }
-.workoutList{
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 1rem;
+.workoutList {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
 }
-.rightSubtitle{
-    color: #303030;
-    font-weight: 500;
+.rightSubtitle {
+  color: #303030;
+  font-weight: 500;
 }
-.workoutList li{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    width: 300px;
-    margin: 0.7rem 0 0.7rem 0;
+.workoutList li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 390px;
+  margin: 0.7rem 0 0.7rem 0;
 }
-.texts{
-    display: flex;
-    cursor: pointer;
+.texts {
+  display: flex;
+  cursor: pointer;
 }
-.weekName{
-    margin-right: 0.4rem;
-    font-weight: 500;
+.weekName {
+  margin-right: 0.4rem;
+  font-weight: 500;
 }
-.spacer{
-    display: none;
+.spacer {
+  display: none;
 }
-.food{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+.food {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
-.foodContainer{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 2rem;
-    overflow: hidden;
-    max-width: 900px;
-    margin-bottom: 4rem;
-    transition: all 0.5s ease-in-out;
-    scroll-behavior: smooth;
+.foodContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 2rem;
+  overflow: hidden;
+  max-width: 900px;
+  margin-bottom: 4rem;
+  transition: all 0.5s ease-in-out;
+  scroll-behavior: smooth;
 }
-.foodItem{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    min-width: 200px;
-    height: 200px;
-    background-color: #DADADA;
-    margin-right: 0.5rem;
-    margin-left: 0.5rem;
-    transition: all 0.3s ease-out;
-    cursor: pointer;
-    border-radius: 12px;
+.foodItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-width: 200px;
+  height: 200px;
+  background-color: #dadada;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+  border-radius: 12px;
 }
-.foodItem:hover p{
-    opacity: 100%;
-    margin-top: 0.7rem;
+.foodItem:hover p {
+  opacity: 100%;
+  margin-top: 0.7rem;
 }
-.itemControl{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: end;
-    width: 70%;
+.itemControl {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  width: 70%;
 }
-.itemControl img{
-    margin-left: 0.7rem;
-    cursor: pointer;
+.itemControl img {
+  margin-left: 0.7rem;
+  cursor: pointer;
 }
-.cardName{
-    font-weight: 500;
-    font-size: 1rem;
-    color: #303030;
-    opacity: 0%;
-    transition: all 0.5s ease-out;
+.cardName {
+  font-weight: 500;
+  font-size: 1rem;
+  color: #303030;
+  opacity: 0%;
+  transition: all 0.5s ease-out;
 }
-.foodItem img{
-    height: 80px;
+.foodItem img {
+  height: 80px;
 }
-.inlineFooterTexts{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: center;
-    margin-bottom: 5rem;
+.inlineFooterTexts {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 5rem;
 }
-.inlineFooterTexts h3:first-child{
-    font-weight: 600;
+.inlineFooterTexts h3:first-child {
+  font-weight: 600;
 }
-.inlineFooterTexts h3:last-child{
-    font-weight: 400;
+.inlineFooterTexts h3:last-child {
+  font-weight: 400;
 }
-.textInformations{
-    display: flex;
+.textInformations {
+  display: flex;
 }
-.informationTitle{
-    font-weight: 500;
-    color: #303030;
-    margin-right: 0.3rem;
+.informationTitle {
+  font-weight: 500;
+  color: #303030;
+  margin-right: 0.3rem;
 }
-.informationText{
-    font-weight: 400;
-    color: #303030;
+.informationText {
+  font-weight: 400;
+  color: #303030;
 }
-.rowDiv{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+.rowDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
-.hiddenWorkoutInfos{
-    width: 100%;
-    max-height: 140px;
-    overflow-y: scroll;
-    /* margin-top: 0.7rem; */
-    height: 0px;
-    transition: all 0.3s ease-in-out;
+.hiddenWorkoutInfos {
+  width: 100%;
+  max-height: 140px;
+  overflow-y: scroll;
+  height: 0px;
+  transition: all 0.3s ease-in-out;
 }
 .hiddenWorkoutInfos::-webkit-scrollbar {
-    width: 8px;     
+  width: 8px;
 }
 .hiddenWorkoutInfos::-webkit-scrollbar-track {
-    border-radius: 10px;
-    border: 1px solid #BEBEBE;
-    width: 100%;
+  border-radius: 10px;
+  border: 1px solid #bebebe;
+  width: 100%;
 }
 .hiddenWorkoutInfos::-webkit-scrollbar-thumb {
-    background-color: #BEBEBE;   
-    border-radius: 20px;
-    border: 5px solid none;       
+  background-color: #bebebe;
+  border-radius: 20px;
+  border: 5px solid none;
 }
-.itemBody{
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    margin: 0.5rem 0 0.5rem 0;
+.itemBody {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  margin: 0.5rem 0 0.5rem 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 .itemBody img {
-    margin-right: 0.5rem;
+  margin-right: 0.5rem;
 }
-.workoutNameBody{
-    display: flex;
-    align-items: center;
-    flex-direction: row;
+.workoutNameBody {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
-.active{
-    height: 140px;
+.active {
+  height: 140px;
 }
 
 @media screen and (max-width: 1150px) {
-    .inlineTitle{
-        width: 350px;
-    }
+  .inlineTitle {
+    width: 350px;
+  }
 }
 
-@media screen and (max-width: 970px){
-    .line{
-        display: none;
-    }
-    .infoAndWorkout{
-        flex-direction: column;
-        align-items: center;
-        padding: 0;
-    }
-    .userInformationBody{
-        width: 80%;
-        margin: 0;
-    }
-    .userIlustration{
-        align-items: center;
-        margin: 0;
-        justify-content: center;
-    }
-    .workouts{
-        width: 80%;
-    }
-    .inlineTitle{
-        width: 70%;
-        display: flex;
-        align-items: center;
-        margin-bottom: 2rem;
-    }
-    .spacer{
-        display: block;
-        width: 70%;
-        margin: 3rem 0 3rem 0;
-    }
-    .subtitle{
-        display: none;
-    }
-    .title{
-        margin-left: 6rem;
-    }
-    .itemControl{
-        display: none;
-    }
+@media screen and (max-width: 970px) {
+  .line {
+    display: none;
+  }
+  .infoAndWorkout {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+  .userInformationBody {
+    width: 80%;
+    margin: 0;
+  }
+  .userIlustration {
+    align-items: center;
+    margin: 0;
+    justify-content: center;
+  }
+  .workouts {
+    width: 80%;
+  }
+  .inlineTitle {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  .spacer {
+    display: block;
+    width: 70%;
+    margin: 3rem 0 3rem 0;
+  }
+  .subtitle {
+    display: none;
+  }
+  .title {
+    margin-left: 6rem;
+  }
+  .itemControl {
+    display: none;
+  }
 
-    .foodContainer{
-        width: 100%;
-        flex-wrap: wrap;
-        max-width: 80%;
-        display: flex;
-        justify-content: center;
-    }
-    .foodItem{
-        margin-top: 1rem;
-    }
-    .cardName{
-        opacity: 100%;
-        margin-top: 0.7rem;
-    }
-    .inlineFooterTexts{
-        display: none
-    }
+  .foodContainer {
+    width: 100%;
+    flex-wrap: wrap;
+    max-width: 80%;
+    display: flex;
+    justify-content: center;
+  }
+  .foodItem {
+    margin-top: 1rem;
+  }
+  .cardName {
+    opacity: 100%;
+    margin-top: 0.7rem;
+  }
+  .inlineFooterTexts {
+    display: none;
+  }
 }
-@media screen and (max-width: 560px){
-    .title{
-        margin-left: 2rem;
-    }
-    .foodContainer{
-        max-width: 100%;
-        width: 100% !important;
-    }
-    .inlineTitle{
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 2rem;
-    }
-    #changeButton{
-        width: 100px;
-    }
-    .foodItem{
-        height: 140px;
-        min-width: 140px;
-        margin: 0 0.5rem 1rem 0.5rem;
-    }
-    .foodItem img{
-        height: 40px;
-    }
-    .foodItem p{
-        font-size: 0.8rem;
-    }
+@media screen and (max-width: 560px) {
+  .title {
+    margin-left: 2rem;
+  }
+  .foodContainer {
+    max-width: 100%;
+    width: 100% !important;
+  }
+  .inlineTitle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+  #changeButton {
+    width: 100px;
+  }
+  .foodItem {
+    height: 140px;
+    min-width: 140px;
+    margin: 0 0.5rem 1rem 0.5rem;
+  }
+  .foodItem img {
+    height: 40px;
+  }
+  .foodItem p {
+    font-size: 0.8rem;
+  }
 }

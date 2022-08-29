@@ -38,8 +38,6 @@
 .apresentation .form {
   width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
   margin-top: 1rem;
 }
 .inputApresentation {
@@ -124,44 +122,43 @@
   align-items: center;
   justify-content: center;
 }
-.abacatePeso{
+.abacatePeso {
   height: 70%;
 }
 .abacateCorrida {
   width: 200;
 }
-.titleWrap{
+.titleWrap {
   display: none;
 }
-.titleRightWrap{
-  display: none
+.titleRightWrap {
+  display: none;
 }
-.form{
+.form {
   width: 80%;
 }
 
-
 @media screen and (max-width: 1200px) {
-  .notificationArea{
+  .notificationArea {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
-  .textsRight{
-    display:flex;
+  .textsRight {
+    display: flex;
     justify-content: center;
     align-items: center;
     width: 80%;
   }
-  .titleRight{
+  .titleRight {
     text-align: center;
   }
-  .leftSide{
+  .leftSide {
     width: 100%;
     padding: 0;
   }
-  .notificationArea{
+  .notificationArea {
     padding: 0;
   }
   .rightSide {
@@ -172,44 +169,43 @@
     align-items: center;
     text-align: center;
   }
-  .resultsRightSide{
+  .resultsRightSide {
     display: none;
   }
-  .resultsLeftSide{
+  .resultsLeftSide {
     width: 100%;
     align-items: center;
-    padding:0;
+    padding: 0;
   }
-  .titleNowrap{
+  .titleNowrap {
     text-align: center;
   }
-  .subtitle{
+  .subtitle {
     text-align: center !important;
   }
-  .form{
+  .form {
     width: 80%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  
 }
 
 @media screen and (max-width: 900px) {
-  .titleWrap{
-    text-align: center
+  .titleWrap {
+    text-align: center;
   }
-  .titleNowrap{
+  .titleNowrap {
     font-size: 30px;
   }
-  .subtitle{
+  .subtitle {
     font-size: 20px;
     text-align: center;
   }
-  .titleRightNowrap{
+  .titleRightNowrap {
     display: none;
   }
-  .titleRightWrap{
+  .titleRightWrap {
     display: block;
     font-size: 30px;
     text-align: center;
@@ -219,12 +215,11 @@
     font-weight: bold;
     margin-bottom: 1rem;
   }
-  
 }
 
-@media screen and (max-width: 700px){
-  .inputApresentation{
-    display: none
+@media screen and (max-width: 700px) {
+  .inputApresentation {
+    display: none;
   }
   .rightSide {
     display: flex !important;
@@ -232,7 +227,7 @@
     justify-content: center;
     width: 100%;
   }
-  .apresentation{
+  .apresentation {
     margin-top: 3rem;
     flex-direction: column;
   }
@@ -241,10 +236,10 @@
     width: 70% !important;
     margin-top: 3rem;
   }
-  .menImg{
+  .menImg {
     width: 35%;
   }
-  .titleWrap{
+  .titleWrap {
     font-size: 5vw !important;
     margin-left: 0.8rem;
     margin-right: 0.8rem;
@@ -253,21 +248,20 @@
     font-weight: bold;
     margin-bottom: 1rem;
   }
-  .text{
-    font-size: 4vw
+  .text {
+    font-size: 4vw;
   }
-  .subtitle{
-    font-size: 3.5vw
+  .subtitle {
+    font-size: 3.5vw;
   }
-  .titleRightWrap{
+  .titleRightWrap {
     font-size: 5vw;
     margin-bottom: 20px !important;
   }
-  .titleWrap{
+  .titleWrap {
     display: block;
   }
-  .titleNowrap{
-    display: none
+  .titleNowrap {
+    display: none;
   }
-
 }
