@@ -4,17 +4,17 @@
   border-radius: 0 0 15px 15px;
   transition: all 0.5s ease-out;
 }
-.navbarLogo{
+.navbarLogo {
   background-image: url(../../images/NemesisV1.1.png);
   background-repeat: no-repeat;
   background-size: contain;
   height: 65px;
   width: 150px;
 }
-.navbarFlex{
+.navbarFlex {
   display: flex;
-  justify-content:space-between;
-  align-items:center;
+  justify-content: space-between;
+  align-items: center;
 }
 .navbarLeftSide {
   padding-left: 75px;
@@ -33,68 +33,78 @@
   color: black;
   font-weight: bold;
 }
-.responsiveMenu{
+.responsiveMenu {
   visibility: hidden;
   display: flex;
   opacity: 0%;
   width: 100%;
   height: 0;
   align-items: center;
-  justify-content:space-around;
+  justify-content: space-around;
   overflow: hidden;
   transition: all 0.5s ease-out;
 }
-.navbarRightSideResponsive{
+.navbarRightSideResponsive {
   display: none;
 }
-.buttonMenuResponsive{
+.buttonMenuResponsive {
   margin-left: 10%;
 }
-.navbarRightSideLogged{
+.navbarRightSideLogged {
   display: flex;
   align-items: center;
   padding-right: 50px;
 }
-.navbarLoggedTexts{
+.navbarLoggedTexts {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   flex-direction: column;
   margin-right: 1rem;
 }
-.navbarUsername{
+.navbarUsername {
   color: #303030;
   font-family: Segoe UI;
   font-weight: bold;
   font-size: 18px;
 }
-.navbarGoal{
+.navbarGoal {
   color: #303030;
   font-family: Segoe UI;
   font-weight: regular;
   font-size: 16px;
 }
-.navbarGoal:hover{
+.navbarGoal:hover {
   text-decoration: underline;
   cursor: pointer;
 }
-.navbarUsername:hover{
+.navbarUsername:hover {
   text-decoration: underline;
   cursor: pointer;
 }
 
-.imgPerfilMenuIcon{
-  margin-left: 1.5rem;
-  cursor: pointer;
+.lateralMenuBody {
+  transition: all 0.5s;
+  right: 0;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: 0;
+  overflow: hidden;
+  background-color: #ededed;
+  height: 100%;
+  z-index: 2;
 }
-/* 
-.lateralMenuLoggedTexts{
+.lateralMenuLoggedTexts {
   margin-left: 1rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
-
-.lateralMenuUser{
+.imgPerfilMenuIcon {
+  margin-left: 1.5rem;
+  cursor: pointer;
+}
+.lateralMenuUser {
   margin-top: 20px;
   display: flex;
   align-items: center;
@@ -102,83 +112,83 @@
   width: 350px;
   justify-content: center;
 }
-.imgPerfilIcon{
+.imgPerfilIcon {
   cursor: pointer;
 }
-.lateralMenuList{
+.lateralMenuList {
   width: 100%;
   display: flex;
-  justify-content:center;
+  justify-content: center;
   flex-direction: column;
 }
-.lateralMenuListItem{
+.lateralMenuListItem {
   display: flex;
   align-items: center;
   width: 300px;
 }
-.lateralMenuListItem:last-child{
+.lateralMenuListItem:last-child {
   margin-top: 1.3rem;
 }
-.lateralMenuListItem img{
+.lateralMenuListItem img {
   margin: 0 0.7rem 0 1rem;
 }
-.lateralMenuListItem p{
+.lateralMenuListItem p {
   cursor: pointer;
   font-size: 17px;
   margin-top: -3px;
   color: #303030;
 }
-.lateralMenuListItem p:hover{
- text-decoration: underline;
+.lateralMenuListItem p:hover {
+  text-decoration: underline;
 }
-.line{
+.line {
   align-self: center;
   width: 280px;
-  border: 1px solid #9B9B9B;
-  background-color: #9B9B9B;
+  border: 1px solid #9b9b9b;
+  background-color: #9b9b9b;
   overflow: hidden;
   margin: 1rem 0 1rem 0;
 }
-#buttonLateralMenuLogout{
+#buttonLateralMenuLogout {
   margin-left: auto;
   margin-top: auto;
   margin-bottom: 3rem;
   margin-right: 2rem;
 }
-.shadowBox{
+.shadowBox {
   transition: opacity 0.5s ease-in-out;
   width: 0%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.38);
   position: fixed;
   opacity: 0%;
-} */
+}
 
 @media screen and (max-width: 800px) {
-  .navbarRightSide{
+  .navbarRightSide {
     display: none;
   }
-  .navbarRightSideResponsive{
+  .navbarRightSideResponsive {
     display: flex;
     align-items: center;
-    justify-content:center;
+    justify-content: center;
     padding-right: 50px;
   }
-  .navbarLeftSide{
+  .navbarLeftSide {
     padding-left: 50px;
   }
-  .navbarRightSideLogged{
+  .navbarRightSideLogged {
     display: none;
   }
-  .navbarLogo{
+  .navbarLogo {
     background-image: url(../../images/Logo.png);
     width: 50px;
     height: 50px;
   }
-  .navbarUsername{
+  .navbarUsername {
     font-size: 15px;
   }
-  .navbarGoal{
+  .navbarGoal {
     font-size: 15px;
   }
 }

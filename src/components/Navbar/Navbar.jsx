@@ -21,7 +21,6 @@ import Button from "./../Button/Button";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import MenuLateral from "./MenuLateral/MenuLateral";
 
 const Navbar = () => {
   var isShowed = false;
@@ -29,13 +28,10 @@ const Navbar = () => {
 
   const { user, setUser, userInformation, setUserInformation } =
     useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState("noResponse");
   const userCollectionRef = collection(db, "users");
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
-
-  const [lateralMenuButtonIsClicked, setLateralMenuButtonIsClicked] =
-    useState(false);
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
@@ -43,6 +39,7 @@ const Navbar = () => {
         setUser(currentUser);
         setIsLoading(false);
       }
+      setIsLoading(currentUser);
     });
     async function getUserDocs() {
       if (user != undefined) {
@@ -59,6 +56,13 @@ const Navbar = () => {
     }
     getUserDocs();
   }, [user]);
+
+  const logOut = async () => {
+    setUser();
+    setUserInformation();
+    await signOut(auth);
+    location.reload();
+  };
 
   const showResponsiveMenu = () => {
     if (!isShowed) {
@@ -98,11 +102,54 @@ const Navbar = () => {
 
   return (
     <>
-      <MenuLateral
-        active={lateralMenuButtonIsClicked}
-        setIsActive={setLateralMenuButtonIsClicked}
-        goal={goal}
-      />
+      <div
+        onClick={() => showPerfilMenu()}
+        id={styles.shadowBox}
+        className={styles.shadowBox}
+      ></div>
+      <div id={styles.lateralMenuBody} className={styles.lateralMenuBody}>
+        <div className={styles.lateralMenuUser}>
+          <img src={perfilIcon} width="60px" />
+          <div className={styles.lateralMenuLoggedTexts}>
+            <p className={styles.navbarUsername}>{name}</p>
+            {goal == "G" ? (
+              <p className={styles.navbarGoal}>Ficando Fortão! 💪</p>
+            ) : (
+              <p className={styles.navbarGoal}>Perdendo Peso! 🏃</p>
+            )}
+          </div>
+          <img
+            onClick={() => showPerfilMenu()}
+            src={closeIcon}
+            className={styles.imgPerfilMenuIcon}
+            alt=""
+          />
+        </div>
+        <LineSpace width="280px" margin="1.5rem" />
+        <ul className={styles.lateralMenuList}>
+          <li className={styles.lateralMenuListItem}>
+            <img width="27px" src={gymIcon} alt="" />
+            <Link to="/UserPage">
+              <p>Treino e Estatísticas</p>
+            </Link>
+          </li>
+          <li className={styles.lateralMenuListItem}>
+            <img width="27px" src={configIcon} alt="" />
+            <Link to="/UserSettings">
+              <p>Configurações da Conta</p>
+            </Link>
+          </li>
+        </ul>
+        <Button
+          id={styles.buttonLateralMenuLogout}
+          type="warning"
+          color="white"
+          onClick={() => logOut()}
+        >
+          Deslogar
+        </Button>
+      </div>
+
       <div className={styles.navbarBody} id={styles.navbarBody}>
         <div className={styles.navbarFlex}>
           <div className={styles.navbarLeftSide}>
@@ -110,62 +157,71 @@ const Navbar = () => {
               <div className={styles.navbarLogo}></div>
             </Link>
           </div>
-          {user != undefined ? (
-            <div className={styles.navbarRightSideLogged}>
-              <div className={styles.navbarLoggedTexts}>
-                {name == "" ? (
-                  <>
-                    <Skeleton
-                      style={{ marginBottom: "7px" }}
-                      width="180px"
-                      height="1rem"
-                    />
-                    <Skeleton
-                      style={{ marginBottom: "7px" }}
-                      width="180px"
-                      height="0.8rem"
-                    />
-                  </>
-                ) : (
-                  <>
-                    <p className={styles.navbarUsername}>{name}</p>
-                    {goal == "G" ? (
-                      <p className={styles.navbarGoal}>Ficando Fortão! 💪</p>
-                    ) : (
-                      <p className={styles.navbarGoal}>Perdendo Peso! 🏃</p>
-                    )}
-                  </>
-                )}
-              </div>
-              {name == "" ? (
-                <Skeleton height="60px" width="60px" circle="true" />
+          {isLoading != "noReponse" ? (
+            <>
+              {isLoading == null ? (
+                <div className={styles.navbarRightSide}>
+                  <Link to="/SignUp">
+                    <Button type="default" color="white">
+                      Cadastre-se
+                    </Button>
+                  </Link>
+                  <Link to="/SignIn">
+                    <span href="">Fazer Login</span>
+                  </Link>
+                </div>
               ) : (
-                <img
-                  src={perfilIcon}
-                  className={styles.imgPerfilIcon}
-                  width="60px"
-                  height="60px"
-                />
+                <div className={styles.navbarRightSideLogged}>
+                  <div className={styles.navbarLoggedTexts}>
+                    {name == "" ? (
+                      <>
+                        <Skeleton
+                          style={{ marginBottom: "7px" }}
+                          width="180px"
+                          height="1rem"
+                        />
+                        <Skeleton
+                          style={{ marginBottom: "7px" }}
+                          width="180px"
+                          height="0.8rem"
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <p className={styles.navbarUsername}>{name}</p>
+                        {goal == "G" ? (
+                          <p className={styles.navbarGoal}>
+                            Ficando Fortão! 💪
+                          </p>
+                        ) : (
+                          <p className={styles.navbarGoal}>Perdendo Peso! 🏃</p>
+                        )}
+                      </>
+                    )}
+                  </div>
+                  {name == "" ? (
+                    <Skeleton height="60px" width="60px" circle="true" />
+                  ) : (
+                    <img
+                      src={perfilIcon}
+                      className={styles.imgPerfilIcon}
+                      width="60px"
+                      height="60px"
+                    />
+                  )}
+                  <img
+                    onClick={() => showPerfilMenu()}
+                    src={perfilMenuIcon}
+                    className={styles.imgPerfilMenuIcon}
+                    alt=""
+                  />
+                </div>
               )}
-              <img
-                onClick={() =>
-                  setLateralMenuButtonIsClicked(!lateralMenuButtonIsClicked)
-                }
-                src={perfilMenuIcon}
-                className={styles.imgPerfilMenuIcon}
-                alt=""
-              />
-            </div>
+            </>
           ) : (
-            <div className={styles.navbarRightSide}>
-              <Link to="/SignUp">
-                <Button type="default">Cadastre-se</Button>
-              </Link>
-              <Link to="/SignIn">
-                <span href="">Fazer Login</span>
-              </Link>
-            </div>
+            <span></span>
           )}
+
           <div className={styles.navbarRightSideResponsive}>
             {user != undefined ? (
               <div style={{ display: "flex" }}>
