@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { auth, db } from "../../services/firebase-config";
+import { auth, db } from "./../../../services/firebase-config";
 import { setDoc, doc, updateDoc } from "firebase/firestore";
 
 import moment from "moment";
@@ -532,19 +532,19 @@ export default async function createDiet(
                   foods: [
                     {
                       name: "Arroz branco",
-                      quantity: "10 colheres de sopa"
+                      quantity: "10 colheres de sopa",
                     },
                     {
                       name: "Batata",
-                      quantity: "2 unidades médias"
+                      quantity: "2 unidades médias",
                     },
                     {
                       name: "Feijão Preto",
-                      quantity: "1 concha"
+                      quantity: "1 concha",
                     },
                     {
                       name: "Peito de frango",
-                      quantity: "2 bifes pequenos"
+                      quantity: "2 bifes pequenos",
                     },
                     {
                       name: "Folhosos",
@@ -560,7 +560,7 @@ export default async function createDiet(
                       name: "Abacaxi",
                       quantity: "3 fatias pequenas",
                     },
-                  ]
+                  ],
                 },
               ],
             },

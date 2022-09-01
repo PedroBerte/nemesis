@@ -82,29 +82,18 @@
   cursor: pointer;
 }
 
-
-.lateralMenuBody{
-  transition: all 0.5s;
-  right: 0;
-  position:fixed;
-  display: flex;
-  flex-direction: column;
-  width: 0;
-  overflow: hidden;
-  background-color: #EDEDED;
-  height: 100%;
-  z-index: 2;
+.imgPerfilMenuIcon{
+  margin-left: 1.5rem;
+  cursor: pointer;
 }
+/* 
 .lateralMenuLoggedTexts{
   margin-left: 1rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
-.imgPerfilMenuIcon{
-  margin-left: 1.5rem;
-  cursor: pointer;
-}
+
 .lateralMenuUser{
   margin-top: 20px;
   display: flex;
@@ -163,7 +152,7 @@
   background-color: rgba(0, 0, 0, 0.38);
   position: fixed;
   opacity: 0%;
-}
+} */
 
 @media screen and (max-width: 800px) {
   .navbarRightSide{

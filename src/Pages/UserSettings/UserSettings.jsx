@@ -12,7 +12,7 @@ import {
   sendPasswordResetEmail,
   deleteUser,
 } from "firebase/auth";
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { collection, getDoc, deleteDoc, doc } from "firebase/firestore";
 
 import { AuthContext } from "./../../contexts/AuthContext";
 
@@ -61,20 +61,19 @@ const UserSettings = () => {
   useEffect(() => {
     async function getUserDocs() {
       if (user != undefined) {
-        const data = await getDocs(userCollectionRef);
-        const UserInfos = data.docs.find((element) => element.id == user.uid)
-          ._document.data.value.mapValue.fields;
-        setName(UserInfos.name.stringValue);
-        setEmail(UserInfos.email.stringValue);
-        setDate(UserInfos.date.stringValue);
-        setSex(UserInfos.sex.stringValue);
-        setWeight(UserInfos.weight.stringValue);
-        setHeight(UserInfos.height.stringValue);
-        setGoal(UserInfos.goal.stringValue);
-        setUserInformation(UserInfos);
+        const userDocs = await getDoc(doc(db, "users", user.uid));
+        const UserInfos = userDocs.data();
+        setName(UserInfos.name);
+        setEmail(UserInfos.email);
+        setDate(UserInfos.date);
+        setSex(UserInfos.sex);
+        setWeight(UserInfos.weight);
+        setHeight(UserInfos.height);
+        setGoal(UserInfos.goal);
       }
     }
     getUserDocs();
+    console.log(height)
   }, [user]);
 
   function changePassword() {
@@ -136,6 +135,7 @@ const UserSettings = () => {
       border: "none",
     },
   };
+
 
   return (
     <>
@@ -473,7 +473,7 @@ const UserSettings = () => {
           ) : (
             <div className={styles.divTextInline}>
               <h4 className={styles.userTitleInfo}>Altura:</h4>
-              <h4 className={styles.userInfo}>{`${height}cm`}</h4>
+              <h4 className={styles.userInfo}>{`${String(height)}cm`}</h4>
             </div>
           )}
         </div>

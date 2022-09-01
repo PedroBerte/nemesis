@@ -14,13 +14,13 @@ import { setDoc, doc, updateDoc, getDoc, collection } from "firebase/firestore";
 import "react-datepicker/dist/react-datepicker.css";
 import toast, { Toaster } from "react-hot-toast";
 import moment from "moment";
-import createWorkout from "./createWorkout";
+import createWorkout from "./utils/createWorkout";
 import EmailStep from "./Steps/EmailStep/EmailStep";
 import UserInfoStep from "./Steps/UserInfoStep/UserInfoStep";
 import { useSignUp } from "../../contexts/SignUpContext";
+import createDiet from "./utils/createDiet";
 
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import createDiet from "./createDiet";
 
 const SignUp = () => {
   const provider = new GoogleAuthProvider();

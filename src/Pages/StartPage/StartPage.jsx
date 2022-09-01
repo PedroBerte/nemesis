@@ -15,12 +15,13 @@ import { auth } from "../../services/firebase-config";
 
 import { AuthContext } from "./../../contexts/AuthContext";
 
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Footer from "../../components/Footer/Footer";
 import Input from "../../components/Input/Input";
 
 const StartPage = () => {
+  const navigateTo = useNavigate();
   const { setUser } = useContext(AuthContext);
 
   useEffect(() => {
@@ -57,6 +58,7 @@ const StartPage = () => {
               width="200px"
               height="50px"
               shadow="2px 5px 4px rgba(0, 0, 0, 0.20)"
+              onClick={() => navigateTo("/SignUp")}
             >
               Cadastre-se
             </Button>

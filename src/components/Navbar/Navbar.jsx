@@ -21,6 +21,7 @@ import Button from "./../Button/Button";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import MenuLateral from "./MenuLateral/MenuLateral";
 
 const Navbar = () => {
   var isShowed = false;
@@ -31,10 +32,17 @@ const Navbar = () => {
   const userCollectionRef = collection(db, "users");
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [lateralMenuButtonIsClicked, setLateralMenuButtonIsClicked] =
+    useState(false);
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      if (currentUser) {
+        setUser(currentUser);
+        setIsLoading(false);
+      }
     });
     async function getUserDocs() {
       if (user != undefined) {
@@ -51,13 +59,6 @@ const Navbar = () => {
     }
     getUserDocs();
   }, [user]);
-
-  const logOut = async () => {
-    setUser();
-    setUserInformation();
-    await signOut(auth);
-    location.reload();
-  };
 
   const showResponsiveMenu = () => {
     if (!isShowed) {
@@ -97,54 +98,11 @@ const Navbar = () => {
 
   return (
     <>
-      <div
-        onClick={() => showPerfilMenu()}
-        id={styles.shadowBox}
-        className={styles.shadowBox}
-      ></div>
-      <div id={styles.lateralMenuBody} className={styles.lateralMenuBody}>
-        <div className={styles.lateralMenuUser}>
-          <img src={perfilIcon} width="60px" />
-          <div className={styles.lateralMenuLoggedTexts}>
-            <p className={styles.navbarUsername}>{name}</p>
-            {goal == "G" ? (
-              <p className={styles.navbarGoal}>Ficando Fortão! 💪</p>
-            ) : (
-              <p className={styles.navbarGoal}>Perdendo Peso! 🏃</p>
-            )}
-          </div>
-          <img
-            onClick={() => showPerfilMenu()}
-            src={closeIcon}
-            className={styles.imgPerfilMenuIcon}
-            alt=""
-          />
-        </div>
-        <LineSpace width="280px" margin="1.5rem" />
-        <ul className={styles.lateralMenuList}>
-          <li className={styles.lateralMenuListItem}>
-            <img width="27px" src={gymIcon} alt="" />
-            <Link to="/UserPage">
-              <p>Treino e Estatísticas</p>
-            </Link>
-          </li>
-          <li className={styles.lateralMenuListItem}>
-            <img width="27px" src={configIcon} alt="" />
-            <Link to="/UserSettings">
-              <p>Configurações da Conta</p>
-            </Link>
-          </li>
-        </ul>
-        <Button
-          id={styles.buttonLateralMenuLogout}
-          type="warning"
-          color="white"
-          onClick={() => logOut()}
-        >
-          Deslogar
-        </Button>
-      </div>
-
+      <MenuLateral
+        active={lateralMenuButtonIsClicked}
+        setIsActive={setLateralMenuButtonIsClicked}
+        goal={goal}
+      />
       <div className={styles.navbarBody} id={styles.navbarBody}>
         <div className={styles.navbarFlex}>
           <div className={styles.navbarLeftSide}>
@@ -190,7 +148,9 @@ const Navbar = () => {
                 />
               )}
               <img
-                onClick={() => showPerfilMenu()}
+                onClick={() =>
+                  setLateralMenuButtonIsClicked(!lateralMenuButtonIsClicked)
+                }
                 src={perfilMenuIcon}
                 className={styles.imgPerfilMenuIcon}
                 alt=""
@@ -199,9 +159,7 @@ const Navbar = () => {
           ) : (
             <div className={styles.navbarRightSide}>
               <Link to="/SignUp">
-                <Button type="default" color="white">
-                  Cadastre-se
-                </Button>
+                <Button type="default">Cadastre-se</Button>
               </Link>
               <Link to="/SignIn">
                 <span href="">Fazer Login</span>
