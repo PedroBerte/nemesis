@@ -47,6 +47,7 @@ import {
   AccordionItemPanel,
 } from "react-accessible-accordion";
 import "react-accessible-accordion/dist/fancy-example.css";
+import Skeleton from "react-loading-skeleton";
 
 export default function UserPage() {
   moment().format();
@@ -61,19 +62,25 @@ export default function UserPage() {
   const [weightProgress, setWeightProgress] = useState("");
   const [workout, setWorkout] = useState([]);
 
-  const [accordionIsOpen, setAccordionIsOpen] = useState(false);
+  const [accordionIsOpen, setAccordionIsOpen] = useState("noResponse");
   const [lastAccordionOpen, setLastAccordionOpen] = useState();
 
   const { user, setUser } = useContext(AuthContext);
   const userCollectionRef = collection(db, "users");
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      if (currentUser) {
+        setUser(currentUser);
+        setIsLoading(false);
+      }
+      setIsLoading(currentUser);
+      if (isLoading == null) {
+        navigateTo("/");
+      }
     });
-    if (user == undefined) {
-      navigateTo("/");
-    }
     async function getUserDocs() {
       if (user != undefined) {
         const userDocs = await getDoc(doc(db, "users", user.uid));
@@ -185,22 +192,42 @@ export default function UserPage() {
             <div className={styles.userProgressBars}>
               <div className={styles.progressItem}>
                 <div className={styles.textInformations}>
-                  <p className={styles.informationTitle}>Idade: </p>
-                  <p className={styles.informationText}>{age} Anos</p>
+                  {age == "" ? (
+                    <Skeleton
+                      width="100px"
+                      height="1rem"
+                      style={{ marginBottom: 5 }}
+                    />
+                  ) : (
+                    <>
+                      <p className={styles.informationTitle}>Idade: </p>
+                      <p className={styles.informationText}>{age} Anos</p>
+                    </>
+                  )}
                 </div>
                 <ProgressBar value={ageProgress} color="red" width="100%" />
               </div>
               <div className={styles.progressItem}>
                 <div className={styles.textInformations}>
-                  <p className={styles.informationTitle}>Altura: </p>
-                  <p
-                    className={styles.informationText}
-                    onClick={() => {
-                      handleSetHeightProgressBar();
-                    }}
-                  >
-                    {String(height / 100).replace(".", ",")}m
-                  </p>
+                  {height == "" ? (
+                    <Skeleton
+                      width="100px"
+                      height="1rem"
+                      style={{ marginBottom: 5 }}
+                    />
+                  ) : (
+                    <>
+                      <p className={styles.informationTitle}>Altura: </p>
+                      <p
+                        className={styles.informationText}
+                        onClick={() => {
+                          handleSetHeightProgressBar();
+                        }}
+                      >
+                        {String(height / 100).replace(".", ",")}m
+                      </p>
+                    </>
+                  )}
                 </div>
                 <ProgressBar
                   value={heightProgress}
@@ -210,8 +237,18 @@ export default function UserPage() {
               </div>
               <div className={styles.progressItem}>
                 <div className={styles.textInformations}>
-                  <p className={styles.informationTitle}>Peso: </p>
-                  <p className={styles.informationText}>{weight}Kg</p>
+                  {weight == "" ? (
+                    <Skeleton
+                      width="100px"
+                      height="1rem"
+                      style={{ marginBottom: 5 }}
+                    />
+                  ) : (
+                    <>
+                      <p className={styles.informationTitle}>Peso: </p>
+                      <p className={styles.informationText}>{weight}Kg</p>
+                    </>
+                  )}
                 </div>
                 <ProgressBar
                   value={weightProgress}
@@ -237,59 +274,87 @@ export default function UserPage() {
             </Button>
           </div>
           <ul className={styles.workoutList}>
-            {workout.map((workouts, i) => {
-              return (
-                <>
-                  <li onClick={() => handleToggleAccordion(i)}>
-                    <div className={styles.rowDiv}>
-                      <div className={styles.texts}>
-                        <p className={styles.weekName}>{workouts.day}:</p>
-                        <p className={styles.workoutName}>{workouts.muscles}</p>
-                      </div>
-                      <img src={listArrow} alt="" />
-                    </div>
-                    <div className={styles.hiddenWorkoutInfos}>
-                      {workouts.workoutsInfos.map((exercise) => {
-                        return (
-                          <>
-                            <div className={styles.itemBody}>
-                              <div className={styles.workoutNameBody}>
-                                <img src={listWeight} alt="" />
-                                <p className={styles.workoutName}>
-                                  {exercise.name}
-                                </p>
-                              </div>
-                              <p className={styles.workoutName}>
-                                {exercise.rep}
-                              </p>
-                            </div>
-                            {workouts.workoutsInfos.lastIndexOf(exercise) ==
-                            workouts.workoutsInfos.length - 1 ? (
-                              ""
-                            ) : (
-                              <hr
-                                style={{
-                                  borderTop: "1px dotted #BEBEBE",
-                                  width: "85%",
-                                  margin: "0 auto 0 auto",
-                                }}
-                              />
-                            )}
-                          </>
-                        );
-                      })}
-                    </div>
-                  </li>
-                  {workout.lastIndexOf(workouts) == workout.length - 1 ? (
-                    ""
-                  ) : (
-                    <hr
-                      style={{ borderTop: "1px dotted #BEBEBE", width: "110%" }}
-                    />
-                  )}
-                </>
-              );
-            })}
+            {workout == "" ? (
+              <>
+                <Skeleton
+                  width="400px"
+                  style={{ marginBottom: 10 }}
+                  height="35px"
+                />
+                <Skeleton
+                  width="400px"
+                  style={{ marginBottom: 10 }}
+                  height="35px"
+                />
+                <Skeleton
+                  width="400px"
+                  style={{ marginBottom: 10 }}
+                  height="35px"
+                />
+                <Skeleton width="400px" height="35px" />
+              </>
+            ) : (
+              <>
+                {workout.map((workouts, i) => {
+                  return (
+                    <>
+                      <li onClick={() => handleToggleAccordion(i)}>
+                        <div className={styles.rowDiv}>
+                          <div className={styles.texts}>
+                            <p className={styles.weekName}>{workouts.day}:</p>
+                            <p className={styles.workoutName}>
+                              {workouts.muscles}
+                            </p>
+                          </div>
+                          <img src={listArrow} alt="" />
+                        </div>
+                        <div className={styles.hiddenWorkoutInfos}>
+                          {workouts.workoutsInfos.map((exercise) => {
+                            return (
+                              <>
+                                <div className={styles.itemBody}>
+                                  <div className={styles.workoutNameBody}>
+                                    <img src={listWeight} alt="" />
+                                    <p className={styles.workoutName}>
+                                      {exercise.name}
+                                    </p>
+                                  </div>
+                                  <p className={styles.workoutName}>
+                                    {exercise.rep}
+                                  </p>
+                                </div>
+                                {workouts.workoutsInfos.lastIndexOf(exercise) ==
+                                workouts.workoutsInfos.length - 1 ? (
+                                  ""
+                                ) : (
+                                  <hr
+                                    style={{
+                                      borderTop: "1px dotted #BEBEBE",
+                                      width: "85%",
+                                      margin: "0 auto 0 auto",
+                                    }}
+                                  />
+                                )}
+                              </>
+                            );
+                          })}
+                        </div>
+                      </li>
+                      {workout.lastIndexOf(workouts) == workout.length - 1 ? (
+                        ""
+                      ) : (
+                        <hr
+                          style={{
+                            borderTop: "1px dotted #BEBEBE",
+                            width: "110%",
+                          }}
+                        />
+                      )}
+                    </>
+                  );
+                })}
+              </>
+            )}
           </ul>
         </div>
       </section>

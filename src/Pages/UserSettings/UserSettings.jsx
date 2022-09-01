@@ -49,13 +49,19 @@ const UserSettings = () => {
   const [removeAccountIsOpen, setRemoveAccountIsOpen] = useState(false);
   const [readMoreModalIsOpen, setReadModalIsOpen] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      if (currentUser) {
+        setUser(currentUser);
+        setIsLoading(false);
+      }
+      setIsLoading(currentUser);
+      if (isLoading == null) {
+        navigateTo("/");
+      }
     });
-    if (user == undefined) {
-      navigateTo("/");
-    }
   }, []);
 
   useEffect(() => {
@@ -73,7 +79,7 @@ const UserSettings = () => {
       }
     }
     getUserDocs();
-    console.log(height)
+    console.log(height);
   }, [user]);
 
   function changePassword() {
@@ -135,7 +141,6 @@ const UserSettings = () => {
       border: "none",
     },
   };
-
 
   return (
     <>
