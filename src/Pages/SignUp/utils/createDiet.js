@@ -28,7 +28,8 @@ export default async function createDiet(
           var d = b + c;
           const result = 88.5 - a + 1 * d + 25;
           totalCal = result;
-          await updateDoc(doc(db, "users", uid), {
+          await setDoc(doc(db, "diets", uid), {
+            uid: uid,
             cal: result,
           });
         } else {
@@ -39,7 +40,8 @@ export default async function createDiet(
           var d = b + c;
           const result = 662 - a + 1 * d;
           totalCal = result;
-          await updateDoc(doc(db, "users", uid), {
+          await setDoc(doc(db, "diets", uid), {
+            uid: uid,
             cal: result,
           });
         }
@@ -52,7 +54,8 @@ export default async function createDiet(
           var d = b + c;
           const result = 135.3 - a + 1 * d + 25;
           totalCal = result;
-          await updateDoc(doc(db, "users", uid), {
+          await setDoc(doc(db, "diets", uid), {
+            uid: uid,
             cal: result,
           });
         } else {
@@ -63,7 +66,8 @@ export default async function createDiet(
           var d = b + c;
           const result = 354 - a + 1 * d;
           totalCal = result;
-          await updateDoc(doc(db, "users", uid), {
+          await setDoc(doc(db, "diets", uid), {
+            uid: uid,
             cal: result,
           });
         }
@@ -78,7 +82,7 @@ export default async function createDiet(
           var d = b + c;
           const result = 114 - a + 1 * d - 500;
           totalCal = result;
-          await updateDoc(doc(db, "users", uid), {
+          await setDoc(doc(db, "diets", uid), {
             cal: result,
           });
         } else {
@@ -89,7 +93,7 @@ export default async function createDiet(
           var d = b + c;
           const result = 1086 - a + 1 * d - 500;
           totalCal = result;
-          await updateDoc(doc(db, "users", uid), {
+          await setDoc(doc(db, "diets", uid), {
             cal: result,
           });
         }
@@ -102,7 +106,7 @@ export default async function createDiet(
           var d = b + c;
           const result = 389 - a + 1 * d - 500;
           totalCal = result;
-          await updateDoc(doc(db, "users", uid), {
+          await setDoc(doc(db, "diets", uid), {
             cal: result,
           });
         } else {
@@ -113,7 +117,7 @@ export default async function createDiet(
           var d = b + c;
           const result = 448 - a + 1 * d - 500;
           totalCal = result;
-          await updateDoc(doc(db, "users", uid), {
+          await setDoc(doc(db, "diets", uid), {
             cal: result,
           });
         }
@@ -121,7 +125,7 @@ export default async function createDiet(
     }
     if (res == "RES-N") {
       if (totalCal >= 1700 && totalCal <= 2000) {
-        await updateDoc(doc(db, "users", uid), {
+        await updateDoc(doc(db, "diets", uid), {
           diet: [
             {
               meal: "Café da manhã",
@@ -323,7 +327,7 @@ export default async function createDiet(
         });
       }
       if (totalCal >= 2000 && totalCal <= 2500) {
-        await updateDoc(doc(db, "users", uid), {
+        await updateDoc(doc(db, "diets", uid), {
           diet: [
             {
               meal: "Café da manhã",

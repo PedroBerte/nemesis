@@ -7,18 +7,8 @@ import Footer from "../../components/Footer/Footer";
 
 import { db } from "../../services/firebase-config";
 import { auth } from "../../services/firebase-config";
-import {
-  onAuthStateChanged,
-  sendPasswordResetEmail,
-  deleteUser,
-} from "firebase/auth";
-import {
-  collection,
-  getDocs,
-  deleteDoc,
-  doc,
-  getDoc,
-} from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import { collection, doc, getDoc } from "firebase/firestore";
 
 import { AuthContext } from "./../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -32,20 +22,12 @@ import appleIcon from "../../images/appleIcon.png";
 import dinnerIcon from "../../images/dinner.png";
 import breakfastIcon from "../../images/breakfastIcon.png";
 import supperIcon from "../../images/supperIcon.png";
-import workoutIcon from "../../images/workoutIcon.png";
 import listWeight from "../../images/listWeight.png";
 
 import moment from "moment";
 
 import styles from "./UserPage.module.css";
 
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemHeading,
-  AccordionItemButton,
-  AccordionItemPanel,
-} from "react-accessible-accordion";
 import "react-accessible-accordion/dist/fancy-example.css";
 import Skeleton from "react-loading-skeleton";
 
@@ -66,7 +48,6 @@ export default function UserPage() {
   const [lastAccordionOpen, setLastAccordionOpen] = useState();
 
   const { user, setUser } = useContext(AuthContext);
-  const userCollectionRef = collection(db, "users");
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -77,9 +58,7 @@ export default function UserPage() {
         setIsLoading(false);
       }
       setIsLoading(currentUser);
-      if (isLoading == null) {
-        navigateTo("/");
-      }
+      console.log(currentUser);
     });
     async function getUserDocs() {
       if (user != undefined) {

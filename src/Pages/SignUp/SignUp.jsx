@@ -219,7 +219,7 @@ const SignUp = () => {
           if ((gymAvailability, gymDays == "")) {
             throw new getException("Não deixe campos vazios!");
           }
-
+          console.log("passou aqui");
           await setDoc(doc(db, "users", user.uid), {
             uid: user.uid,
             name: user.displayName,

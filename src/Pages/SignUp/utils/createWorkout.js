@@ -1,14 +1,31 @@
 import { auth, db } from "../../../services/firebase-config";
 import { setDoc, doc, updateDoc } from "firebase/firestore";
 
-import { a3, b3, c3, a4, b4, c4, d4, a5, b5, c5, d5, e5 } from "./workouts";
+import {
+  a3,
+  b3,
+  c3,
+  a4,
+  b4,
+  c4,
+  d4,
+  a5,
+  b5,
+  c5,
+  d5,
+  e5,
+  na,
+  nb,
+  nc,
+} from "./workouts";
 
 export default async function createWorkout(GymAvail, GymDays, uid) {
   try {
     if (GymAvail == "GYM-S") {
       switch (GymDays) {
         case "GYM-DAYS-3":
-          await updateDoc(doc(db, "users", uid), {
+          await setDoc(doc(db, "workouts", uid), {
+            uid: uid,
             workouts: [
               {
                 day: "Segunda-Feira",
@@ -42,7 +59,8 @@ export default async function createWorkout(GymAvail, GymDays, uid) {
           });
           break;
         case "GYM-DAYS-4":
-          await updateDoc(doc(db, "users", uid), {
+          await setDoc(doc(db, "workouts", uid), {
+            uid: uid,
             workouts: [
               {
                 day: "Segunda-Feira",
@@ -76,7 +94,8 @@ export default async function createWorkout(GymAvail, GymDays, uid) {
           });
           break;
         case "GYM-DAYS-5":
-          await updateDoc(doc(db, "users", uid), {
+          await setDoc(doc(db, "workouts", uid), {
+            uid: uid,
             workouts: [
               {
                 day: "Segunda-Feira",
@@ -111,7 +130,8 @@ export default async function createWorkout(GymAvail, GymDays, uid) {
           break;
       }
     } else {
-      await updateDoc(doc(db, "users", uid), {
+      await setDoc(doc(db, "workouts", uid), {
+        uid: uid,
         workouts: [
           {
             day: "Segunda-Feira",
