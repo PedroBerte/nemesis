@@ -47,6 +47,8 @@ export default function UserPage() {
   const [accordionIsOpen, setAccordionIsOpen] = useState("noResponse");
   const [lastAccordionOpen, setLastAccordionOpen] = useState();
 
+  const [teste, setTeste] = useState("");
+
   const { user, setUser } = useContext(AuthContext);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -66,11 +68,21 @@ export default function UserPage() {
         setDate(userDocs.data().date);
         setWeight(userDocs.data().weight);
         setHeight(userDocs.data().height);
-        setWorkout(userDocs.data().workouts);
+      }
+    }
+    async function getWorkout() {
+      if (user != undefined) {
+        const workoutDocs = await getDoc(doc(db, "workouts", user.uid));
+        setWorkout(workoutDocs.data().workouts);
       }
     }
     getUserDocs();
+    getWorkout();
   }, [user]);
+
+  useEffect(() => {
+    console.log(workout.lastIndexOf());
+  }, [workout]);
 
   useEffect(() => {
     if (date != "") {
@@ -274,64 +286,78 @@ export default function UserPage() {
               </>
             ) : (
               <>
-                {workout.map((workouts, i) => {
-                  return (
-                    <>
-                      <li onClick={() => handleToggleAccordion(i)}>
-                        <div className={styles.rowDiv}>
-                          <div className={styles.texts}>
-                            <p className={styles.weekName}>{workouts.day}:</p>
-                            <p className={styles.workoutName}>
-                              {workouts.muscles}
-                            </p>
+                {workout
+                  .filter((item, i) => item.workoutInfos.name != undefined)
+                  .map((workoutDay, i) => {
+                    return (
+                      <>
+                        <li onClick={() => handleToggleAccordion(i)}>
+                          <div className={styles.rowDiv}>
+                            <div className={styles.texts}>
+                              <p className={styles.weekName}>
+                                {workoutDay.day}:
+                              </p>
+                              <p className={styles.workoutName}>
+                                {workoutDay.workoutInfos.muscles}
+                              </p>
+                            </div>
+                            <img src={listArrow} alt="" />
                           </div>
-                          <img src={listArrow} alt="" />
-                        </div>
-                        <div className={styles.hiddenWorkoutInfos}>
-                          {workouts.workoutsInfos.map((exercise) => {
-                            return (
-                              <>
-                                <div className={styles.itemBody}>
-                                  <div className={styles.workoutNameBody}>
-                                    <img src={listWeight} alt="" />
-                                    <p className={styles.workoutName}>
-                                      {exercise.name}
-                                    </p>
-                                  </div>
-                                  <p className={styles.workoutName}>
-                                    {exercise.rep}
-                                  </p>
-                                </div>
-                                {workouts.workoutsInfos.lastIndexOf(exercise) ==
-                                workouts.workoutsInfos.length - 1 ? (
-                                  ""
-                                ) : (
-                                  <hr
-                                    style={{
-                                      borderTop: "1px dotted #BEBEBE",
-                                      width: "85%",
-                                      margin: "0 auto 0 auto",
-                                    }}
-                                  />
-                                )}
-                              </>
-                            );
-                          })}
-                        </div>
-                      </li>
-                      {workout.lastIndexOf(workouts) == workout.length - 1 ? (
-                        ""
-                      ) : (
-                        <hr
-                          style={{
-                            borderTop: "1px dotted #BEBEBE",
-                            width: "110%",
-                          }}
-                        />
-                      )}
-                    </>
-                  );
-                })}
+                          <div className={styles.hiddenWorkoutInfos}>
+                            {workoutDay.workoutInfos.workoutsList.map(
+                              (exercise) => {
+                                return (
+                                  <>
+                                    <div className={styles.itemBody}>
+                                      <div className={styles.workoutNameBody}>
+                                        <img src={listWeight} alt="" />
+                                        <p className={styles.workoutName}>
+                                          {exercise.name}
+                                        </p>
+                                      </div>
+                                      <p className={styles.workoutName}>
+                                        {exercise.rep}
+                                      </p>
+                                    </div>
+                                    {workoutDay.workoutInfos.workoutsList.lastIndexOf(
+                                      exercise
+                                    ) ==
+                                    workoutDay.workoutInfos.workoutsList
+                                      .length -
+                                      1 ? (
+                                      ""
+                                    ) : (
+                                      <hr
+                                        style={{
+                                          borderTop: "1px dotted #BEBEBE",
+                                          width: "85%",
+                                          margin: "0 auto 0 auto",
+                                        }}
+                                      />
+                                    )}
+                                  </>
+                                );
+                              }
+                            )}
+                          </div>
+                        </li>
+                        {workout.lastIndexOf(workoutDay) ==
+                        workout.filter(
+                          (item, i) => item.workoutInfos.name != undefined
+                        ).length -
+                          1 ? (
+                          ""
+                        ) : (
+                          <hr
+                            style={{
+                              borderTop: "1px dotted #BEBEBE",
+                              width: "110%",
+                            }}
+                          />
+                        )}
+                      </>
+                    );
+                  })}
               </>
             )}
           </ul>

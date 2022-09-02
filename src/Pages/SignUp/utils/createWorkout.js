@@ -29,7 +29,7 @@ export default async function createWorkout(GymAvail, GymDays, uid) {
             workouts: [
               {
                 day: "Segunda-Feira",
-                workoutsInfos: a3,
+                workoutInfos: a3,
               },
               {
                 day: "Terça-Feira",
