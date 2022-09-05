@@ -2,21 +2,21 @@ import { auth, db } from "../../../services/firebase-config";
 import { setDoc, doc, updateDoc } from "firebase/firestore";
 
 import {
-  a3,
-  b3,
-  c3,
-  a4,
-  b4,
-  c4,
-  d4,
-  a5,
-  b5,
-  c5,
-  d5,
-  e5,
-  na,
-  nb,
-  nc,
+  workA_day3,
+  workB_day3,
+  workC_day3,
+  workA_day4,
+  workB_day4,
+  workC_day4,
+  workD_day4,
+  workA_day5,
+  workB_day5,
+  workC_day5,
+  workD_day5,
+  workE_day5,
+  workA_noGym,
+  workB_noGym,
+  workC_noGym,
 } from "./workouts";
 
 export default async function createWorkout(GymAvail, GymDays, uid) {
@@ -29,15 +29,15 @@ export default async function createWorkout(GymAvail, GymDays, uid) {
             workouts: [
               {
                 day: "Segunda-Feira",
-                workoutInfos: a3,
+                workoutInfos: workA_day3,
               },
               {
                 day: "Terça-Feira",
-                workoutInfos: b3,
+                workoutInfos: workB_day3,
               },
               {
                 day: "Quarta-Feira",
-                workoutInfos: c3,
+                workoutInfos: workC_day3,
               },
               {
                 day: "Quinta-Feira",
@@ -64,19 +64,19 @@ export default async function createWorkout(GymAvail, GymDays, uid) {
             workouts: [
               {
                 day: "Segunda-Feira",
-                workoutInfos: a4,
+                workoutInfos: workA_day4,
               },
               {
                 day: "Terça-Feira",
-                workoutInfos: b4,
+                workoutInfos: workB_day4,
               },
               {
                 day: "Quarta-Feira",
-                workoutInfos: c4,
+                workoutInfos: workC_day4,
               },
               {
                 day: "Quinta-Feira",
-                workoutInfos: d4,
+                workoutInfos: workD_day4,
               },
               {
                 day: "Sexta-Feira",
@@ -99,23 +99,23 @@ export default async function createWorkout(GymAvail, GymDays, uid) {
             workouts: [
               {
                 day: "Segunda-Feira",
-                workoutInfos: a5,
+                workoutInfos: workA_day5,
               },
               {
                 day: "Terça-Feira",
-                workoutInfos: b5,
+                workoutInfos: workB_day5,
               },
               {
                 day: "Quarta-Feira",
-                workoutInfos: c5,
+                workoutInfos: workC_day5,
               },
               {
                 day: "Quinta-Feira",
-                workoutInfos: d5,
+                workoutInfos: workD_day5,
               },
               {
                 day: "Sexta-Feira",
-                workoutInfos: e5,
+                workoutInfos: workE_day5,
               },
               {
                 day: "Sábado",
@@ -135,15 +135,15 @@ export default async function createWorkout(GymAvail, GymDays, uid) {
         workouts: [
           {
             day: "Segunda-Feira",
-            workoutInfos: na,
+            workoutInfos: workA_noGym,
           },
           {
             day: "Terça-Feira",
-            workoutInfos: nb,
+            workoutInfos: workB_noGym,
           },
           {
             day: "Quarta-Feira",
-            workoutInfos: nc,
+            workoutInfos: workC_noGym,
           },
         ],
       });
