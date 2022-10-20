@@ -157,7 +157,7 @@ const Navbar = () => {
               <div className={styles.navbarLogo}></div>
             </Link>
           </div>
-          {isLoading != "noReponse" ? (
+          {isLoading != "noResponse" ? (
             <>
               {isLoading == null ? (
                 <div className={styles.navbarRightSide}>
