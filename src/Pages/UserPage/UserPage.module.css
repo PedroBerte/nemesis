@@ -224,6 +224,42 @@
   height: 140px;
 }
 
+.modalTitle {
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: #303030;
+}
+.modalSubtitle {
+  font-weight: normal;
+  color: #303030;
+}
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+.modalContent {
+}
+.modalDietItem {
+}
+.dietList {
+  width: 100%;
+}
+.dietListContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  overflow: hidden;
+}
+
+.rec.rec-arrow:disabled {
+  visibility: hidden;
+}
+.rec.rec-arrow {
+  width: 10px;
+}
+
 @media screen and (max-width: 1150px) {
   .inlineTitle {
     width: 350px;

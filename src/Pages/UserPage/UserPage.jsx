@@ -24,11 +24,15 @@ import breakfastIcon from "../../images/breakfastIcon.png";
 import supperIcon from "../../images/supperIcon.png";
 import listWeight from "../../images/listWeight.png";
 
+import Carousel from "react-elastic-carousel";
+
+import smallLogo from "./../../images/Logo.png";
+
+import Modal from "react-modal";
+
 import moment from "moment";
 
 import styles from "./UserPage.module.css";
-
-import "react-accessible-accordion/dist/fancy-example.css";
 import Skeleton from "react-loading-skeleton";
 
 export default function UserPage() {
@@ -43,11 +47,13 @@ export default function UserPage() {
   const [weight, setWeight] = useState("");
   const [weightProgress, setWeightProgress] = useState("");
   const [workout, setWorkout] = useState([]);
+  const [diet, setDiet] = useState([]);
+  const [dietIndex, setDietIndex] = useState(0);
 
   const [accordionIsOpen, setAccordionIsOpen] = useState("noResponse");
   const [lastAccordionOpen, setLastAccordionOpen] = useState();
 
-  const [teste, setTeste] = useState("");
+  const [dietModal, setDietModal] = useState(false);
 
   const { user, setUser } = useContext(AuthContext);
 
@@ -60,7 +66,6 @@ export default function UserPage() {
         setIsLoading(false);
       }
       setIsLoading(currentUser);
-      console.log(currentUser);
     });
     async function getUserDocs() {
       if (user != undefined) {
@@ -76,13 +81,16 @@ export default function UserPage() {
         setWorkout(workoutDocs.data().workouts);
       }
     }
+    async function getDiet() {
+      if (user != undefined) {
+        const workoutDocs = await getDoc(doc(db, "diets", user.uid));
+        setDiet(workoutDocs.data().diet);
+      }
+    }
+    getDiet();
     getUserDocs();
     getWorkout();
   }, [user]);
-
-  useEffect(() => {
-    console.log(workout.lastIndexOf());
-  }, [workout]);
 
   useEffect(() => {
     if (date != "") {
@@ -118,6 +126,10 @@ export default function UserPage() {
     var b = 100 * heightFormated;
     var result = b / a;
     setHeightProgress(result);
+  }
+
+  function closeDietModal() {
+    setDietModal(false);
   }
 
   function handleSetAgeProgressBar() {
@@ -171,9 +183,76 @@ export default function UserPage() {
     }
   }
 
+  function handleDietButtonIsPressed(index) {
+    setDietModal(true);
+    setDietIndex(index);
+  }
+
+  const customStyles = {
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.38)",
+    },
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      borderRadius: "15px",
+      border: "none",
+      width: "40%",
+    },
+  };
+
   return (
     <>
       <Navbar />
+      <Modal
+        isOpen={dietModal}
+        onRequestClose={closeDietModal}
+        style={customStyles}
+        closeTimeoutMS={200}
+      >
+        <div className={styles.modalHeader}>
+          <div>
+            <h3 className={styles.modalTitle}>
+              Refeição: {diet[dietIndex]?.meal}
+            </h3>
+            <h3 className={styles.modalSubtitle}>
+              Horário: {diet[dietIndex]?.time}
+            </h3>
+          </div>
+          <img
+            className={styles.modalSmallLogo}
+            width="35px"
+            src={smallLogo}
+            alt=""
+          />
+        </div>
+        <div className={styles.modalContent}>
+          <Carousel>
+            <ul className={styles.dietList}>
+              {diet[dietIndex]?.option[0].foods.map((food) => {
+                return (
+                  <li className={styles.dietListItem}>
+                    {food.name} - {food.quantity}
+                  </li>
+                );
+              })}
+            </ul>
+            <ul className={styles.dietList}>
+              {diet[dietIndex]?.option[1].foods.map((food) => {
+                return (
+                  <li className={styles.dietListItem}>
+                    {food.name} - {food.quantity}
+                  </li>
+                );
+              })}
+            </ul>
+          </Carousel>
+        </div>
+      </Modal>
       <h2 className={styles.title}>Perfil do usuário:</h2>
       <section className={styles.infoAndWorkout}>
         <div className={styles.userInformationBody}>
@@ -380,40 +459,49 @@ export default function UserPage() {
           />
         </div>
         <div id="foodContainer" className={styles.foodContainer}>
-          <div className={styles.foodItem}>
+          <div
+            className={styles.foodItem}
+            onClick={() => handleDietButtonIsPressed(0)}
+          >
             <img src={coffeeIcon} alt="" />
             <p id="coffee" className={styles.cardName}>
               Café da manhã
             </p>
           </div>
-          <div className={styles.foodItem}>
+          <div
+            className={styles.foodItem}
+            onClick={() => handleDietButtonIsPressed(1)}
+          >
             <img src={appleIcon} alt="" />
             <p id="apple" className={styles.cardName}>
               Lanche
             </p>
           </div>
-          <div className={styles.foodItem}>
+          <div
+            className={styles.foodItem}
+            onClick={() => handleDietButtonIsPressed(2)}
+          >
             <img src={dinnerIcon} alt="" />
             <p id="lunch" className={styles.cardName}>
               Almoço
             </p>
           </div>
-          <div className={styles.foodItem}>
+          <div
+            className={styles.foodItem}
+            onClick={() => handleDietButtonIsPressed(3)}
+          >
             <img src={breakfastIcon} alt="" />
             <p id="bread" className={styles.cardName}>
               Café da tarde
             </p>
           </div>
-          <div className={styles.foodItem}>
+          <div
+            className={styles.foodItem}
+            onClick={() => handleDietButtonIsPressed(4)}
+          >
             <img src={dinnerIcon} alt="" />
             <p id="dinner" className={styles.cardName}>
               Jantar
-            </p>
-          </div>
-          <div className={styles.foodItem}>
-            <img height="80px" src={supperIcon} alt="" />
-            <p id="supper" className={styles.cardName}>
-              Ceia
             </p>
           </div>
         </div>
