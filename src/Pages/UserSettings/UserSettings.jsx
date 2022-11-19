@@ -110,8 +110,6 @@ const UserSettings = () => {
     }
   }
 
-  Modal.setAppElement("#root");
-
   function openRemoveModal() {
     setRemoveAccountIsOpen(true);
   }
@@ -139,6 +137,7 @@ const UserSettings = () => {
       transform: "translate(-50%, -50%)",
       borderRadius: "15px",
       border: "none",
+      maxWidth: window.matchMedia("(min-width: 768px)").matches ? "50%" : "",
     },
   };
 
@@ -386,7 +385,21 @@ const UserSettings = () => {
         {user == undefined ? (
           <Skeleton width="200px" height="200px" circle="true" />
         ) : (
-          <img src={userPhoto} width="200px" alt="" />
+          <div
+            style={{
+              width: 200,
+              height: 200,
+              borderRadius: "50%",
+              backgroundColor: "red",
+              //overflow: "hidden",
+            }}
+          >
+            {/* <img src={userPhoto} width="200px" alt="" /> */}
+            <label className={styles.label} for="oi">
+              <input id="oi" type="file" style={{ display: "none" }} />
+              <h2>oi</h2>
+            </label>
+          </div>
         )}
         <div className={styles.textsLeftSide}>
           {name == "" ? (

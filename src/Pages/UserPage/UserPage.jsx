@@ -24,8 +24,6 @@ import breakfastIcon from "../../images/breakfastIcon.png";
 import supperIcon from "../../images/supperIcon.png";
 import listWeight from "../../images/listWeight.png";
 
-import Carousel from "react-elastic-carousel";
-
 import smallLogo from "./../../images/Logo.png";
 
 import Modal from "react-modal";
@@ -34,6 +32,9 @@ import moment from "moment";
 
 import styles from "./UserPage.module.css";
 import Skeleton from "react-loading-skeleton";
+
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 export default function UserPage() {
   moment().format();
@@ -54,6 +55,7 @@ export default function UserPage() {
   const [lastAccordionOpen, setLastAccordionOpen] = useState();
 
   const [dietModal, setDietModal] = useState(false);
+  const [dietOption, setDietOption] = useState(0);
 
   const { user, setUser } = useContext(AuthContext);
 
@@ -201,7 +203,27 @@ export default function UserPage() {
       transform: "translate(-50%, -50%)",
       borderRadius: "15px",
       border: "none",
-      width: "40%",
+      width: "35%",
+    },
+  };
+
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 1,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
     },
   };
 
@@ -231,12 +253,16 @@ export default function UserPage() {
           />
         </div>
         <div className={styles.modalContent}>
-          <Carousel>
+          <Carousel responsive={responsive} draggable={false}>
             <ul className={styles.dietList}>
               {diet[dietIndex]?.option[0].foods.map((food) => {
                 return (
                   <li className={styles.dietListItem}>
-                    {food.name} - {food.quantity}
+                    <div>
+                      <p className={styles.dietTexts}>
+                        {food.name} - {food.quantity}
+                      </p>
+                    </div>
                   </li>
                 );
               })}
@@ -245,12 +271,19 @@ export default function UserPage() {
               {diet[dietIndex]?.option[1].foods.map((food) => {
                 return (
                   <li className={styles.dietListItem}>
-                    {food.name} - {food.quantity}
+                    <div>
+                      <p className={styles.dietTexts}>
+                        {food.name} - {food.quantity}
+                      </p>
+                    </div>
                   </li>
                 );
               })}
             </ul>
           </Carousel>
+          <div className={styles.optionChooseBody}>
+            <p>Opção {dietOption}</p>
+          </div>
         </div>
       </Modal>
       <h2 className={styles.title}>Perfil do usuário:</h2>

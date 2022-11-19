@@ -239,27 +239,26 @@
   justify-content: space-between;
   margin-bottom: 1.2rem;
 }
-.modalContent {
-}
-.modalDietItem {
+.dietTexts {
+  font-weight: 500;
+  color: #303030;
 }
 .dietList {
-  width: 100%;
+  list-style: none;
 }
-.dietListContainer {
+.dietListItem {
+  width: 100%;
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.optionChooseBody {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  overflow: hidden;
+  margin: 1.6rem 0 1rem 0;
 }
-
-.rec.rec-arrow:disabled {
-  visibility: hidden;
-}
-.rec.rec-arrow {
-  width: 10px;
-}
-
 @media screen and (max-width: 1150px) {
   .inlineTitle {
     width: 350px;
