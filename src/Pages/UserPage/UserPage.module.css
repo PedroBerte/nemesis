@@ -242,14 +242,19 @@
 .dietTexts {
   font-weight: 500;
   color: #303030;
+  max-width: 500px;
 }
 .dietList {
   list-style: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 .dietListItem {
   width: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 .optionChooseBody {
@@ -257,7 +262,17 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin: 1.6rem 0 1rem 0;
+  margin: 1rem 0 1rem 0;
+  flex-direction: column;
+}
+.optionText {
+  font-weight: 400;
+  font-size: small;
+  color: #303030;
+  margin-right: 0.5rem;
+}
+#closeModalButton {
+  margin-left: auto;
 }
 @media screen and (max-width: 1150px) {
   .inlineTitle {

@@ -23,6 +23,8 @@ import dinnerIcon from "../../images/dinner.png";
 import breakfastIcon from "../../images/breakfastIcon.png";
 import supperIcon from "../../images/supperIcon.png";
 import listWeight from "../../images/listWeight.png";
+import SelectedItemElipse from "../../images/SelectedItemElipse.png";
+import UnselectedItemElipse from "../../images/UnSelectedItemElipse.png";
 
 import smallLogo from "./../../images/Logo.png";
 
@@ -188,6 +190,7 @@ export default function UserPage() {
   function handleDietButtonIsPressed(index) {
     setDietModal(true);
     setDietIndex(index);
+    setDietOption(1);
   }
 
   const customStyles = {
@@ -209,7 +212,6 @@ export default function UserPage() {
 
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 1,
     },
@@ -226,6 +228,10 @@ export default function UserPage() {
       items: 1,
     },
   };
+
+  function oi(e) {
+    console.log("oi", e);
+  }
 
   return (
     <>
@@ -253,16 +259,21 @@ export default function UserPage() {
           />
         </div>
         <div className={styles.modalContent}>
-          <Carousel responsive={responsive} draggable={false}>
+          <Carousel
+            responsive={responsive}
+            draggable={false}
+            removeArrowOnDeviceType={["tablet", "mobile"]}
+            beforeChange={(nextSlide, { currentSlide, onMove }) => {
+              setDietOption(nextSlide + 1);
+            }}
+          >
             <ul className={styles.dietList}>
               {diet[dietIndex]?.option[0].foods.map((food) => {
                 return (
                   <li className={styles.dietListItem}>
-                    <div>
-                      <p className={styles.dietTexts}>
-                        {food.name} - {food.quantity}
-                      </p>
-                    </div>
+                    <p className={styles.dietTexts}>
+                      {food.name} - {food.quantity}
+                    </p>
                   </li>
                 );
               })}
@@ -271,20 +282,41 @@ export default function UserPage() {
               {diet[dietIndex]?.option[1].foods.map((food) => {
                 return (
                   <li className={styles.dietListItem}>
-                    <div>
-                      <p className={styles.dietTexts}>
-                        {food.name} - {food.quantity}
-                      </p>
-                    </div>
+                    <p className={styles.dietTexts}>
+                      {food.name} - {food.quantity}
+                    </p>
                   </li>
                 );
               })}
             </ul>
           </Carousel>
           <div className={styles.optionChooseBody}>
-            <p>Opção {dietOption}</p>
+            <p className={styles.optionText}>Opção {dietOption}</p>
+            <div className={styles.optionChooseImg}>
+              <img
+                src={
+                  dietOption == 1 ? SelectedItemElipse : UnselectedItemElipse
+                }
+                style={{ marginRight: "5px" }}
+              />
+              <img
+                src={
+                  dietOption == 1 ? UnselectedItemElipse : SelectedItemElipse
+                }
+                alt=""
+              />
+            </div>
           </div>
         </div>
+        <Button
+          type="warning"
+          id={styles.closeModalButton}
+          onClick={() => {
+            closeDietModal();
+          }}
+        >
+          Fechar
+        </Button>
       </Modal>
       <h2 className={styles.title}>Perfil do usuário:</h2>
       <section className={styles.infoAndWorkout}>

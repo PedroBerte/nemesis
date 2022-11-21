@@ -20,7 +20,7 @@ const Button = (props) => {
       }}
       className={styles.buttonBody}
     >
-      <p>{props.children}</p>
+      <p style={{ fontSize: "14px", fontWeight: "500" }}>{props.children}</p>
     </button>
   );
 };
