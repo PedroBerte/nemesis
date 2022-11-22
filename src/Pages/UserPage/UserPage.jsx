@@ -68,6 +68,9 @@ export default function UserPage() {
       if (currentUser) {
         setUser(currentUser);
         setIsLoading(false);
+        console.log(currentUser);
+      } else {
+        navigateTo("/");
       }
       setIsLoading(currentUser);
     });

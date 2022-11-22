@@ -56,11 +56,10 @@ const UserSettings = () => {
       if (currentUser) {
         setUser(currentUser);
         setIsLoading(false);
-      }
-      setIsLoading(currentUser);
-      if (isLoading == null) {
+      } else {
         navigateTo("/");
       }
+      setIsLoading(currentUser);
     });
   }, []);
 
@@ -79,7 +78,6 @@ const UserSettings = () => {
       }
     }
     getUserDocs();
-    console.log(height);
   }, [user]);
 
   function changePassword() {
