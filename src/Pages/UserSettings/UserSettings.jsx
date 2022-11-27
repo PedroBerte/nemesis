@@ -12,7 +12,13 @@ import {
   sendPasswordResetEmail,
   deleteUser,
 } from "firebase/auth";
-import { collection, getDoc, deleteDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  getDoc,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 
 import { AuthContext } from "./../../contexts/AuthContext";
 
@@ -41,6 +47,7 @@ const UserSettings = () => {
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
   const [goal, setGoal] = useState("");
+  const [userPhotoBase64, setUserPhotoBase64] = useState("");
 
   const { user, setUser, userInformation, setUserInformation } =
     useContext(AuthContext);
@@ -64,6 +71,10 @@ const UserSettings = () => {
   }, []);
 
   useEffect(() => {
+    console.log(userPhotoBase64);
+  }, [userPhotoBase64]);
+
+  useEffect(() => {
     async function getUserDocs() {
       if (user != undefined) {
         const userDocs = await getDoc(doc(db, "users", user.uid));
@@ -75,10 +86,26 @@ const UserSettings = () => {
         setWeight(UserInfos.weight);
         setHeight(UserInfos.height);
         setGoal(UserInfos.goal);
+        setUserPhotoBase64(UserInfos.userPhotoBase64);
       }
     }
     getUserDocs();
   }, [user]);
+
+  async function getUserPhotoUpload(e) {
+    var reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+
+    reader.onload = async () => {
+      setUserPhotoBase64(reader.result);
+      await updateDoc(doc(db, "users", user.uid), {
+        userPhotoBase64: reader.result,
+      });
+    };
+    reader.onerror = (error) => {
+      console.log("Error: ", error);
+    };
+  }
 
   function changePassword() {
     sendPasswordResetEmail(auth, email).then(() => {
@@ -166,7 +193,16 @@ const UserSettings = () => {
           />
         </div>
         <div className={styles.modalContent}>
-          <img src={userPhoto} width="100px" alt="" />
+          {userPhotoBase64 == "" ? (
+            <img src={userPhoto} width="100px" alt="" />
+          ) : (
+            <img
+              className={styles.userPhoto}
+              src={userPhotoBase64}
+              width="100px"
+              alt=""
+            />
+          )}
           {name == "" ? (
             <Skeleton
               style={{ marginBottom: "7px" }}
@@ -332,7 +368,18 @@ const UserSettings = () => {
         {user == undefined ? (
           <Skeleton width="130px" height="130px" circle="true" />
         ) : (
-          <img src={userPhoto} width="130px" alt="" />
+          <>
+            {userPhotoBase64 == "" ? (
+              <img src={userPhoto} width="130px" alt="" />
+            ) : (
+              <img
+                className={styles.userPhoto}
+                src={userPhotoBase64}
+                width="130px"
+                alt=""
+              />
+            )}
+          </>
         )}
         <div className={styles.textsResponsive}>
           {name == "" ? (
@@ -388,14 +435,25 @@ const UserSettings = () => {
               width: 200,
               height: 200,
               borderRadius: "50%",
-              backgroundColor: "red",
-              //overflow: "hidden",
             }}
           >
-            {/* <img src={userPhoto} width="200px" alt="" /> */}
             <label className={styles.label} for="oi">
-              <input id="oi" type="file" style={{ display: "none" }} />
-              <h2>oi</h2>
+              <input
+                id="oi"
+                type="file"
+                style={{ display: "none" }}
+                onChange={(e) => getUserPhotoUpload(e)}
+              />
+              {userPhotoBase64 == "" ? (
+                <img src={userPhoto} width="200px" alt="" />
+              ) : (
+                <img
+                  className={styles.userPhoto}
+                  src={userPhotoBase64}
+                  width="200px"
+                  alt=""
+                />
+              )}
             </label>
           </div>
         )}

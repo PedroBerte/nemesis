@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../services/firebase-config";
-import { setDoc, doc, updateDoc, getDoc, collection } from "firebase/firestore";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 
 import "react-datepicker/dist/react-datepicker.css";
 import toast, { Toaster } from "react-hot-toast";
@@ -219,7 +219,6 @@ const SignUp = () => {
           if ((gymAvailability, gymDays == "")) {
             throw new getException("Não deixe campos vazios!");
           }
-          console.log("passou aqui");
           await setDoc(doc(db, "users", user.uid), {
             uid: user.uid,
             name: user.displayName,
@@ -233,6 +232,7 @@ const SignUp = () => {
             gymFreq: gymFreq,
             gymDays: gymDays,
             userRes: userRes,
+            userPhotoBase64: "",
           });
           createWorkout(gymAvailability, gymDays, user.uid);
           createDiet(
@@ -314,6 +314,7 @@ const SignUp = () => {
             gymFreq: gymFreq,
             gymDays: gymDays,
             userRes: userRes,
+            userPhotoBase64: "",
           });
           createWorkout(gymAvailability, gymDays, uid);
           createDiet(

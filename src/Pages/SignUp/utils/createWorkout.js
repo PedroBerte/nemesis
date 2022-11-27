@@ -1,5 +1,5 @@
 import { auth, db } from "../../../services/firebase-config";
-import { setDoc, doc, updateDoc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 
 import {
   workA_day3,

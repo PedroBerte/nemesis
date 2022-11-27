@@ -32,6 +32,7 @@ const Navbar = () => {
   const userCollectionRef = collection(db, "users");
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
+  const [userPhotoBase64, setUserPhotoBase64] = useState("");
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
@@ -41,6 +42,7 @@ const Navbar = () => {
       }
       setIsLoading(currentUser);
     });
+
     async function getUserDocs() {
       if (user != undefined) {
         const data = await getDocs(userCollectionRef);
@@ -50,6 +52,10 @@ const Navbar = () => {
         );
         setGoal(
           UserInfos._document.data.value.mapValue.fields.goal.stringValue
+        );
+        setUserPhotoBase64(
+          UserInfos._document.data.value.mapValue.fields.userPhotoBase64
+            .stringValue
         );
         setUserInformation(UserInfos);
       }
@@ -109,7 +115,20 @@ const Navbar = () => {
       ></div>
       <div id={styles.lateralMenuBody} className={styles.lateralMenuBody}>
         <div className={styles.lateralMenuUser}>
-          <img src={perfilIcon} width="60px" />
+          {userPhotoBase64 == "" ? (
+            <img src={perfilIcon} width="60px" alt="" />
+          ) : (
+            <img
+              className={styles.userPhoto}
+              src={userPhotoBase64}
+              width="60px"
+              height="60px"
+              style={{
+                borderRadius: "50%",
+                objectFit: "contain",
+              }}
+            />
+          )}
           <div className={styles.lateralMenuLoggedTexts}>
             <p className={styles.navbarUsername}>{name}</p>
             {goal == "G" ? (
@@ -202,12 +221,22 @@ const Navbar = () => {
                   {name == "" ? (
                     <Skeleton height="60px" width="60px" circle="true" />
                   ) : (
-                    <img
-                      src={perfilIcon}
-                      className={styles.imgPerfilIcon}
-                      width="60px"
-                      height="60px"
-                    />
+                    <>
+                      {userPhotoBase64 == "" ? (
+                        <img src={perfilIcon} width="60px" alt="" />
+                      ) : (
+                        <img
+                          className={styles.userPhoto}
+                          src={userPhotoBase64}
+                          width="55px"
+                          height="55px"
+                          style={{
+                            borderRadius: "50%",
+                            objectFit: "contain",
+                          }}
+                        />
+                      )}
+                    </>
                   )}
                   <img
                     onClick={() => showPerfilMenu()}
@@ -257,12 +286,18 @@ const Navbar = () => {
                     </>
                   )}
                 </div>
-                <img
-                  width="50px"
-                  onClick={showPerfilMenu}
-                  src={perfilIcon}
-                  alt=""
-                />
+                {userPhotoBase64 == "" ? (
+                  <img width="50px" onClick={showPerfilMenu} src={perfilIcon} />
+                ) : (
+                  <img
+                    style={{
+                      borderRadius: "50%",
+                    }}
+                    src={userPhotoBase64}
+                    width="50px"
+                    onClick={showPerfilMenu}
+                  />
+                )}
               </div>
             ) : (
               <img
