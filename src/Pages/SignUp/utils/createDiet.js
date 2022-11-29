@@ -19,9 +19,25 @@ export default async function createDiet(
   var totalCal;
   try {
     if (sex == "M") {
-      totalCal = (66 + 13.7 * weight + 5 * height - 6.8 * age) * 0.25;
+      var result = 66 + 13.7 * weight + 5 * height - 6.8 * age;
+      totalCal = result + result * 0.25;
+      if (goal == "P") {
+        totalCal = totalCal - 350;
+      }
+      await setDoc(doc(db, "diets", uid), {
+        uid: uid,
+        cal: totalCal,
+      });
     } else {
-      totalCal = (655 + 9.6 * weight + 1.7 * height - 4.7 * age) * 0.2;
+      var result = 655 + 9.6 * weight + 1.7 * height - 4.7 * age;
+      totalCal = result + result * 0.2;
+      if (goal == "P") {
+        totalCal = totalCal - 350;
+      }
+      await setDoc(doc(db, "diets", uid), {
+        uid: uid,
+        cal: totalCal,
+      });
     }
     if (res == "RES-N") {
       if (totalCal <= 2000) {
@@ -29,6 +45,7 @@ export default async function createDiet(
           diet: [
             {
               meal: "Café da manhã",
+              time: "07:00",
               option: [
                 {
                   id: 1,
@@ -72,6 +89,7 @@ export default async function createDiet(
             },
             {
               meal: "Lanche da manhã",
+              time: "09:00",
               option: [
                 {
                   id: 1,
@@ -95,6 +113,7 @@ export default async function createDiet(
             },
             {
               meal: "Almoço",
+              time: "12:00",
               option: [
                 {
                   id: 1,
@@ -150,6 +169,7 @@ export default async function createDiet(
             },
             {
               meal: "Lanche da Tarde",
+              time: "16:30",
               option: [
                 {
                   id: 1,
@@ -178,6 +198,7 @@ export default async function createDiet(
             },
             {
               meal: "Jantar",
+              time: "20:00",
               option: [
                 {
                   id: 1,
@@ -231,6 +252,7 @@ export default async function createDiet(
           diet: [
             {
               meal: "Café da manhã",
+              time: "07:00",
               option: [
                 {
                   id: 1,
@@ -274,6 +296,7 @@ export default async function createDiet(
             },
             {
               meal: "Lanche da manhã",
+              time: "09:00",
               option: [
                 {
                   id: 1,
@@ -305,6 +328,7 @@ export default async function createDiet(
             },
             {
               meal: "Almoço",
+              time: "12:00",
               option: [
                 {
                   id: 1,
@@ -372,6 +396,7 @@ export default async function createDiet(
             },
             {
               meal: "Lanche da tarde",
+              time: "16:30",
               option: [
                 {
                   id: 1,
@@ -407,6 +432,7 @@ export default async function createDiet(
             },
             {
               meal: "Jantar",
+              time: "20:00",
               option: [
                 {
                   id: 1,
@@ -476,6 +502,7 @@ export default async function createDiet(
           diet: [
             {
               meal: "Café da manhã",
+              time: "07:00",
               option: [
                 {
                   id: 1,
@@ -513,6 +540,7 @@ export default async function createDiet(
             },
             {
               meal: "Lanche da manhã",
+              time: "09:00",
               option: [
                 {
                   id: 1,
@@ -540,6 +568,7 @@ export default async function createDiet(
             },
             {
               meal: "Almoço",
+              time: "12:00",
               option: [
                 {
                   id: 1,
@@ -595,6 +624,7 @@ export default async function createDiet(
             },
             {
               meal: "Lanche da tarde",
+              time: "16:30",
               option: [
                 {
                   id: 1,
@@ -630,6 +660,7 @@ export default async function createDiet(
             },
             {
               meal: "Jantar",
+              time: "20:00",
               option: [
                 {
                   id: 1,
@@ -705,6 +736,7 @@ export default async function createDiet(
           diet: [
             {
               meal: "Café da manhã",
+              time: "07:00",
               option: [
                 {
                   id: 1,
@@ -748,6 +780,7 @@ export default async function createDiet(
             },
             {
               meal: "Lanche da manhã",
+              time: "09:00",
               option: [
                 {
                   id: 1,
@@ -771,6 +804,7 @@ export default async function createDiet(
             },
             {
               meal: "Almoço",
+              time: "12:00",
               option: [
                 {
                   id: 1,
@@ -824,6 +858,7 @@ export default async function createDiet(
             },
             {
               meal: "Lanche da Tarde",
+              time: "16:30",
               option: [
                 {
                   id: 1,
@@ -848,6 +883,7 @@ export default async function createDiet(
             },
             {
               meal: "Jantar",
+              time: "20:00",
               option: [
                 {
                   id: 1,
@@ -905,6 +941,7 @@ export default async function createDiet(
           diet: [
             {
               meal: "Café da manhã",
+              time: "07:00",
               option: [
                 {
                   id: 1,
@@ -946,6 +983,7 @@ export default async function createDiet(
             },
             {
               meal: "Lanche da manhã",
+              time: "09:00",
               option: [
                 {
                   id: 1,
@@ -977,6 +1015,7 @@ export default async function createDiet(
             },
             {
               meal: "Almoço",
+              time: "12:00",
               option: [
                 {
                   id: 1,
@@ -1031,6 +1070,7 @@ export default async function createDiet(
             },
             {
               meal: "Lanche da tarde",
+              time: "16:30",
               option: [
                 {
                   id: 1,
@@ -1059,6 +1099,7 @@ export default async function createDiet(
             },
             {
               meal: "Jantar",
+              time: "20:00",
               option: [
                 {
                   id: 1,
@@ -1117,6 +1158,7 @@ export default async function createDiet(
           diet: [
             {
               meal: "Café da manhã",
+              time: "07:00",
               option: [
                 {
                   id: 1,
@@ -1150,6 +1192,7 @@ export default async function createDiet(
             },
             {
               meal: "Lanche da manhã",
+              time: "09:00",
               option: [
                 {
                   id: 1,
@@ -1177,6 +1220,7 @@ export default async function createDiet(
             },
             {
               meal: "Almoço",
+              time: "12:00",
               option: [
                 {
                   id: 1,
@@ -1240,6 +1284,7 @@ export default async function createDiet(
             },
             {
               meal: "Lanche da tarde",
+              time: "16:30",
               option: [
                 {
                   id: 1,
@@ -1271,6 +1316,7 @@ export default async function createDiet(
             },
             {
               meal: "Jantar",
+              time: "20:00",
               option: [
                 {
                   id: 1,
@@ -1342,6 +1388,7 @@ export default async function createDiet(
           diet: [
             {
               meal: "Café da manhã",
+              time: "07:00",
               option: [
                 {
                   id: 1,
@@ -1379,6 +1426,7 @@ export default async function createDiet(
             },
             {
               meal: "Lanche da manhã",
+              time: "09:00",
               option: [
                 {
                   id: 1,
@@ -1402,6 +1450,7 @@ export default async function createDiet(
             },
             {
               meal: "Almoço",
+              time: "12:00",
               option: [
                 {
                   id: 1,
@@ -1453,6 +1502,7 @@ export default async function createDiet(
             },
             {
               meal: "Lanche da Tarde",
+              time: "16:30",
               option: [
                 {
                   id: 1,
@@ -1476,6 +1526,7 @@ export default async function createDiet(
             },
             {
               meal: "Jantar",
+              time: "20:00",
               option: [
                 {
                   id: 1,
@@ -1525,6 +1576,7 @@ export default async function createDiet(
           diet: [
             {
               meal: "Café da manhã",
+              time: "07:00",
               option: [
                 {
                   id: 1,
@@ -1564,6 +1616,7 @@ export default async function createDiet(
             },
             {
               meal: "Lanche da manhã",
+              time: "09:00",
               option: [
                 {
                   id: 1,
@@ -1591,6 +1644,7 @@ export default async function createDiet(
             },
             {
               meal: "Almoço",
+              time: "12:00",
               option: [
                 {
                   id: 1,
@@ -1646,6 +1700,7 @@ export default async function createDiet(
             },
             {
               meal: "Lanche da tarde",
+              time: "16:30",
               option: [
                 {
                   id: 1,
@@ -1670,6 +1725,7 @@ export default async function createDiet(
             },
             {
               meal: "Jantar",
+              time: "20:00",
               option: [
                 {
                   id: 1,
@@ -1731,6 +1787,7 @@ export default async function createDiet(
           diet: [
             {
               meal: "Café da manhã",
+              time: "07:00",
               option: [
                 {
                   id: 1,
@@ -1764,6 +1821,7 @@ export default async function createDiet(
             },
             {
               meal: "Lanche da manhã",
+              time: "09:00",
               option: [
                 {
                   id: 1,
@@ -1795,6 +1853,7 @@ export default async function createDiet(
             },
             {
               meal: "Almoço",
+              time: "12:00",
               option: [
                 {
                   id: 1,
@@ -1854,6 +1913,7 @@ export default async function createDiet(
             },
             {
               meal: "Lanche da tarde",
+              time: "16:30",
               option: [
                 {
                   id: 1,
@@ -1881,6 +1941,7 @@ export default async function createDiet(
             },
             {
               meal: "Jantar",
+              time: "20:00",
               option: [
                 {
                   id: 1,

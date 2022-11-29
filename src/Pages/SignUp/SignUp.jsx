@@ -233,6 +233,35 @@ const SignUp = () => {
             gymDays: gymDays,
             userRes: userRes,
             userPhotoBase64: "",
+            waterReminder: false,
+            mealReminder: false,
+            workoutReminder: false,
+            reminders: [
+              {
+                title: "Café da manhã",
+                time: "06:30",
+              },
+              {
+                title: "Treino",
+                time: "7:30 - 9:00",
+              },
+              {
+                title: "Lanche (Pós-Treino)",
+                time: "9:15",
+              },
+              {
+                title: "Almoço",
+                time: "12:30",
+              },
+              {
+                title: "Café da Tarde",
+                time: "16:00",
+              },
+              {
+                title: "Jantar",
+                time: "19:30",
+              },
+            ],
           });
           createWorkout(gymAvailability, gymDays, user.uid);
           createDiet(
@@ -315,6 +344,35 @@ const SignUp = () => {
             gymDays: gymDays,
             userRes: userRes,
             userPhotoBase64: "",
+            waterReminder: false,
+            mealReminder: false,
+            workoutReminder: false,
+            reminders: [
+              {
+                title: "Café da manhã",
+                time: "06:30",
+              },
+              {
+                title: "Treino",
+                time: "7:30 - 9:00",
+              },
+              {
+                title: "Lanche (Pós-Treino)",
+                time: "9:15",
+              },
+              {
+                title: "Almoço",
+                time: "12:30",
+              },
+              {
+                title: "Café da Tarde",
+                time: "16:00",
+              },
+              {
+                title: "Jantar",
+                time: "19:30",
+              },
+            ],
           });
           createWorkout(gymAvailability, gymDays, uid);
           createDiet(

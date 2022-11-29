@@ -1,84 +1,84 @@
-.form{
-    display: flex;
-    width: 70%;
+.form {
+  display: flex;
+  width: 70%;
 }
-.emailSide{
+.emailSide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.linkText {
+  margin-top: 15px;
+}
+.verticalLine {
+  width: 1px;
+  height: 80%;
+  background-color: #bebebe;
+  margin: 0 10px;
+}
+.googleButton {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  border: 1px solid #c6c6c6;
+  box-shadow: 2px 6px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  background-color: #fff;
+}
+.inlineButtons {
+  display: flex;
+  justify-content: end;
+  flex-direction: row;
+  align-items: flex-end;
+  width: 100%;
+}
+.divButtons {
+  width: 67%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.responsiveGoogleButtonText {
+  font-size: 14px;
+  color: #868686;
+  font-weight: bold;
+  display: none;
+  margin-left: 8px;
+}
+@media screen and (max-width: 700px) {
+  .responsiveGoogleButtonText {
+    display: block;
+  }
+  .googleButton {
+    width: 90px;
+    height: 35px;
+    border-radius: 10px;
+  }
+  .googleButton img {
+    width: 15px;
+  }
+  .divButtons {
     width: 100%;
-    height: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
-}
-.linkText{
-    margin-top: 15px;
-}
-.verticalLine{
-    width: 1px;
-    height: 80%;
-    background-color: #BEBEBE;
-    margin: 0 10px;
-}
-.googleButton{
-    width: 50px;
-    height: 50px;
-    display: flex;
     align-items: center;
-    justify-content: center;
-    border-radius: 15px;
-    border: 1px solid #c6c6c6;
-    box-shadow: 2px 6px 4px rgba(0, 0, 0, 0.25);
-    cursor: pointer;
-    background-color: #fff
-}
-.inlineButtons{
+  }
+  .inlineButtons {
     display: flex;
-    justify-content: end;
+    justify-content: center;
     flex-direction: row;
     align-items: center;
     width: 100%;
+  }
 }
-.divButtons{
-    width: 67%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-.responsiveGoogleButtonText{
-    font-size: 14px;
-    color: #868686;
-    font-weight: bold;
-    display: none;
-    margin-left: 8px;
-}
-@media screen and (max-width: 700px){
-    .responsiveGoogleButtonText{
-        display: block;
-    }
-    .googleButton{
-        width: 90px;
-        height: 35px;
-        border-radius: 10px;
-    }
-    .googleButton img{
-        width: 15px;
-    }
-    .divButtons{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .inlineButtons{
-        display: flex;
-        justify-content: center;
-        flex-direction: row;
-        align-items: center;
-        width: 100%;
-    }
-}
-@media screen and (max-width: 500px){
-    .responsiveGoogleButtonText {
-      font-size: 12px;
-    }
+@media screen and (max-width: 500px) {
+  .responsiveGoogleButtonText {
+    font-size: 12px;
+  }
 }

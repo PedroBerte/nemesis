@@ -156,14 +156,14 @@ const SignIn = () => {
         </form>
         <div className={styles.divButtons}>
           <div className={styles.inlineButtons}>
-            <div
+            {/* <div
               className={styles.googleButton}
               onClick={() => signInWithGoogle()}
             >
               <img src={googleIcon} />
               <p className={styles.responsiveGoogleButtonText}>Login</p>
             </div>
-            <div className={styles.verticalLine}></div>
+            <div className={styles.verticalLine}></div> */}
             <Button
               onClick={() => trySignIn()}
               type="default"

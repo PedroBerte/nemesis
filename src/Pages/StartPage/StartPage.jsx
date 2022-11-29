@@ -19,16 +19,26 @@ import { useNavigate } from "react-router-dom";
 
 import Footer from "../../components/Footer/Footer";
 import Input from "../../components/Input/Input";
+import { useSignUp } from "../../contexts/SignUpContext";
 
 const StartPage = () => {
   const navigateTo = useNavigate();
   const { setUser } = useContext(AuthContext);
+  const { setRegisterEmail, setRegisterConfirmEmail } = useSignUp();
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      if (currentUser != null) {
+        navigateTo("/UserPage");
+      }
     });
   }, []);
+
+  function handleEmailUpdate(event) {
+    setRegisterEmail(event.target.value);
+    setRegisterConfirmEmail(event.target.value);
+  }
 
   return (
     <>
@@ -51,6 +61,7 @@ const StartPage = () => {
               className={styles.inputApresentation}
               style={{ width: "70%" }}
               placeholder="Insira o seu melhor E-mail!"
+              onChange={(event) => handleEmailUpdate(event)}
             />
             <Button
               style={{ marginLeft: "60px" }}

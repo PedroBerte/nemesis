@@ -90,13 +90,13 @@ export default function UserPage() {
     }
     async function getDiet() {
       if (user != undefined) {
-        const workoutDocs = await getDoc(doc(db, "diets", user.uid));
-        setDiet(workoutDocs.data().diet);
+        const userDiet = await getDoc(doc(db, "diets", user.uid));
+        setDiet(userDiet.data().diet);
       }
     }
-    getDiet();
     getUserDocs();
     getWorkout();
+    getDiet();
   }, [user]);
 
   useEffect(() => {
