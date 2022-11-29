@@ -47,7 +47,7 @@ const UserSettings = () => {
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
   const [goal, setGoal] = useState("");
-  const [userPhotoBase64, setUserPhotoBase64] = useState("");
+  const [userPhotoBase64, setUserPhotoBase64] = useState(undefined);
 
   const { user, setUser, userInformation, setUserInformation } =
     useContext(AuthContext);
@@ -91,6 +91,10 @@ const UserSettings = () => {
     }
     getUserDocs();
   }, [user]);
+
+  useEffect(() => {
+    console.log(userPhotoBase64);
+  }, [userPhotoBase64]);
 
   async function getUserPhotoUpload(e) {
     var reader = new FileReader();
@@ -193,7 +197,7 @@ const UserSettings = () => {
           />
         </div>
         <div className={styles.modalContent}>
-          {userPhotoBase64 == "" ? (
+          {userPhotoBase64 == undefined ? (
             <img src={userPhoto} width="100px" alt="" />
           ) : (
             <img
@@ -369,7 +373,7 @@ const UserSettings = () => {
           <Skeleton width="130px" height="130px" circle="true" />
         ) : (
           <>
-            {userPhotoBase64 == "" ? (
+            {userPhotoBase64 == undefined ? (
               <img src={userPhoto} width="130px" alt="" />
             ) : (
               <img
@@ -444,7 +448,7 @@ const UserSettings = () => {
                 style={{ display: "none" }}
                 onChange={(e) => getUserPhotoUpload(e)}
               />
-              {userPhotoBase64 == "" ? (
+              {userPhotoBase64 == undefined ? (
                 <img src={userPhoto} width="200px" alt="" />
               ) : (
                 <img
